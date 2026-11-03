@@ -30,13 +30,13 @@
 
         <div>
             <label for="password" class="block text-sm font-bold text-charcoal">{{ __('auth-ui.password', [], 'id') }}</label>
-            <input id="password" name="password" type="password" required autocomplete="new-password" class="mt-2 block w-full rounded-2xl border-forest/15 bg-cream/50 px-4 py-3 text-sm text-charcoal shadow-sm focus:border-forest focus:ring-forest">
+            <x-password-input id="password" name="password" autocomplete="new-password" required container-class="mt-2" />
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
 
         <div>
             <label for="password_confirmation" class="block text-sm font-bold text-charcoal">{{ __('auth-ui.confirm_password', [], 'id') }}</label>
-            <input id="password_confirmation" name="password_confirmation" type="password" required autocomplete="new-password" class="mt-2 block w-full rounded-2xl border-forest/15 bg-cream/50 px-4 py-3 text-sm text-charcoal shadow-sm focus:border-forest focus:ring-forest">
+            <x-password-input id="password_confirmation" name="password_confirmation" autocomplete="new-password" required container-class="mt-2" />
             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
         </div>
 

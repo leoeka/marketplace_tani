@@ -1,30 +1,28 @@
 <x-guest-layout>
-    <div class="mb-4 text-sm text-gray-600">
-        {{ __('Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn\'t receive the email, we will gladly send you another.') }}
+    <div class="mb-7">
+        <p class="text-xs font-bold uppercase tracking-[0.16em] text-forest/60">{{ __('auth-ui.eyebrow', [], 'id') }}</p>
+        <h2 class="mt-2 text-3xl font-extrabold tracking-tight text-charcoal">{{ __('auth-ui.verify_email_title', [], 'id') }}</h2>
+        <p class="mt-2 text-sm leading-6 text-charcoal/60">{{ __('auth-ui.verify_email_description', [], 'id') }}</p>
     </div>
 
-    @if (session('status') == 'verification-link-sent')
-        <div class="mb-4 font-medium text-sm text-green-600">
-            {{ __('A new verification link has been sent to the email address you provided during registration.') }}
+    @if (session('status') === 'verification-link-sent')
+        <div class="mb-5 rounded-2xl bg-forest/5 px-4 py-3 text-sm font-medium leading-6 text-forest">
+            {{ __('auth-ui.verification_link_sent', [], 'id') }}
         </div>
     @endif
 
-    <div class="mt-4 flex items-center justify-between">
+    <div class="grid gap-3">
         <form method="POST" action="{{ route('verification.send') }}">
             @csrf
-
-            <div>
-                <x-primary-button>
-                    {{ __('Resend Verification Email') }}
-                </x-primary-button>
-            </div>
+            <button type="submit" class="inline-flex min-h-12 w-full items-center justify-center rounded-full bg-forest px-6 py-3 text-sm font-extrabold text-white shadow-md shadow-forest/15 transition hover:-translate-y-0.5 hover:bg-forest/90 focus:outline-none focus:ring-2 focus:ring-forest focus:ring-offset-2">
+                {{ __('auth-ui.resend_verification_email', [], 'id') }}
+            </button>
         </form>
 
         <form method="POST" action="{{ route('logout') }}">
             @csrf
-
-            <button type="submit" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                {{ __('Log Out') }}
+            <button type="submit" class="inline-flex min-h-11 w-full items-center justify-center rounded-full border border-forest/20 px-6 py-2 text-sm font-bold text-forest transition hover:bg-forest/5 focus:outline-none focus:ring-2 focus:ring-forest focus:ring-offset-2">
+                {{ __('auth-ui.logout', [], 'id') }}
             </button>
         </form>
     </div>
