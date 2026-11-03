@@ -17,9 +17,18 @@ class AuthenticationTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function test_users_can_authenticate_using_the_login_screen(): void
+    public function test_marketplace_homepage_is_public(): void
     {
-        $user = User::factory()->create();
+        $response = $this->get(route('home'));
+
+        $response->assertOk();
+        $response->assertSee('Hasil bumi segar, langsung dari petani.');
+        $response->assertSee('Dukung Petani Lokal');
+    }
+
+    public function test_customers_are_redirected_to_the_marketplace_after_authentication(): void
+    {
+        $user = User::factory()->create(['role' => 'customer']);
 
         $response = $this->post('/login', [
             'email' => $user->email,

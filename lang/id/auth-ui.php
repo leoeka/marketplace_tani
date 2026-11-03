@@ -1,0 +1,25 @@
+<?php
+
+return [
+    'eyebrow' => 'TaniRaya untuk semua',
+    'brand_heading' => 'Dari hasil bumi yang baik, tumbuh masa depan yang lebih baik.',
+    'brand_description' => 'Temukan hasil panen pilihan dari petani lokal dan jadilah bagian dari rantai pangan yang lebih dekat dan adil.',
+    'login_title' => 'Selamat datang kembali',
+    'login_description' => 'Masuk untuk melanjutkan perjalanan belanjamu.',
+    'register_title' => 'Mulai tumbuh bersama',
+    'register_description' => 'Buat akun untuk berbelanja atau menjual hasil bumi.',
+    'name' => 'Nama lengkap',
+    'email' => 'Alamat email',
+    'password' => 'Kata sandi',
+    'confirm_password' => 'Konfirmasi kata sandi',
+    'remember' => 'Ingat saya',
+    'forgot_password' => 'Lupa kata sandi?',
+    'login' => 'Masuk',
+    'register' => 'Daftar',
+    'role' => 'Daftar sebagai',
+    'customer' => 'Pembeli',
+    'farmer' => 'Petani',
+    'already_registered' => 'Sudah punya akun?',
+    'not_registered' => 'Belum punya akun?',
+    'back_home' => 'Kembali ke beranda',
+];

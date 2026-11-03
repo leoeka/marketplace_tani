@@ -11,6 +11,12 @@ export default {
 
     theme: {
         extend: {
+            colors: {
+                forest: '#2F5D3A',
+                harvest: '#F5B731',
+                cream: '#FAF7F0',
+                charcoal: '#26302B',
+            },
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },

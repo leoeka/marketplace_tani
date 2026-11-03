@@ -1,61 +1,52 @@
 <x-guest-layout>
-    <form method="POST" action="{{ route('register') }}">
-        @csrf
+    <div class="mb-6">
+        <p class="text-xs font-bold uppercase tracking-[0.16em] text-forest/60">{{ __('auth-ui.eyebrow', [], 'id') }}</p>
+        <h2 class="mt-2 text-3xl font-extrabold tracking-tight text-charcoal">{{ __('auth-ui.register_title', [], 'id') }}</h2>
+        <p class="mt-2 text-sm leading-6 text-charcoal/60">{{ __('auth-ui.register_description', [], 'id') }}</p>
+    </div>
 
-        <!-- Name -->
+    <form method="POST" action="{{ route('register') }}" class="grid gap-4">
+        @csrf
         <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
+            <label for="name" class="block text-sm font-bold text-charcoal">{{ __('auth-ui.name', [], 'id') }}</label>
+            <input id="name" name="name" type="text" value="{{ old('name') }}" required autofocus autocomplete="name" class="mt-2 block w-full rounded-2xl border-forest/15 bg-cream/50 px-4 py-3 text-sm text-charcoal shadow-sm focus:border-forest focus:ring-forest">
             <x-input-error :messages="$errors->get('name')" class="mt-2" />
         </div>
 
-        <!-- Email Address -->
-        <div class="mt-4">
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
+        <div>
+            <label for="email" class="block text-sm font-bold text-charcoal">{{ __('auth-ui.email', [], 'id') }}</label>
+            <input id="email" name="email" type="email" value="{{ old('email') }}" required autocomplete="username" class="mt-2 block w-full rounded-2xl border-forest/15 bg-cream/50 px-4 py-3 text-sm text-charcoal shadow-sm focus:border-forest focus:ring-forest">
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
-        <div class="mt-4">
-            <x-input-label for="role" :value="__('Daftar sebagai')" />
-            <select id="role" name="role" class="block mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" required>
-                <option value="customer" @selected(old('role', 'customer') === 'customer')>{{ __('Pembeli') }}</option>
-                <option value="farmer" @selected(old('role') === 'farmer')>{{ __('Petani') }}</option>
+        <div>
+            <label for="role" class="block text-sm font-bold text-charcoal">{{ __('auth-ui.role', [], 'id') }}</label>
+            <select id="role" name="role" required class="mt-2 block w-full rounded-2xl border-forest/15 bg-cream/50 px-4 py-3 text-sm text-charcoal shadow-sm focus:border-forest focus:ring-forest">
+                <option value="customer" @selected(old('role', 'customer') === 'customer')>{{ __('auth-ui.customer', [], 'id') }}</option>
+                <option value="farmer" @selected(old('role') === 'farmer')>{{ __('auth-ui.farmer', [], 'id') }}</option>
             </select>
             <x-input-error :messages="$errors->get('role')" class="mt-2" />
         </div>
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="new-password" />
-
+        <div>
+            <label for="password" class="block text-sm font-bold text-charcoal">{{ __('auth-ui.password', [], 'id') }}</label>
+            <input id="password" name="password" type="password" required autocomplete="new-password" class="mt-2 block w-full rounded-2xl border-forest/15 bg-cream/50 px-4 py-3 text-sm text-charcoal shadow-sm focus:border-forest focus:ring-forest">
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
 
-        <!-- Confirm Password -->
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
-
-            <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                            type="password"
-                            name="password_confirmation" required autocomplete="new-password" />
-
+        <div>
+            <label for="password_confirmation" class="block text-sm font-bold text-charcoal">{{ __('auth-ui.confirm_password', [], 'id') }}</label>
+            <input id="password_confirmation" name="password_confirmation" type="password" required autocomplete="new-password" class="mt-2 block w-full rounded-2xl border-forest/15 bg-cream/50 px-4 py-3 text-sm text-charcoal shadow-sm focus:border-forest focus:ring-forest">
             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
         </div>
 
-        <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
-                {{ __('Already registered?') }}
-            </a>
-
-            <x-primary-button class="ms-4">
-                {{ __('Register') }}
-            </x-primary-button>
-        </div>
+        <button type="submit" class="mt-1 inline-flex min-h-12 w-full items-center justify-center rounded-full bg-forest px-6 py-3 text-sm font-extrabold text-white shadow-md shadow-forest/15 transition hover:-translate-y-0.5 hover:bg-forest/90 focus:outline-none focus:ring-2 focus:ring-forest focus:ring-offset-2">
+            {{ __('auth-ui.register', [], 'id') }}
+        </button>
     </form>
+
+    <p class="mt-5 border-t border-forest/10 pt-4 text-center text-sm text-charcoal/60">
+        {{ __('auth-ui.already_registered', [], 'id') }}
+        <a href="{{ route('login') }}" class="font-bold text-forest underline decoration-harvest decoration-2 underline-offset-4">{{ __('auth-ui.login', [], 'id') }}</a>
+    </p>
 </x-guest-layout>
