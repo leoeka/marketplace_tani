@@ -20,7 +20,7 @@ class AdminUserSeeder extends Seeder
             throw new RuntimeException('Admin seeding requires both ADMIN_EMAIL and ADMIN_PASSWORD to be set in the .env file.');
         }
 
-        User::updateOrCreate(
+        User::firstOrCreate(
             ['email' => $email],
             [
                 'name' => 'Master Admin',
