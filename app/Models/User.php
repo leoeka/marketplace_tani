@@ -18,6 +18,15 @@ class User extends Authenticatable
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
 
+    public function dashboardRouteName(): string
+    {
+        return match ($this->role) {
+            'admin' => 'admin.dashboard',
+            'farmer' => 'farmer.dashboard',
+            default => 'home',
+        };
+    }
+
     /**
      * Get the attributes that should be cast.
      *
