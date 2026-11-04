@@ -9,12 +9,18 @@ class ProductPolicy
 {
     public function viewAny(User $user): bool
     {
-        return $user->role === 'farmer';
+        return in_array($user->role, ['admin', 'farmer'], true);
     }
 
     public function view(User $user, Product $product): bool
     {
-        return $user->role === 'farmer' && $product->farmer_id === $user->id;
+        return $user->role === 'admin'
+            || ($user->role === 'farmer' && $product->farmer_id === $user->id);
+    }
+
+    public function moderate(User $user, Product $product): bool
+    {
+        return $user->role === 'admin';
     }
 
     public function create(User $user): bool

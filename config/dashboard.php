@@ -8,5 +8,7 @@ return [
     ],
     'admin_menu' => [
         ['label' => 'overview', 'route' => 'admin.dashboard', 'icon' => '▦'],
+        ['label' => 'farmers', 'route' => 'admin.farmers.index', 'active' => 'admin.farmers.*', 'icon' => '🌾'],
+        ['label' => 'products', 'route' => 'admin.products.index', 'active' => 'admin.products.*', 'icon' => '🥬'],
     ],
 ];

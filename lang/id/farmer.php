@@ -9,6 +9,8 @@ return [
         'product_status' => 'Status produk',
         'status_hint' => 'Pantau perkembangan produk yang kamu kelola.',
         'recent_products' => 'Produk terbaru',
+        'rejected_products' => 'Produk yang perlu diperbaiki',
+        'edit_rejected' => 'Edit dan ajukan ulang',
         'view_products' => 'Lihat Produk Saya',
         'no_products' => 'Belum ada produk. Tambahkan produk pertamamu untuk mulai mengelola katalog.',
     ],

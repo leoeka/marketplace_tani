@@ -15,6 +15,11 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="min-h-screen bg-cream font-sans text-charcoal antialiased" x-data="{ sidebarOpen: false }">
+    @php
+        $dashboardUser = Auth::user();
+        $shopProfile = $dashboardUser->role === 'farmer' ? $dashboardUser->farmerProfile : null;
+        $shopUrl = $shopProfile ? route('marketplace.farmers.show', $shopProfile->slug) : route('home');
+    @endphp
     <div x-cloak x-show="sidebarOpen" class="fixed inset-0 z-40 bg-charcoal/50 lg:hidden" @click="sidebarOpen = false" @keydown.escape.window="sidebarOpen = false"></div>
 
     <aside id="dashboard-sidebar" class="fixed inset-y-0 left-0 z-50 flex w-72 -translate-x-full flex-col border-r border-forest/10 bg-white transition-transform duration-200 lg:translate-x-0"
@@ -65,7 +70,7 @@
                 </div>
 
                 <div class="flex shrink-0 items-center gap-2 sm:gap-3">
-                    <a href="{{ route('home') }}" class="hidden rounded-xl border border-forest/20 px-4 py-2.5 text-sm font-bold text-forest transition hover:bg-cream sm:inline-flex">
+                    <a href="{{ $shopUrl }}" class="hidden rounded-xl border border-forest/20 px-4 py-2.5 text-sm font-bold text-forest transition hover:bg-cream sm:inline-flex">
                         {{ __('dashboard.view_shop', [], 'id') }}
                     </a>
                     <form method="POST" action="{{ route('logout') }}">
@@ -76,7 +81,7 @@
                     </form>
                 </div>
             </div>
-            <a href="{{ route('home') }}" class="mx-4 mb-3 inline-flex rounded-xl border border-forest/20 px-4 py-2 text-sm font-bold text-forest sm:hidden">
+            <a href="{{ $shopUrl }}" class="mx-4 mb-3 inline-flex rounded-xl border border-forest/20 px-4 py-2 text-sm font-bold text-forest sm:hidden">
                 {{ __('dashboard.view_shop', [], 'id') }}
             </a>
         </header>

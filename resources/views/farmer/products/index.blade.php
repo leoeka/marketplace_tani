@@ -22,12 +22,6 @@
         <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
             @foreach ($products as $product)
                 @php
-                    $statusTones = [
-                        'draft' => 'bg-stone-100 text-stone-700',
-                        'pending' => 'bg-amber-100 text-amber-900',
-                        'approved' => 'bg-green-100 text-green-900',
-                        'rejected' => 'bg-red-100 text-red-900',
-                    ];
                     $image = $product->images->first();
                 @endphp
                 <article class="overflow-hidden rounded-2xl border border-forest/10 bg-white shadow-sm">
@@ -44,7 +38,7 @@
                                 <p class="text-xs font-semibold text-forest/60">{{ $product->category->name }}</p>
                                 <h2 class="mt-1 truncate font-extrabold text-charcoal">{{ $product->name }}</h2>
                             </div>
-                            <span class="shrink-0 rounded-full px-3 py-1 text-xs font-bold {{ $statusTones[$product->status] }}">{{ __('farmer.statuses.'.$product->status, [], 'id') }}</span>
+                            <x-product-status-badge :status="$product->status" />
                         </div>
                         <div class="flex items-center justify-between border-t border-forest/10 pt-4 text-sm">
                             <span class="font-extrabold text-forest">{{ __('farmer.products.currency', [], 'id') }} {{ number_format($product->price_idr, 0, ',', '.') }} / {{ $product->unit }}</span>

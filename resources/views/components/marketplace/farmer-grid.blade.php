@@ -10,9 +10,13 @@
         <a href="#farmers" class="inline-flex w-fit items-center gap-2 text-sm font-bold text-forest underline decoration-harvest decoration-2 underline-offset-4">{{ __('marketplace.farmers.view_all', [], 'id') }} <span aria-hidden="true">→</span></a>
     </div>
 
-    <div class="grid gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
-        @foreach ($farmers as $farmer)
-            <x-marketplace.farmer-card :farmer="$farmer" />
-        @endforeach
-    </div>
+    @if ($farmers->isNotEmpty())
+        <div class="grid gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
+            @foreach ($farmers as $farmer)
+                <x-marketplace.farmer-card :farmer="$farmer" />
+            @endforeach
+        </div>
+    @else
+        <p class="rounded-3xl border border-dashed border-forest/20 bg-white px-6 py-12 text-center text-sm text-charcoal/65">{{ __('marketplace.farmers.empty', [], 'id') }}</p>
+    @endif
 </section>

@@ -10,5 +10,7 @@ return [
         'overview' => 'Ringkasan',
         'my_products' => 'Produk Saya',
         'shop_profile' => 'Profil Toko',
+        'farmers' => 'Petani',
+        'products' => 'Produk',
     ],
 ];

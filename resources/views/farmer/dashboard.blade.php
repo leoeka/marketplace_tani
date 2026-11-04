@@ -28,6 +28,29 @@
         </div>
     </section>
 
+    @if ($rejectedProducts->isNotEmpty())
+        <section class="mt-8 rounded-2xl border border-red-200 bg-white p-5 shadow-sm sm:p-6" aria-labelledby="rejected-products-title">
+            <div class="mb-4">
+                <h2 id="rejected-products-title" class="text-lg font-extrabold text-charcoal">{{ __('farmer.dashboard.rejected_products', [], 'id') }}</h2>
+            </div>
+            <div class="divide-y divide-red-100">
+                @foreach ($rejectedProducts as $product)
+                    <article class="flex flex-col gap-3 py-4 first:pt-0 last:pb-0 sm:flex-row sm:items-center sm:justify-between">
+                        <div>
+                            <p class="font-bold text-charcoal">{{ $product->name }}</p>
+                            <p class="mt-1 inline-flex rounded-full bg-red-100 px-3 py-1 text-xs font-bold text-red-800">{{ __('farmer.statuses.rejected', [], 'id') }}</p>
+                            @if ($product->rejection_note)
+                                <p class="mt-2 text-sm leading-5 text-red-700"><strong>{{ __('farmer.products.rejection_note', [], 'id') }}:</strong> {{ $product->rejection_note }}</p>
+                            @endif
+                        </div>
+                        <a href="{{ route('farmer.products.edit', $product) }}" class="shrink-0 rounded-xl border border-forest/20 px-4 py-2.5 text-center text-sm font-bold text-forest hover:bg-cream">{{ __('farmer.dashboard.edit_rejected', [], 'id') }}</a>
+                    </article>
+                @endforeach
+            </div>
+            <div class="mt-4">{{ $rejectedProducts->links() }}</div>
+        </section>
+    @endif
+
     <section class="mt-8 rounded-2xl border border-forest/10 bg-white p-5 shadow-sm sm:p-6">
         <div class="flex flex-wrap items-center justify-between gap-4">
             <div>
@@ -45,6 +68,9 @@
                         <div>
                             <p class="font-bold text-charcoal">{{ $product->name }}</p>
                             <p class="mt-1 text-xs text-charcoal/55">{{ $product->category->name }}</p>
+                            @if ($product->status === 'rejected' && $product->rejection_note)
+                                <p class="mt-2 text-sm leading-5 text-red-700"><strong>{{ __('farmer.products.rejection_note', [], 'id') }}:</strong> {{ $product->rejection_note }}</p>
+                            @endif
                         </div>
                         <span class="rounded-full bg-cream px-3 py-1 text-xs font-bold text-forest">{{ __('farmer.statuses.'.$product->status, [], 'id') }}</span>
                     </div>

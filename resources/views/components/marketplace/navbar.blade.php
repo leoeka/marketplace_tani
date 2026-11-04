@@ -23,14 +23,14 @@
 
         <div class="hidden items-center gap-5 xl:flex">
             @foreach ($navigationLinks as $link)
-                <a href="{{ route('home') . $link['target'] }}" class="text-xs font-semibold text-charcoal/70 transition hover:text-forest 2xl:text-sm">
+                <a href="{{ $link['label'] === 'products' ? route('marketplace.products.index') : route('home') . $link['target'] }}" class="text-xs font-semibold text-charcoal/70 transition hover:text-forest 2xl:text-sm">
                     {{ __('marketplace.nav.' . $link['label'], [], 'id') }}
                 </a>
             @endforeach
         </div>
 
         <div class="hidden items-center gap-2 sm:flex">
-            <a href="{{ route('home') }}#products" aria-label="{{ __('marketplace.nav.search', [], 'id') }}" class="flex h-10 w-10 items-center justify-center rounded-full text-charcoal transition hover:bg-cream hover:text-forest">
+            <a href="{{ route('marketplace.products.index') }}" aria-label="{{ __('marketplace.nav.search', [], 'id') }}" class="flex h-10 w-10 items-center justify-center rounded-full text-charcoal transition hover:bg-cream hover:text-forest">
                 <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8" stroke="currentColor" stroke-width="1.8" /><path d="m16 16 4.5 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" /></svg>
             </a>
             <a href="{{ route('home') }}#products" aria-label="{{ __('marketplace.nav.cart', [], 'id') }}" class="flex h-10 w-10 items-center justify-center rounded-full bg-cream text-forest transition hover:bg-harvest">
@@ -73,13 +73,13 @@
     <div x-show="open" x-cloak class="mt-3 border-t border-forest/10 pb-2 pt-3 sm:hidden">
         <div class="grid gap-1">
             @foreach ($navigationLinks as $link)
-                <a @click="open = false" href="{{ route('home') . $link['target'] }}" class="rounded-xl px-3 py-2 text-sm font-semibold text-charcoal/80 hover:bg-cream hover:text-forest">
+                <a @click="open = false" href="{{ $link['label'] === 'products' ? route('marketplace.products.index') : route('home') . $link['target'] }}" class="rounded-xl px-3 py-2 text-sm font-semibold text-charcoal/80 hover:bg-cream hover:text-forest">
                     {{ __('marketplace.nav.' . $link['label'], [], 'id') }}
                 </a>
             @endforeach
         </div>
         <div class="mt-3 flex items-center gap-2 border-t border-forest/10 pt-3">
-            <a href="{{ route('home') }}#products" aria-label="{{ __('marketplace.nav.search', [], 'id') }}" class="flex h-10 w-10 items-center justify-center rounded-full bg-cream text-forest">
+            <a href="{{ route('marketplace.products.index') }}" aria-label="{{ __('marketplace.nav.search', [], 'id') }}" class="flex h-10 w-10 items-center justify-center rounded-full bg-cream text-forest">
                 <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8" stroke="currentColor" stroke-width="1.8" /><path d="m16 16 4.5 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" /></svg>
             </a>
             <a href="{{ route('home') }}#products" aria-label="{{ __('marketplace.nav.cart', [], 'id') }}" class="flex h-10 w-10 items-center justify-center rounded-full bg-cream text-forest">

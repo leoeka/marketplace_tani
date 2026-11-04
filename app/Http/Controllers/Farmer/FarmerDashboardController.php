@@ -22,6 +22,10 @@ class FarmerDashboardController extends Controller
                 ->mapWithKeys(fn (string $status): array => [$status => (int) ($counts[$status] ?? 0)]),
             'isVerified' => $request->user()->farmerProfile()->whereNotNull('verified_at')->exists(),
             'recentProducts' => $request->user()->products()->with('category')->latest()->limit(3)->get(),
+            'rejectedProducts' => $request->user()->products()
+                ->where('status', 'rejected')
+                ->latest()
+                ->paginate(5, ['*'], 'rejected_page'),
         ]);
     }
 }
