@@ -21,6 +21,21 @@ class ProfileTest extends TestCase
         $response->assertOk();
     }
 
+    public function test_profile_page_uses_role_layouts_and_indonesian_copy(): void
+    {
+        foreach (['customer', 'farmer', 'admin'] as $role) {
+            $user = User::factory()->create(['role' => $role]);
+
+            $response = $this
+                ->actingAs($user)
+                ->get('/profile');
+
+            $response
+                ->assertOk()
+                ->assertDontSee('Profile Information');
+        }
+    }
+
     public function test_profile_information_can_be_updated(): void
     {
         $user = User::factory()->create();

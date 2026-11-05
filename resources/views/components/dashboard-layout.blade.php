@@ -51,6 +51,9 @@
             <div class="rounded-2xl bg-cream p-4">
                 <p class="text-sm font-bold text-forest">{{ Auth::user()->name }}</p>
                 <p class="mt-1 truncate text-xs text-charcoal/60">{{ Auth::user()->email }}</p>
+                <a href="{{ route('profile.edit') }}" class="mt-3 inline-flex rounded-lg px-2 py-1 text-sm font-bold text-forest transition hover:bg-white focus:outline-none focus:ring-2 focus:ring-forest focus:ring-offset-2">
+                    {{ __('dashboard.account', [], 'id') }}
+                </a>
             </div>
         </div>
     </aside>

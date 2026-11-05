@@ -175,7 +175,12 @@ return [
         'view' => 'Lihat detail',
     ],
     'profile' => [
-        'title' => 'Profil',
+        'title' => 'Akun Saya',
+        'description' => 'Kelola informasi akun dan keamanan kata sandi Anda.',
+        'information_title' => 'Informasi Profil',
+        'information_description' => 'Perbarui nama, alamat email, dan jenis pembeli Anda.',
+        'security_title' => 'Keamanan',
+        'section_navigation' => 'Bagian pengaturan akun',
         'customer_type' => 'Jenis pembeli',
         'individual' => 'Perorangan',
         'business' => 'Usaha',
