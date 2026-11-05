@@ -1,3 +1,5 @@
+SUMBER KEBENARAN: docs/DESKRIPSI_ATASAN.md. Jika berbeda dengan dokumen ini, ikuti deskripsi atasan. Jangan mengarang fitur atau aturan. Hal yang belum ditentukan: buat versi paling sederhana dan catat di docs/PERTANYAAN_ATASAN.md.
+
 # PROJECT_SPEC: Marketplace Hasil Bumi + Website Ekspor
 
 Dokumen ini adalah acuan utama untuk AI copilot. Baca seluruhnya sebelum membuat kode. Jangan menambah fitur di luar dokumen ini tanpa konfirmasi.

@@ -33,8 +33,9 @@
             <a href="{{ route('marketplace.products.index') }}" aria-label="{{ __('marketplace.nav.search', [], 'id') }}" class="flex h-10 w-10 items-center justify-center rounded-full text-charcoal transition hover:bg-cream hover:text-forest">
                 <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8" stroke="currentColor" stroke-width="1.8" /><path d="m16 16 4.5 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" /></svg>
             </a>
-            <a href="{{ route('home') }}#products" aria-label="{{ __('marketplace.nav.cart', [], 'id') }}" class="flex h-10 w-10 items-center justify-center rounded-full bg-cream text-forest transition hover:bg-harvest">
+            <a href="{{ route('cart.index') }}" aria-label="{{ __('marketplace.nav.cart', [], 'id') }}: {{ collect(session('cart', []))->sum() }}" class="relative flex h-10 w-10 items-center justify-center rounded-full bg-cream text-forest transition hover:bg-harvest">
                 <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3.5 4h2l2.2 11.2a2 2 0 0 0 2 1.6h8.1a2 2 0 0 0 1.9-1.4l1.5-6.1H7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" /><circle cx="10" cy="20" r="1.2" fill="currentColor" /><circle cx="18" cy="20" r="1.2" fill="currentColor" /></svg>
+                <span class="absolute -right-1 -top-1 flex min-h-5 min-w-5 items-center justify-center rounded-full bg-forest px-1 text-[10px] font-bold text-white">{{ collect(session('cart', []))->sum() }}</span>
             </a>
 
             @auth
@@ -51,6 +52,7 @@
                             <a href="{{ route('admin.dashboard') }}" class="block rounded-xl px-3 py-2 text-sm font-semibold text-forest hover:bg-cream">{{ __('marketplace.nav.admin_dashboard', [], 'id') }}</a>
                         @else
                             <a href="{{ route('profile.edit') }}" class="block rounded-xl px-3 py-2 text-sm font-semibold text-forest hover:bg-cream">{{ __('marketplace.nav.account', [], 'id') }}</a>
+                            <a href="{{ route('customer.orders.index') }}" class="block rounded-xl px-3 py-2 text-sm font-semibold text-forest hover:bg-cream">{{ __('marketplace.nav.my_orders', [], 'id') }}</a>
                         @endif
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
@@ -82,8 +84,9 @@
             <a href="{{ route('marketplace.products.index') }}" aria-label="{{ __('marketplace.nav.search', [], 'id') }}" class="flex h-10 w-10 items-center justify-center rounded-full bg-cream text-forest">
                 <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8" stroke="currentColor" stroke-width="1.8" /><path d="m16 16 4.5 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" /></svg>
             </a>
-            <a href="{{ route('home') }}#products" aria-label="{{ __('marketplace.nav.cart', [], 'id') }}" class="flex h-10 w-10 items-center justify-center rounded-full bg-cream text-forest">
+            <a href="{{ route('cart.index') }}" aria-label="{{ __('marketplace.nav.cart', [], 'id') }}: {{ collect(session('cart', []))->sum() }}" class="relative flex h-10 w-10 items-center justify-center rounded-full bg-cream text-forest">
                 <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3.5 4h2l2.2 11.2a2 2 0 0 0 2 1.6h8.1a2 2 0 0 0 1.9-1.4l1.5-6.1H7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" /><circle cx="10" cy="20" r="1.2" fill="currentColor" /><circle cx="18" cy="20" r="1.2" fill="currentColor" /></svg>
+                <span class="absolute -right-1 -top-1 flex min-h-5 min-w-5 items-center justify-center rounded-full bg-forest px-1 text-[10px] font-bold text-white">{{ collect(session('cart', []))->sum() }}</span>
             </a>
             @auth
                 <div class="ml-auto flex flex-wrap items-center justify-end gap-2">
@@ -93,6 +96,7 @@
                         <a href="{{ route('admin.dashboard') }}" class="rounded-full bg-forest px-4 py-2 text-xs font-bold text-white">{{ __('marketplace.nav.admin_dashboard', [], 'id') }}</a>
                     @else
                         <a href="{{ route('profile.edit') }}" class="rounded-full bg-forest px-4 py-2 text-xs font-bold text-white">{{ __('marketplace.nav.account', [], 'id') }}</a>
+                        <a href="{{ route('customer.orders.index') }}" class="rounded-full border border-forest/20 px-4 py-2 text-xs font-bold text-forest">{{ __('marketplace.nav.my_orders', [], 'id') }}</a>
                     @endif
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf

@@ -5,6 +5,7 @@ namespace App\Services\Farmer;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -57,10 +58,21 @@ class ProductCatalogService
         }
     }
 
-    public function delete(Product $product): void
+    public function delete(Product $product): bool
     {
-        Storage::disk('public')->delete($product->images()->pluck('path')->all());
-        $product->delete();
+        return DB::transaction(function () use ($product): bool {
+            $lockedProduct = Product::query()->lockForUpdate()->findOrFail($product->id);
+
+            if ($lockedProduct->orderItems()->exists()) {
+                return false;
+            }
+
+            $imagePaths = $lockedProduct->images()->pluck('path')->all();
+            $lockedProduct->delete();
+            Storage::disk('public')->delete($imagePaths);
+
+            return true;
+        });
     }
 
     /** @param array<int, UploadedFile> $photos */

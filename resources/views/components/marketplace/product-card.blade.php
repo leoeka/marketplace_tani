@@ -24,5 +24,9 @@
             <span class="text-base font-extrabold text-forest sm:text-lg">{{ __('marketplace.products.currency_prefix', [], 'id') }} {{ number_format($product->price_idr, 0, ',', '.') }}</span>
             <span class="text-[10px] text-charcoal/50 sm:text-xs">/ {{ $product->unit }}</span>
         </div>
+        <form method="POST" action="{{ route('cart.items.store', $product->id) }}" class="mt-3">
+            @csrf
+            <button type="submit" @disabled($product->stock < 1) class="w-full rounded-xl bg-harvest px-3 py-2.5 text-xs font-extrabold text-forest transition hover:bg-yellow-400 disabled:cursor-not-allowed disabled:opacity-50">{{ __('marketplace.products.add_to_cart', [], 'id') }}</button>
+        </form>
     </div>
 </article>

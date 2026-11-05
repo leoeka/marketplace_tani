@@ -1,4 +1,8 @@
 <section>
+    @php
+        /** @var \App\Models\User $profileAccount */
+        $profileAccount = $user;
+    @endphp
     <header>
         <h2 class="text-lg font-medium text-gray-900">
             {{ __('Profile Information') }}
@@ -46,6 +50,17 @@
                 </div>
             @endif
         </div>
+
+        @if ($profileAccount->role === 'customer')
+            <div>
+                <x-input-label for="customer_type" :value="__('marketplace.profile.customer_type', [], 'id')" />
+                <select id="customer_type" name="customer_type" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                    <option value="individual" @selected(old('customer_type', $profileAccount->customer_type) === 'individual')>{{ __('marketplace.profile.individual', [], 'id') }}</option>
+                    <option value="business" @selected(old('customer_type', $profileAccount->customer_type) === 'business')>{{ __('marketplace.profile.business', [], 'id') }}</option>
+                </select>
+                <x-input-error class="mt-2" :messages="$errors->get('customer_type')" />
+            </div>
+        @endif
 
         <div class="flex items-center gap-4">
             <x-primary-button>{{ __('Save') }}</x-primary-button>

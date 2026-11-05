@@ -27,8 +27,10 @@
                         <span>{{ $product->farmer->farmerProfile->shop_name }} · {{ $product->farmer->farmerProfile->region }}</span>
                     </a>
                 </div>
-                <button type="button" class="mt-7 w-full cursor-default rounded-xl bg-harvest px-5 py-3.5 text-sm font-extrabold text-forest" aria-describedby="cart-notice">{{ __('marketplace.product_detail.add_to_cart', [], 'id') }}</button>
-                <p id="cart-notice" class="mt-2 text-center text-xs text-charcoal/55">{{ __('marketplace.product_detail.cart_coming_soon', [], 'id') }}</p>
+                <form method="POST" action="{{ route('cart.items.store', $product->id) }}" class="mt-7">
+                    @csrf
+                    <button type="submit" @disabled($product->stock < 1) class="w-full rounded-xl bg-harvest px-5 py-3.5 text-sm font-extrabold text-forest transition hover:bg-yellow-400 disabled:cursor-not-allowed disabled:opacity-50">{{ __('marketplace.product_detail.add_to_cart', [], 'id') }}</button>
+                </form>
             </article>
         </div>
     </section>

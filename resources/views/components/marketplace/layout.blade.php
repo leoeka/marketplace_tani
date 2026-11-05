@@ -18,6 +18,20 @@
             </header>
 
             <main>
+                @if ($errors->any())
+                    <div class="mx-auto mt-5 max-w-7xl px-4 sm:px-6 lg:px-8">
+                        <ul class="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800" role="alert">
+                            @foreach ($errors->all() as $message)
+                                <li>{{ $message }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                @if (session('success') || session('error'))
+                    <div class="mx-auto mt-5 max-w-7xl px-4 sm:px-6 lg:px-8">
+                        <p class="rounded-xl {{ session('error') ? 'border border-red-200 bg-red-50 text-red-800' : 'border border-green-200 bg-green-50 text-green-800' }} px-4 py-3 text-sm font-semibold" role="{{ session('error') ? 'alert' : 'status' }}">{{ session('error') ?? session('success') }}</p>
+                    </div>
+                @endif
                 {{ $slot }}
             </main>
 

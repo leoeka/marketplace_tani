@@ -28,11 +28,11 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->route(match ($request->user()->role) {
+        return redirect()->intended(route(match ($request->user()->role) {
             'admin' => 'admin.dashboard',
             'farmer' => 'farmer.dashboard',
             default => 'home',
-        });
+        }));
     }
 
     /**

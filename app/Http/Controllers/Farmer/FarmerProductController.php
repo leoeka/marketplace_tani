@@ -87,7 +87,9 @@ class FarmerProductController extends Controller
     {
         Gate::authorize('delete', $product);
 
-        $products->delete($product);
+        if (! $products->delete($product)) {
+            return redirect()->route('farmer.products.index')->with('error', __('farmer.products.delete_has_orders', [], 'id'));
+        }
 
         return redirect()->route('farmer.products.index')->with('success', __('farmer.products.deleted', [], 'id'));
     }

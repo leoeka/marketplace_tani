@@ -1,0 +1,4 @@
+- [3A] Berapa hari yang berlaku untuk pembayaran tempo/termin? | asumsi yang dipakai: opsi disimpan sebagai `tempo` tanpa jumlah hari dan tidak ada batas jatuh tempo pada tahap ini.
+- [3A] Kapan stok produk harus dikurangi: saat pesanan dibuat atau setelah pembayaran dikonfirmasi? | asumsi yang dipakai: stok langsung dikurangi di dalam transaksi saat pesanan dibuat.
+- [3A] Siapa yang mengelola dan menindaklanjuti pesanan masuk dari beberapa petani? | asumsi yang dipakai: petani hanya melihat item miliknya tanpa aksi, sedangkan master admin melihat seluruh pesanan dan dapat menandai pembayaran sudah diterima.
+- [3A] Apakah ada format khusus untuk menyimpan alamat pengiriman pada pesanan? | asumsi yang dipakai: nama penerima, telepon, alamat, dan catatan opsional digabung menjadi teks berlabel dalam satu kolom.
