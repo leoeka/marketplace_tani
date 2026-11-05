@@ -23,7 +23,7 @@
 
         <div class="hidden items-center gap-5 xl:flex">
             @foreach ($navigationLinks as $link)
-                <a href="{{ $link['label'] === 'products' ? route('marketplace.products.index') : route('home') . $link['target'] }}" class="text-xs font-semibold text-charcoal/70 transition hover:text-forest 2xl:text-sm">
+                <a href="{{ $link['label'] === 'products' ? route('marketplace.products.index') : ($link['label'] === 'preorder' ? route('marketplace.preorders.index') : route('home') . $link['target']) }}" class="text-xs font-semibold text-charcoal/70 transition hover:text-forest 2xl:text-sm">
                     {{ __('marketplace.nav.' . $link['label'], [], 'id') }}
                 </a>
             @endforeach
@@ -75,7 +75,7 @@
     <div x-show="open" x-cloak class="mt-3 border-t border-forest/10 pb-2 pt-3 sm:hidden">
         <div class="grid gap-1">
             @foreach ($navigationLinks as $link)
-                <a @click="open = false" href="{{ $link['label'] === 'products' ? route('marketplace.products.index') : route('home') . $link['target'] }}" class="rounded-xl px-3 py-2 text-sm font-semibold text-charcoal/80 hover:bg-cream hover:text-forest">
+                <a @click="open = false" href="{{ $link['label'] === 'products' ? route('marketplace.products.index') : ($link['label'] === 'preorder' ? route('marketplace.preorders.index') : route('home') . $link['target']) }}" class="rounded-xl px-3 py-2 text-sm font-semibold text-charcoal/80 hover:bg-cream hover:text-forest">
                     {{ __('marketplace.nav.' . $link['label'], [], 'id') }}
                 </a>
             @endforeach

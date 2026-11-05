@@ -48,6 +48,9 @@ return [
         'currency' => 'Rp',
         'unit_kg' => 'Kilogram (kg)',
         'unit_ton' => 'Ton',
+        'preorder_option' => 'Jual sebagai pra-order (panen terjadwal)',
+        'preorder_date' => 'Tanggal panen',
+        'preorder_badge' => 'Pra-order',
     ],
     'orders' => [
         'title' => 'Pesanan Masuk',
@@ -73,6 +76,7 @@ return [
         'unit' => 'Satuan',
         'price' => 'Harga per satuan (Rp)',
         'stock' => 'Stok',
+        'harvest_date' => 'Tanggal panen',
     ],
     'statuses' => [
         'draft' => 'Draft',
@@ -108,5 +112,8 @@ return [
         'photo_image' => 'File harus berupa gambar.',
         'photo_type' => 'Foto harus berformat JPG, PNG, atau WEBP.',
         'photo_max' => 'Ukuran setiap foto maksimal 2 MB.',
+        'harvest_date_required' => 'Tanggal panen wajib diisi untuk produk pra-order.',
+        'harvest_date_invalid' => 'Tanggal panen tidak valid.',
+        'harvest_date_past' => 'Tanggal panen tidak boleh sebelum hari ini.',
     ],
 ];

@@ -15,6 +15,8 @@ class ProductCatalogService
     public function create(User $farmer, array $data, string $action): Product
     {
         $photos = $data['photos'];
+        $data['harvest_date'] = ($data['is_preorder'] ?? false) ? $data['harvest_date'] : null;
+        unset($data['is_preorder']);
         unset($data['photos'], $data['action']);
 
         $product = $farmer->products()->create([
@@ -32,6 +34,8 @@ class ProductCatalogService
     public function update(Product $product, array $data, string $action): void
     {
         $photos = $data['photos'] ?? [];
+        $data['harvest_date'] = ($data['is_preorder'] ?? false) ? $data['harvest_date'] : null;
+        unset($data['is_preorder']);
         unset($data['photos'], $data['action']);
         $wasApproved = $product->status === 'approved';
 

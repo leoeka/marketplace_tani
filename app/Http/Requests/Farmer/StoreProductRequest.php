@@ -21,6 +21,8 @@ class StoreProductRequest extends FormRequest
             'unit' => ['required', 'in:kg,ton'],
             'price_idr' => ['required', 'integer', 'min:0', 'max:4294967295'],
             'stock' => ['required', 'integer', 'min:0', 'max:4294967295'],
+            'is_preorder' => ['sometimes', 'boolean'],
+            'harvest_date' => ['exclude_unless:is_preorder,1', 'required', 'date', 'after_or_equal:today'],
             'action' => ['required', 'in:draft,submit'],
             'photos' => ['required', 'array', 'min:1', 'max:5'],
             'photos.*' => ['required', 'image', 'mimes:jpg,png,webp', 'extensions:jpg,png,webp', 'max:2048'],
@@ -58,6 +60,9 @@ class StoreProductRequest extends FormRequest
             'description.string' => __('farmer.validation.string', ['attribute' => __('farmer.fields.description', [], 'id')], 'id'),
             'price_idr.max' => __('farmer.validation.max_numeric', ['attribute' => __('farmer.fields.price', [], 'id')], 'id'),
             'stock.max' => __('farmer.validation.max_numeric', ['attribute' => __('farmer.fields.stock', [], 'id')], 'id'),
+            'harvest_date.required' => __('farmer.validation.harvest_date_required', [], 'id'),
+            'harvest_date.date' => __('farmer.validation.harvest_date_invalid', [], 'id'),
+            'harvest_date.after_or_equal' => __('farmer.validation.harvest_date_past', [], 'id'),
             'photos.*.required' => __('farmer.validation.photos_required_file', [], 'id'),
         ];
     }
@@ -71,6 +76,7 @@ class StoreProductRequest extends FormRequest
             'unit' => __('farmer.fields.unit', [], 'id'),
             'price_idr' => __('farmer.fields.price', [], 'id'),
             'stock' => __('farmer.fields.stock', [], 'id'),
+            'harvest_date' => __('farmer.fields.harvest_date', [], 'id'),
             'photos' => __('farmer.products.images', [], 'id'),
         ];
     }

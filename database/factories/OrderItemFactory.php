@@ -29,6 +29,8 @@ class OrderItemFactory extends Factory
             'unit' => fake()->randomElement(['kg', 'ton']),
             'price' => fake()->numberBetween(1000, 100000),
             'qty' => fake()->numberBetween(1, 100),
+            'is_preorder' => false,
+            'harvest_date' => null,
         ];
     }
 }

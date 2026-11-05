@@ -23,6 +23,17 @@
                     <div><dt class="text-xs font-bold uppercase text-charcoal/55">{{ __('admin.products.price', [], 'id') }}</dt><dd class="mt-1 font-extrabold text-forest">{{ __('marketplace.products.currency_prefix', [], 'id') }} {{ number_format($product->price_idr, 0, ',', '.') }} / {{ $product->unit }}</dd></div>
                     <div><dt class="text-xs font-bold uppercase text-charcoal/55">{{ __('admin.products.stock', [], 'id') }}</dt><dd class="mt-1 font-semibold text-charcoal">{{ number_format($product->stock, 0, ',', '.') }}</dd></div>
                     <div><dt class="text-xs font-bold uppercase text-charcoal/55">{{ __('admin.products.farmer', [], 'id') }}</dt><dd class="mt-1 font-semibold text-charcoal">{{ $product->farmer->farmerProfile?->shop_name ?: $product->farmer->name }}</dd></div>
+                    @if ($product->harvest_date)
+                        <div>
+                            <dt class="text-xs font-bold uppercase text-charcoal/55">{{ __('admin.products.harvest_date', [], 'id') }}</dt>
+                            <dd class="mt-1 font-semibold text-charcoal">
+                                @if ($product->isPreorder())
+                                    <span class="mr-2 rounded-full bg-harvest/30 px-2.5 py-1 text-xs font-extrabold text-forest">{{ __('admin.products.preorder_badge', [], 'id') }}</span>
+                                @endif
+                                {{ $product->harvest_date->format('d/m/Y') }}
+                            </dd>
+                        </div>
+                    @endif
                 </dl>
                 @if ($product->farmer->farmerProfile)
                     <a href="{{ route('admin.farmers.show', $product->farmer->farmerProfile) }}" class="text-sm font-bold text-forest underline underline-offset-4">{{ __('admin.products.view_farmer', [], 'id') }}</a>

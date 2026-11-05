@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [MarketplaceController::class, 'home'])->name('home');
 Route::get('/produk', [MarketplaceController::class, 'index'])->name('marketplace.products.index');
+Route::get('/pra-order', [MarketplaceController::class, 'preorder'])->name('marketplace.preorders.index');
 Route::get('/produk/{slug}', [MarketplaceController::class, 'showProduct'])->name('marketplace.products.show');
 Route::get('/petani/{slug}', [MarketplaceController::class, 'showFarmer'])->name('marketplace.farmers.show');
 Route::get('/keranjang', [CartController::class, 'index'])->name('cart.index');

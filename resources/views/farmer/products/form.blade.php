@@ -56,6 +56,18 @@
             </div>
         </div>
 
+        <div class="space-y-4 rounded-xl border border-forest/10 bg-cream/40 p-4">
+            <label for="is_preorder" class="flex items-start gap-3 text-sm font-bold text-charcoal">
+                <input id="is_preorder" name="is_preorder" type="checkbox" value="1" @checked(old('is_preorder', $product->isPreorder())) class="mt-0.5 rounded border-forest/25 text-forest focus:ring-forest">
+                <span>{{ __('farmer.products.preorder_option', [], 'id') }}</span>
+            </label>
+            <div>
+                <label for="harvest_date" class="mb-2 block text-sm font-bold text-charcoal">{{ __('farmer.products.preorder_date', [], 'id') }}</label>
+                <input id="harvest_date" name="harvest_date" type="date" min="{{ today()->toDateString() }}" value="{{ old('harvest_date', $product->isPreorder() ? $product->harvest_date->format('Y-m-d') : '') }}" class="w-full rounded-xl border-forest/15 focus:border-forest focus:ring-forest sm:max-w-xs">
+                @error('harvest_date') <p class="mt-2 text-sm text-red-700">{{ $message }}</p> @enderror
+            </div>
+        </div>
+
         @if ($product->images->isNotEmpty())
             <div>
                 <p class="mb-3 text-sm font-bold text-charcoal">{{ __('farmer.products.existing_images', [], 'id') }}</p>

@@ -69,6 +69,48 @@ class OrderCheckoutTest extends TestCase
         $this->assertSame([], session('cart', []));
     }
 
+    public function test_preorder_is_shown_through_checkout_and_order_details_and_snapshotted_with_reduced_stock(): void
+    {
+        $harvestDate = now()->addDays(5);
+        $harvestDateString = $harvestDate->toDateString();
+        $displayHarvestDate = $harvestDate->format('d/m/Y');
+        $customer = User::factory()->create(['role' => 'customer']);
+        $farmer = $this->createVerifiedFarmer();
+        $product = $this->createMarketplaceProduct($farmer, 8);
+        $product->update(['harvest_date' => $harvestDateString]);
+        $this->actingAs($customer)->post(route('cart.items.store', $product->id));
+
+        $this->get(route('cart.index'))
+            ->assertOk()
+            ->assertSee('Pra-order')
+            ->assertSee('Panen: '.$displayHarvestDate);
+        $this->get(route('marketplace.checkout.index'))
+            ->assertOk()
+            ->assertSee('Pra-order')
+            ->assertSee('Panen: '.$displayHarvestDate);
+
+        $this->post(route('marketplace.checkout.store'), $this->checkoutData())
+            ->assertRedirect();
+
+        $order = Order::query()->with('items')->firstOrFail();
+        $item = $order->items->firstOrFail();
+        $this->assertSame(true, $item->is_preorder);
+        $this->assertSame($harvestDateString, $item->harvest_date->toDateString());
+        $this->assertSame(7, $product->fresh()->stock);
+        $this->get(route('customer.orders.show', $order))->assertOk()->assertSee('Panen: '.$displayHarvestDate);
+
+        $this->actingAs($farmer)
+            ->get(route('farmer.orders.show', $order))
+            ->assertOk()
+            ->assertSee('Panen: '.$displayHarvestDate);
+
+        $admin = User::factory()->create(['role' => 'admin']);
+        $this->actingAs($admin)
+            ->get(route('admin.orders.show', $order))
+            ->assertOk()
+            ->assertSee('Panen: '.$displayHarvestDate);
+    }
+
     public function test_tempo_is_rejected_for_individual_customer_and_allowed_for_business_customer(): void
     {
         $farmer = $this->createVerifiedFarmer();

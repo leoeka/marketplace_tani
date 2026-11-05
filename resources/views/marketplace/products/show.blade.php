@@ -12,6 +12,13 @@
             <article class="rounded-3xl border border-forest/10 bg-white p-6 shadow-sm sm:p-8">
                 <p class="text-sm font-bold text-forest/65">{{ $product->category->name }}</p>
                 <h1 class="mt-2 text-3xl font-extrabold tracking-tight text-charcoal sm:text-4xl">{{ $product->name }}</h1>
+                @if ($product->isPreorder())
+                    <div class="mt-4 rounded-2xl bg-cream p-4">
+                        <span class="inline-flex rounded-full bg-harvest px-3 py-1 text-xs font-extrabold text-forest">{{ __('marketplace.products.preorder_badge', [], 'id') }}</span>
+                        <p class="mt-2 text-sm font-bold text-charcoal">{{ __('marketplace.products.harvest_date', ['date' => $product->harvest_date->format('d/m/Y')], 'id') }}</p>
+                        <p class="mt-1 text-sm text-charcoal/65">{{ __('marketplace.products.preorder_shipping_note', [], 'id') }}</p>
+                    </div>
+                @endif
                 <p class="mt-5 text-2xl font-extrabold text-forest">{{ __('marketplace.products.currency_prefix', [], 'id') }} {{ number_format($product->price_idr, 0, ',', '.') }} <span class="text-base font-semibold text-charcoal/55">/ {{ $product->unit }}</span></p>
                 <p class="mt-3 text-sm text-charcoal/65">{{ __('marketplace.product_detail.stock', [], 'id') }}: {{ number_format($product->stock, 0, ',', '.') }} {{ $product->unit }}</p>
                 <div class="mt-7 border-t border-forest/10 pt-6">

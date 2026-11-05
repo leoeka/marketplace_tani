@@ -44,6 +44,8 @@ return [
         'status' => 'Status',
         'price' => 'Harga',
         'stock' => 'Stok',
+        'preorder_badge' => 'Pra-order',
+        'harvest_date' => 'Tanggal panen',
         'description_label' => 'Deskripsi',
         'images' => 'Foto produk',
         'marketplace_channel' => 'Tampilkan di marketplace',

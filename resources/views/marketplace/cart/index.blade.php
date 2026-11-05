@@ -23,6 +23,12 @@
                                     <h2 class="font-extrabold text-charcoal">{{ $product?->name ?? __('marketplace.cart.item_missing', [], 'id') }}</h2>
                                     @if ($product)
                                         <p class="mt-1 text-sm text-charcoal/60">{{ __('marketplace.products.currency_prefix', [], 'id') }} {{ number_format($product->price_idr, 0, ',', '.') }} / {{ $product->unit }}</p>
+                                        @if ($item['is_preorder'])
+                                            <div class="mt-2 flex flex-wrap items-center gap-2 text-xs">
+                                                <span class="rounded-full bg-harvest px-2.5 py-1 font-extrabold text-forest">{{ __('marketplace.products.preorder_badge', [], 'id') }}</span>
+                                                <span class="font-semibold text-charcoal/70">{{ __('marketplace.products.harvest_date', ['date' => $product->harvest_date->format('d/m/Y')], 'id') }}</span>
+                                            </div>
+                                        @endif
                                     @endif
                                     @unless ($item['available'])
                                         <p class="mt-2 text-sm font-semibold text-red-700" role="alert">{{ __('marketplace.cart.item_unavailable', [], 'id') }}</p>

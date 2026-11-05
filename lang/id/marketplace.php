@@ -69,6 +69,8 @@ return [
         'location_4' => 'Sleman, DI Yogyakarta',
         'verified' => 'Terverifikasi',
         'preorder_badge' => 'Pra-order',
+        'harvest_date' => 'Panen: :date',
+        'preorder_shipping_note' => 'Barang dikirim setelah panen.',
         'unit_kg' => 'kg',
         'currency_prefix' => 'Rp',
         'add_to_cart' => 'Tambah ke keranjang',
@@ -89,6 +91,11 @@ return [
         'empty' => 'Belum ada produk yang sesuai. Coba ubah kata pencarian atau kategori.',
         'category_invalid' => 'Kategori yang dipilih tidak tersedia.',
         'search_max' => 'Pencarian maksimal 100 karakter.',
+    ],
+    'preorder' => [
+        'title' => 'Pra-order Panen',
+        'description' => 'Pesan hasil bumi yang tersedia sesuai jadwal panen petani.',
+        'empty' => 'Belum ada produk pra-order yang tersedia. Silakan kembali lagi nanti.',
     ],
     'product_detail' => [
         'back_to_products' => 'Kembali ke produk',

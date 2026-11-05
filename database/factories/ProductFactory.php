@@ -30,6 +30,7 @@ class ProductFactory extends Factory
             'rejection_note' => null,
             'show_in_marketplace' => false,
             'show_in_export' => false,
+            'harvest_date' => null,
         ];
     }
 }

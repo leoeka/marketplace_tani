@@ -70,6 +70,8 @@ class CheckoutService
                     'unit' => $product->unit,
                     'price' => $product->price_idr,
                     'qty' => (int) $qty,
+                    'is_preorder' => $product->isPreorder(),
+                    'harvest_date' => $product->harvest_date,
                 ]);
                 $product->decrement('stock', (int) $qty);
             }

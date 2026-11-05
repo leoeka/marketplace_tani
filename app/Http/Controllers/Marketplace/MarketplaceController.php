@@ -46,6 +46,32 @@ class MarketplaceController extends Controller
         ]);
     }
 
+    public function preorder(ProductCatalogRequest $request): View
+    {
+        $filters = $request->validated();
+        $products = $this->marketplaceProducts()
+            ->preorder()
+            ->when($filters['category'] ?? null, fn (Builder $query, string $category): Builder => $query->whereHas(
+                'category',
+                fn (Builder $categoryQuery): Builder => $categoryQuery->where('slug', $category),
+            ))
+            ->when($filters['q'] ?? null, fn (Builder $query, string $search): Builder => $query->where('name', 'like', '%'.$search.'%'))
+            ->orderBy('harvest_date')
+            ->orderBy('id')
+            ->paginate(12)
+            ->withQueryString();
+
+        return view('marketplace.products.index', [
+            'products' => $products,
+            'categories' => Category::query()->orderBy('name')->get(),
+            'filters' => $filters,
+            'catalogTitle' => __('marketplace.preorder.title', [], 'id'),
+            'catalogDescription' => __('marketplace.preorder.description', [], 'id'),
+            'emptyMessage' => __('marketplace.preorder.empty', [], 'id'),
+            'catalogRoute' => route('marketplace.preorders.index'),
+        ]);
+    }
+
     public function showProduct(string $slug): View
     {
         $product = $this->marketplaceProducts()

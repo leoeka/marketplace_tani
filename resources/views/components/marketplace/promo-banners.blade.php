@@ -1,5 +1,5 @@
 <section class="mx-auto -mt-2 grid max-w-7xl gap-4 px-4 pt-5 sm:grid-cols-2 sm:gap-5 sm:px-6 lg:px-8" aria-label="{{ __('marketplace.promos.decorative_icon', [], 'id') }}">
-    <a id="preorder" href="#products" class="group relative isolate flex min-h-44 overflow-hidden rounded-3xl bg-[#F3E6CA] p-6 sm:min-h-48 sm:p-8">
+    <a id="preorder" href="{{ route('marketplace.preorders.index') }}" class="group relative isolate flex min-h-44 overflow-hidden rounded-3xl bg-[#F3E6CA] p-6 sm:min-h-48 sm:p-8">
         <div class="absolute -right-7 -top-9 h-40 w-40 rounded-full bg-harvest/25 transition duration-500 group-hover:scale-110" aria-hidden="true"></div>
         <div class="relative z-10 max-w-[68%] self-center">
             <span class="text-xs font-bold uppercase tracking-[0.15em] text-forest/60">{{ __('marketplace.promos.preorder_action', [], 'id') }}</span>

@@ -133,6 +133,90 @@ class FarmerDashboardTest extends TestCase
         ]);
     }
 
+    public function test_farmer_can_save_a_preorder_with_a_valid_harvest_date(): void
+    {
+        Storage::fake('public');
+        $harvestDate = now()->toDateString();
+        $farmer = User::factory()->create(['role' => 'farmer']);
+        $category = Category::factory()->create();
+
+        $this->actingAs($farmer)
+            ->post(route('farmer.products.store'), [
+                ...$this->productData($category),
+                'is_preorder' => '1',
+                'harvest_date' => $harvestDate,
+                'photos' => [UploadedFile::fake()->image('panen.jpg')],
+            ])
+            ->assertRedirect(route('farmer.products.index'));
+
+        $this->assertDatabaseHas('products', [
+            'farmer_id' => $farmer->id,
+            'name' => 'Hasil Panen Terjadwal',
+        ]);
+        $product = Product::query()->where('name', 'Hasil Panen Terjadwal')->firstOrFail();
+        /** @var \Illuminate\Support\Carbon $productHarvestDate */
+        $productHarvestDate = $product->harvest_date;
+        $this->assertSame($harvestDate, $productHarvestDate->toDateString());
+    }
+
+    public function test_preorder_requires_a_harvest_date(): void
+    {
+        Storage::fake('public');
+        $farmer = User::factory()->create(['role' => 'farmer']);
+        $category = Category::factory()->create();
+
+        $this->actingAs($farmer)
+            ->from(route('farmer.products.create'))
+            ->post(route('farmer.products.store'), [
+                ...$this->productData($category),
+                'is_preorder' => '1',
+                'photos' => [UploadedFile::fake()->image('panen.jpg')],
+            ])
+            ->assertSessionHasErrors('harvest_date');
+
+        $this->assertDatabaseMissing('products', ['name' => 'Hasil Panen Terjadwal']);
+    }
+
+    public function test_preorder_rejects_a_harvest_date_before_today(): void
+    {
+        Storage::fake('public');
+        $pastDate = now()->subDay()->toDateString();
+        $farmer = User::factory()->create(['role' => 'farmer']);
+        $category = Category::factory()->create();
+
+        $this->actingAs($farmer)
+            ->from(route('farmer.products.create'))
+            ->post(route('farmer.products.store'), [
+                ...$this->productData($category),
+                'is_preorder' => '1',
+                'harvest_date' => $pastDate,
+                'photos' => [UploadedFile::fake()->image('panen.jpg')],
+            ])
+            ->assertSessionHasErrors('harvest_date');
+
+        $this->assertDatabaseMissing('products', ['name' => 'Hasil Panen Terjadwal']);
+    }
+
+    public function test_harvest_date_is_cleared_when_preorder_is_not_selected(): void
+    {
+        Storage::fake('public');
+        $farmer = User::factory()->create(['role' => 'farmer']);
+        $category = Category::factory()->create();
+
+        $this->actingAs($farmer)
+            ->post(route('farmer.products.store'), [
+                ...$this->productData($category),
+                'harvest_date' => now()->addDays(15)->toDateString(),
+                'photos' => [UploadedFile::fake()->image('produk.jpg')],
+            ])
+            ->assertRedirect(route('farmer.products.index'));
+
+        $this->assertDatabaseHas('products', [
+            'name' => 'Hasil Panen Terjadwal',
+            'harvest_date' => null,
+        ]);
+    }
+
     public function test_farmer_can_save_a_shop_profile_with_a_generated_slug(): void
     {
         Storage::fake('public');
@@ -217,5 +301,19 @@ class FarmerDashboardTest extends TestCase
 
         $this->assertDatabaseMissing('products', ['name' => 'Produk Tidak Valid']);
         Storage::disk('public')->assertEmpty();
+    }
+
+    /** @return array<string, mixed> */
+    private function productData(Category $category): array
+    {
+        return [
+            'name' => 'Hasil Panen Terjadwal',
+            'category_id' => $category->id,
+            'description' => 'Hasil bumi siap dipesan.',
+            'unit' => 'kg',
+            'price_idr' => 10000,
+            'stock' => 25,
+            'action' => 'draft',
+        ];
     }
 }

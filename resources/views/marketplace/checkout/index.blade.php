@@ -68,7 +68,12 @@
                 <div class="mt-4 space-y-3">
                     @foreach ($items as $item)
                         <div class="flex justify-between gap-3 text-sm">
-                            <span class="text-charcoal/70">{{ $item['product']?->name }} × {{ $item['qty'] }}</span>
+                            <span class="text-charcoal/70">
+                                {{ $item['product']?->name }} × {{ $item['qty'] }}
+                                @if ($item['is_preorder'] && $item['product'])
+                                    <span class="mt-1 block text-xs font-semibold text-forest">{{ __('marketplace.products.preorder_badge', [], 'id') }} · {{ __('marketplace.products.harvest_date', ['date' => $item['product']->harvest_date->format('d/m/Y')], 'id') }}</span>
+                                @endif
+                            </span>
                             <span class="shrink-0 font-semibold">{{ __('marketplace.products.currency_prefix', [], 'id') }} {{ number_format($item['line_total'], 0, ',', '.') }}</span>
                         </div>
                     @endforeach

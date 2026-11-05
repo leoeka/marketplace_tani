@@ -12,12 +12,12 @@ class OrderItem extends Model
     use HasFactory;
 
     protected $fillable = [
-        'order_id', 'product_id', 'farmer_id', 'product_name', 'unit', 'price', 'qty',
+        'order_id', 'product_id', 'farmer_id', 'product_name', 'unit', 'price', 'qty', 'is_preorder', 'harvest_date',
     ];
 
     protected function casts(): array
     {
-        return ['price' => 'integer', 'qty' => 'integer'];
+        return ['price' => 'integer', 'qty' => 'integer', 'is_preorder' => 'boolean', 'harvest_date' => 'date'];
     }
 
     public function order(): BelongsTo

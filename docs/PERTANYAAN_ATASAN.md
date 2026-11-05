@@ -2,3 +2,6 @@
 - [3A] Kapan stok produk harus dikurangi: saat pesanan dibuat atau setelah pembayaran dikonfirmasi? | asumsi yang dipakai: stok langsung dikurangi di dalam transaksi saat pesanan dibuat.
 - [3A] Siapa yang mengelola dan menindaklanjuti pesanan masuk dari beberapa petani? | asumsi yang dipakai: petani hanya melihat item miliknya tanpa aksi, sedangkan master admin melihat seluruh pesanan dan dapat menandai pembayaran sudah diterima.
 - [3A] Apakah ada format khusus untuk menyimpan alamat pengiriman pada pesanan? | asumsi yang dipakai: nama penerima, telepon, alamat, dan catatan opsional digabung menjadi teks berlabel dalam satu kolom.
+- [3B] Apakah kuota pra-order perlu dipisahkan dari stok produk? | asumsi yang dipakai: stok produk menjadi jumlah tersedia untuk dipesan dan langsung berkurang saat checkout dibuat.
+- [3B] Apakah keranjang boleh mencampur produk biasa dan pra-order? | asumsi yang dipakai: keranjang dapat berisi campuran keduanya dan seluruh item diproses dalam satu checkout.
+- [3B] Apakah item pesanan untuk produk yang tanggal panennya sudah lewat tetap menyimpan tanggal lama? | asumsi yang dipakai: harvest_date produk disalin sebagai snapshot kapan pun nilainya terisi, sedangkan is_preorder hanya true jika tanggal panen hari ini atau sesudahnya.

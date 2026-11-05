@@ -40,6 +40,12 @@
                             </div>
                             <x-product-status-badge :status="$product->status" />
                         </div>
+                        @if ($product->isPreorder())
+                            <div class="flex flex-wrap items-center gap-2 text-xs">
+                                <span class="rounded-full bg-harvest/30 px-2.5 py-1 font-extrabold text-forest">{{ __('farmer.products.preorder_badge', [], 'id') }}</span>
+                                <span class="font-semibold text-charcoal/70">{{ __('marketplace.products.harvest_date', ['date' => $product->harvest_date->format('d/m/Y')], 'id') }}</span>
+                            </div>
+                        @endif
                         <div class="flex items-center justify-between border-t border-forest/10 pt-4 text-sm">
                             <span class="font-extrabold text-forest">{{ __('farmer.products.currency', [], 'id') }} {{ number_format($product->price_idr, 0, ',', '.') }} / {{ $product->unit }}</span>
                             <span class="text-charcoal/60">{{ __('farmer.fields.stock', [], 'id') }}: {{ number_format($product->stock, 0, ',', '.') }}</span>

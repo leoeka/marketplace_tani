@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Database\Factories\ProductFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -26,6 +27,7 @@ class Product extends Model
         'rejection_note',
         'show_in_marketplace',
         'show_in_export',
+        'harvest_date',
     ];
 
     protected function casts(): array
@@ -35,6 +37,7 @@ class Product extends Model
             'stock' => 'integer',
             'show_in_marketplace' => 'boolean',
             'show_in_export' => 'boolean',
+            'harvest_date' => 'date',
         ];
     }
 
@@ -56,5 +59,17 @@ class Product extends Model
     public function orderItems(): HasMany
     {
         return $this->hasMany(OrderItem::class);
+    }
+
+    public function isPreorder(): bool
+    {
+        $harvestDate = $this->attributes['harvest_date'] ?? null;
+
+        return is_string($harvestDate) && $harvestDate >= today()->toDateString();
+    }
+
+    public function scopePreorder(Builder $query): Builder
+    {
+        return $query->whereDate('harvest_date', '>=', today());
     }
 }

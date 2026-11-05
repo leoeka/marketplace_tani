@@ -6,7 +6,7 @@ use App\Models\Product;
 
 class CartService
 {
-    /** @return array<int, array{product: Product|null, qty: int, eligible: bool, available: bool, line_total: int}> */
+    /** @return array<int, array{product: Product|null, qty: int, eligible: bool, available: bool, line_total: int, is_preorder: bool}> */
     public function items(): array
     {
         $cart = session('cart', []);
@@ -27,6 +27,7 @@ class CartService
                 'eligible' => $eligible,
                 'available' => $available,
                 'line_total' => $product instanceof Product ? $product->price_idr * $qty : 0,
+                'is_preorder' => $product instanceof Product && $product->isPreorder(),
             ]];
         })->all();
     }
