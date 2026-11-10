@@ -5,6 +5,8 @@ use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\AdminFarmerController;
 use App\Http\Controllers\Admin\AdminProductController;
 use App\Http\Controllers\Admin\AdminOrderController;
+use App\Http\Controllers\Admin\AdminMarketPriceController;
+use App\Http\Controllers\Admin\AdminArticleController;
 use App\Http\Controllers\Farmer\FarmerDashboardController;
 use App\Http\Controllers\Farmer\IncomingOrderController;
 use App\Http\Controllers\Farmer\FarmerProductController;
@@ -13,6 +15,8 @@ use App\Http\Controllers\Marketplace\MarketplaceController;
 use App\Http\Controllers\Marketplace\CartController;
 use App\Http\Controllers\Marketplace\CheckoutController;
 use App\Http\Controllers\Marketplace\CustomerOrderController;
+use App\Http\Controllers\Marketplace\MarketPriceController;
+use App\Http\Controllers\Marketplace\ArticleController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -21,6 +25,9 @@ Route::get('/produk', [MarketplaceController::class, 'index'])->name('marketplac
 Route::get('/pra-order', [MarketplaceController::class, 'preorder'])->name('marketplace.preorders.index');
 Route::get('/produk/{slug}', [MarketplaceController::class, 'showProduct'])->name('marketplace.products.show');
 Route::get('/petani/{slug}', [MarketplaceController::class, 'showFarmer'])->name('marketplace.farmers.show');
+Route::get('/harga-pasar', [MarketPriceController::class, 'index'])->name('marketplace.market-prices.index');
+Route::get('/edukasi', [ArticleController::class, 'index'])->name('marketplace.articles.index');
+Route::get('/edukasi/{slug}', [ArticleController::class, 'show'])->name('marketplace.articles.show');
 Route::get('/keranjang', [CartController::class, 'index'])->name('cart.index');
 Route::post('/keranjang/{productId}', [CartController::class, 'store'])->whereNumber('productId')->name('cart.items.store');
 Route::put('/keranjang/{productId}', [CartController::class, 'update'])->whereNumber('productId')->name('cart.items.update');
@@ -55,6 +62,14 @@ Route::prefix('admin')
         Route::get('/pesanan', [AdminOrderController::class, 'index'])->name('orders.index');
         Route::get('/pesanan/{order}', [AdminOrderController::class, 'show'])->name('orders.show');
         Route::post('/pesanan/{order}/tandai-dibayar', [AdminOrderController::class, 'markPaid'])->name('orders.mark-paid');
+        Route::resource('harga-pasar', AdminMarketPriceController::class)
+            ->parameters(['harga-pasar' => 'marketPrice'])
+            ->except(['show'])
+            ->names('market-prices');
+        Route::resource('artikel', AdminArticleController::class)
+            ->parameters(['artikel' => 'article'])
+            ->except(['show'])
+            ->names('articles');
     });
 
 Route::prefix('dashboard-petani')

@@ -15,5 +15,7 @@ return [
         'shop_profile' => 'Profil Toko',
         'farmers' => 'Petani',
         'products' => 'Produk',
+        'market_prices' => 'Harga Pasar',
+        'articles' => 'Artikel',
     ],
 ];
