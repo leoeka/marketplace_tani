@@ -72,6 +72,10 @@ class AdminCertificateController extends Controller
             'title' => $title,
             'certificate' => $certificate,
             'products' => Product::query()->orderBy('name')->get(['id', 'name']),
+            'certificateTypes' => Certificate::TYPES,
+            'typeLabels' => collect(Certificate::TYPES)
+                ->mapWithKeys(fn (string $type): array => [$type => __('admin.certificates.types.'.$type, [], 'id')])
+                ->all(),
         ]);
     }
 }

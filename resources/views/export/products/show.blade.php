@@ -24,7 +24,10 @@
                         <ul class="mt-3 grid gap-2 sm:grid-cols-2">
                             @foreach ($product->certificates as $certificate)
                                 <li class="flex items-center justify-between gap-3 rounded-lg bg-white px-3 py-2 text-sm">
-                                    <span class="font-semibold text-charcoal">{{ $certificate->name }}</span>
+                                    <span>
+                                        <span class="block font-semibold text-charcoal">{{ $certificate->name }}</span>
+                                        <span class="mt-0.5 block text-xs text-charcoal/55">{{ __('export.certifications.types.'.$certificate->type) }}</span>
+                                    </span>
                                     <a href="{{ asset('storage/'.$certificate->file_path) }}" target="_blank" rel="noopener" class="shrink-0 font-bold text-forest underline">{{ __('export.product_detail.view_certificate') }}</a>
                                 </li>
                             @endforeach

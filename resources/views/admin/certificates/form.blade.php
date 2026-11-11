@@ -1,15 +1,44 @@
 <x-dashboard-layout :menu="$menu" :title="$title">
     @php($selectedProductIds = old('product_ids', $certificate->products->modelKeys()))
     @php($selectedProductIds = is_array($selectedProductIds) ? $selectedProductIds : [])
-    <form method="POST" action="{{ $certificate->exists ? route('admin.certificates.update', $certificate) : route('admin.certificates.store') }}" enctype="multipart/form-data" class="max-w-3xl space-y-5 rounded-2xl border border-forest/10 bg-white p-5 shadow-sm sm:p-7">
+    <form x-data="{ selectedType: @js(old('type', $certificate->type ?? 'organic')), suggestions: @js($typeLabels) }" method="POST" action="{{ $certificate->exists ? route('admin.certificates.update', $certificate) : route('admin.certificates.store') }}" enctype="multipart/form-data" class="max-w-3xl space-y-5 rounded-2xl border border-forest/10 bg-white p-5 shadow-sm sm:p-7">
         @csrf
         @if ($certificate->exists)
             @method('PUT')
         @endif
         <div>
+            <label for="type" class="mb-1.5 block text-sm font-bold text-charcoal">{{ __('admin.certificates.type', [], 'id') }}</label>
+            <select id="type" name="type" x-model="selectedType" required class="w-full rounded-xl border-forest/15 focus:border-forest focus:ring-forest">
+                @foreach ($certificateTypes as $type)
+                    <option value="{{ $type }}">{{ $typeLabels[$type] }}</option>
+                @endforeach
+            </select>
+            @error('type') <p class="mt-1 text-sm text-red-700">{{ $message }}</p> @enderror
+        </div>
+
+        <div>
             <label for="name" class="mb-1.5 block text-sm font-bold text-charcoal">{{ __('admin.certificates.name', [], 'id') }}</label>
-            <input id="name" name="name" value="{{ old('name', $certificate->name) }}" required maxlength="255" class="w-full rounded-xl border-forest/15 focus:border-forest focus:ring-forest">
+            <input id="name" name="name" value="{{ old('name', $certificate->name) }}" :placeholder="suggestions[selectedType]" required maxlength="255" class="w-full rounded-xl border-forest/15 focus:border-forest focus:ring-forest">
+            <p class="mt-1 text-xs text-charcoal/55">{{ __('admin.certificates.name_help', [], 'id') }}</p>
             @error('name') <p class="mt-1 text-sm text-red-700">{{ $message }}</p> @enderror
+        </div>
+
+        <div>
+            <label for="issuer" class="mb-1.5 block text-sm font-bold text-charcoal">{{ __('admin.certificates.issuer', [], 'id') }}</label>
+            <input id="issuer" name="issuer" value="{{ old('issuer', $certificate->issuer) }}" maxlength="255" class="w-full rounded-xl border-forest/15 focus:border-forest focus:ring-forest">
+            @error('issuer') <p class="mt-1 text-sm text-red-700">{{ $message }}</p> @enderror
+        </div>
+
+        <div>
+            <label for="certificate_number" class="mb-1.5 block text-sm font-bold text-charcoal">{{ __('admin.certificates.number', [], 'id') }}</label>
+            <input id="certificate_number" name="certificate_number" value="{{ old('certificate_number', $certificate->certificate_number) }}" maxlength="255" class="w-full rounded-xl border-forest/15 focus:border-forest focus:ring-forest">
+            @error('certificate_number') <p class="mt-1 text-sm text-red-700">{{ $message }}</p> @enderror
+        </div>
+
+        <div>
+            <label for="expires_at" class="mb-1.5 block text-sm font-bold text-charcoal">{{ __('admin.certificates.expires_at', [], 'id') }}</label>
+            <input id="expires_at" name="expires_at" type="date" value="{{ old('expires_at', $certificate->expires_at?->format('Y-m-d')) }}" class="w-full rounded-xl border-forest/15 focus:border-forest focus:ring-forest">
+            @error('expires_at') <p class="mt-1 text-sm text-red-700">{{ $message }}</p> @enderror
         </div>
 
         <div>

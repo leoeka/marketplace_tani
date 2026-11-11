@@ -172,6 +172,58 @@ class ExportWebsiteTest extends TestCase
             ->assertSee('View certificate');
     }
 
+    public function test_export_certificates_show_metadata_and_hide_expired_or_unassociated_certificates(): void
+    {
+        $this->travelTo(now()->startOfDay());
+        $visibleProduct = $this->createVisibleProduct([], ['name_en' => 'Compliant Green Beans']);
+        $expiredProduct = $this->createVisibleProduct([], ['name_en' => 'Expired Mango']);
+        $hiddenProduct = $this->createVisibleProduct(['show_in_export' => false], ['name_en' => 'Private Rice']);
+        $validCertificate = Certificate::factory()->create([
+            'name' => 'Fair Trade Verified',
+            'type' => 'fair_trade',
+            'issuer' => 'Global Standards Body',
+            'certificate_number' => 'FT-2026-10',
+            'expires_at' => now()->addDays(30)->toDateString(),
+        ]);
+        $expiredCertificate = Certificate::factory()->create([
+            'name' => 'Expired Organic Document',
+            'expires_at' => now()->subDay()->toDateString(),
+        ]);
+        Certificate::factory()->create(['name' => 'Unassociated Document']);
+        $hiddenProductCertificate = Certificate::factory()->create(['name' => 'Private Product Document']);
+        $visibleProduct->certificates()->attach($validCertificate);
+        $expiredProduct->certificates()->attach($expiredCertificate);
+        $hiddenProduct->certificates()->attach($hiddenProductCertificate);
+
+        $this->get(route('export.certifications.index'))
+            ->assertOk()
+            ->assertSee('Fair Trade Verified')
+            ->assertSee('Fair Trade')
+            ->assertSee('Global Standards Body')
+            ->assertSee(now()->addDays(30)->format('M j, Y'))
+            ->assertSee('Compliant Green Beans')
+            ->assertDontSee('Expired Organic Document')
+            ->assertDontSee('Unassociated Document')
+            ->assertDontSee('Private Product Document');
+
+        $this->get(route('export.products.show', $visibleProduct->slug))
+            ->assertOk()
+            ->assertSee('Fair Trade Verified')
+            ->assertSee('Fair Trade')
+            ->assertDontSee('Expired Organic Document');
+
+        $this->get(route('export.products.show', $expiredProduct->slug))
+            ->assertOk()
+            ->assertDontSee('Expired Organic Document');
+    }
+
+    public function test_guest_can_open_empty_export_certifications_page(): void
+    {
+        $this->get(route('export.certifications.index'))
+            ->assertOk()
+            ->assertSee('No certificates are available yet.');
+    }
+
     /**
      * @param  array<string, mixed>  $productAttributes
      * @param  array<string, mixed>  $detailsAttributes

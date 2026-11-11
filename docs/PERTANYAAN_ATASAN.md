@@ -10,6 +10,7 @@
 - [3D] Apa nama kurir lokal dan ekspedisi cold chain yang sebenarnya? | asumsi yang dipakai: gunakan layanan placeholder "Kurir Lokal" dan "Cold Chain".
 - [3D] Apakah pengiriman hanya boleh dilakukan setelah pembayaran lunas? | asumsi yang dipakai: tahap ini tidak membatasi pengisian resi berdasarkan status pembayaran.
 - [4A] Apakah nama petani, harga, dan stok perlu ditampilkan pada katalog ekspor? | asumsi yang dipakai: tidak ditampilkan.
-- [4B] Format dan batas ukuran file sertifikat apa yang diterima? | asumsi yang dipakai: PDF, JPG, JPEG, atau PNG dengan ukuran maksimal 10 MB.
+- [4B] Format dan batas ukuran file sertifikat apa yang diterima? | asumsi yang dipakai: PDF, JPG, atau PNG dengan ukuran maksimal 5 MB.
 - [4B] Apakah setiap sertifikat berlaku global atau untuk produk tertentu? | asumsi yang dipakai: admin mengaitkan sertifikat ke produk yang berlaku.
 - [4B] Apakah website ekspor hanya menampilkan dokumen sertifikat yang sudah diunggah dan terkait produk yang tampil di kanal ekspor? | asumsi yang dipakai: ya, sertifikat tanpa file atau tanpa produk ekspor yang terlihat tidak ditampilkan.
+- [4B] Apakah sertifikat yang sudah kedaluwarsa disembunyikan atau diberi label "Expired"? | asumsi yang dipakai: sertifikat kedaluwarsa tidak ditampilkan di halaman publik maupun detail produk.

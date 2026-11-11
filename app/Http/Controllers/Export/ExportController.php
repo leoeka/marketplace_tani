@@ -56,7 +56,9 @@ class ExportController extends Controller
                 'category',
                 'images',
                 'exportDetails',
-                'certificates' => fn ($query) => $query->whereNotNull('file_path'),
+                'certificates' => fn ($query) => $query
+                    ->whereNotNull('file_path')
+                    ->notExpired(),
             ])
             ->where('slug', $slug)
             ->firstOrFail();
@@ -70,7 +72,8 @@ class ExportController extends Controller
     {
         $certificates = Certificate::query()
             ->whereNotNull('file_path')
-            ->whereHas('products', fn (Builder $productQuery): Builder => $productQuery->exportVisible())
+            ->notExpired()
+            ->whereHas('products', fn ($productQuery) => $productQuery->exportVisible())
             ->with(['products' => fn ($productQuery) => $productQuery
                 ->exportVisible()
                 ->with('exportDetails')])

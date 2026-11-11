@@ -25,7 +25,11 @@ class AdminCertificateTest extends TestCase
 
         $this->actingAs($admin)
             ->post(route('admin.certificates.store'), [
-                'name' => 'Organic',
+                'name' => 'Farm Organic Standard',
+                'type' => 'organic',
+                'issuer' => 'Regional Organic Board',
+                'certificate_number' => 'ORG-2026-01',
+                'expires_at' => now()->addYear()->toDateString(),
                 'file' => $firstFile,
                 'product_ids' => [$product->id],
             ])
@@ -33,6 +37,11 @@ class AdminCertificateTest extends TestCase
             ->assertSessionHas('success', 'Sertifikat berhasil ditambahkan.');
 
         $certificate = Certificate::query()->firstOrFail();
+        $this->assertNotSame('organic.pdf', basename($certificate->file_path));
+        $this->assertSame('organic', $certificate->type);
+        $this->assertSame('Regional Organic Board', $certificate->issuer);
+        $this->assertSame('ORG-2026-01', $certificate->certificate_number);
+        $this->assertSame(now()->addYear()->toDateString(), $certificate->expires_at->toDateString());
         Storage::disk('public')->assertExists($certificate->file_path);
         $this->assertDatabaseHas('product_certificate', [
             'certificate_id' => $certificate->id,
@@ -40,18 +49,24 @@ class AdminCertificateTest extends TestCase
         ]);
 
         $oldFilePath = $certificate->file_path;
-        $secondFile = UploadedFile::fake()->createWithContent('organic-updated.pdf', "%PDF-1.4\nUpdated certificate document");
 
         $this->put(route('admin.certificates.update', $certificate), [
             'name' => 'Organic Standard',
-            'file' => $secondFile,
+            'type' => 'fair_trade',
+            'issuer' => '',
+            'certificate_number' => '',
+            'expires_at' => '',
             'product_ids' => [],
         ])->assertRedirect(route('admin.certificates.index'));
 
         $certificate->refresh();
         $this->assertSame('Organic Standard', $certificate->name);
-        Storage::disk('public')->assertMissing($oldFilePath);
-        Storage::disk('public')->assertExists($certificate->file_path);
+        $this->assertSame('fair_trade', $certificate->type);
+        $this->assertNull($certificate->issuer);
+        $this->assertNull($certificate->certificate_number);
+        $this->assertNull($certificate->expires_at);
+        $this->assertSame($oldFilePath, $certificate->file_path);
+        Storage::disk('public')->assertExists($oldFilePath);
         $this->assertDatabaseMissing('product_certificate', [
             'certificate_id' => $certificate->id,
             'product_id' => $product->id,
@@ -73,7 +88,14 @@ class AdminCertificateTest extends TestCase
             ->from(route('admin.certificates.create'))
             ->post(route('admin.certificates.store'), [
                 'name' => 'Organic',
-                'file' => UploadedFile::fake()->create('certificate.txt', 10, 'text/plain'),
+                'type' => 'organic',
+                'file' => new UploadedFile(
+                    tap(tempnam(sys_get_temp_dir(), 'cert'), fn($path) => file_put_contents($path, 'Not an image file.')),
+                    'certificate.jpg',
+                    'image/jpeg',
+                    null,
+                    true
+                ),
             ])
             ->assertSessionHasErrors('file');
 

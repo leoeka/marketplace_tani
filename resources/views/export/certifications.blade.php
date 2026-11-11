@@ -15,9 +15,22 @@
                 @foreach ($certificates as $certificate)
                     <article class="rounded-xl border border-forest/10 bg-white p-5 shadow-[0_12px_35px_-28px_rgba(27,57,38,0.55)] sm:p-6">
                         <div class="flex flex-wrap items-start justify-between gap-4">
-                            <h2 class="text-xl font-extrabold text-forest">{{ $certificate->name }}</h2>
+                            <div>
+                                <h2 class="text-xl font-extrabold text-forest">{{ $certificate->name }}</h2>
+                                <p class="mt-1 text-sm font-semibold text-charcoal/65">{{ __('export.certifications.types.'.$certificate->type) }}</p>
+                            </div>
                             <a href="{{ asset('storage/'.$certificate->file_path) }}" target="_blank" rel="noopener" class="rounded-lg border border-forest/20 px-3 py-2 text-sm font-bold text-forest hover:bg-[#f4f7f3]">{{ __('export.certifications.view_file') }}</a>
                         </div>
+                        @if ($certificate->issuer || $certificate->expires_at)
+                            <dl class="mt-4 grid gap-2 text-sm sm:grid-cols-2">
+                                @if ($certificate->issuer)
+                                    <div><dt class="text-charcoal/55">{{ __('export.certifications.issuer') }}</dt><dd class="font-semibold text-charcoal">{{ $certificate->issuer }}</dd></div>
+                                @endif
+                                @if ($certificate->expires_at)
+                                    <div><dt class="text-charcoal/55">{{ __('export.certifications.expires_at') }}</dt><dd class="font-semibold text-charcoal">{{ $certificate->expires_at->format('M j, Y') }}</dd></div>
+                                @endif
+                            </dl>
+                        @endif
                         <div class="mt-5 border-t border-forest/10 pt-4">
                             <h3 class="text-xs font-bold uppercase tracking-wide text-charcoal/55">{{ __('export.certifications.products') }}</h3>
                             <ul class="mt-2 grid gap-2">

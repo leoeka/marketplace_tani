@@ -14,6 +14,12 @@ class CertificateFactory extends Factory
     {
         return [
             'name' => fake()->unique()->words(2, true),
+            'type' => 'other',
+            'issuer' => fake()->optional()->company(),
+            'certificate_number' => fake()->optional()->bothify('CERT-####'),
+            'expires_at' => fake()->boolean(60)
+                ? fake()->dateTimeBetween('+1 month', '+2 years')->format('Y-m-d')
+                : null,
             'file_path' => 'certificates/'.fake()->uuid().'.pdf',
         ];
     }

@@ -11,6 +11,8 @@
                 <thead class="bg-cream text-xs uppercase tracking-wide text-charcoal/60">
                     <tr>
                         <th class="px-5 py-4">{{ __('admin.certificates.name', [], 'id') }}</th>
+                        <th class="px-5 py-4">{{ __('admin.certificates.type', [], 'id') }}</th>
+                        <th class="px-5 py-4">{{ __('admin.certificates.expires_at', [], 'id') }}</th>
                         <th class="px-5 py-4">{{ __('admin.certificates.file', [], 'id') }}</th>
                         <th class="px-5 py-4">{{ __('admin.certificates.products_count', [], 'id') }}</th>
                         <th class="px-5 py-4"></th>
@@ -20,6 +22,8 @@
                     @foreach ($certificates as $certificate)
                         <tr>
                             <td class="px-5 py-4 font-bold text-charcoal">{{ $certificate->name }}</td>
+                            <td class="px-5 py-4 text-charcoal/65">{{ __('admin.certificates.types.'.$certificate->type, [], 'id') }}</td>
+                            <td class="px-5 py-4 text-charcoal/65">{{ $certificate->expires_at?->format('d/m/Y') ?? __('admin.certificates.not_provided', [], 'id') }}</td>
                             <td class="px-5 py-4">
                                 @if ($certificate->file_path)
                                     <a href="{{ asset('storage/'.$certificate->file_path) }}" target="_blank" rel="noopener" class="font-semibold text-forest underline">{{ __('admin.certificates.view_file', [], 'id') }}</a>
