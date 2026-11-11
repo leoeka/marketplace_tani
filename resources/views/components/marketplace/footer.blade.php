@@ -34,7 +34,7 @@
         <div>
             <h2 class="text-sm font-extrabold text-white">{{ __('marketplace.footer.export', [], 'id') }}</h2>
             <p class="mt-4 text-sm leading-6 text-white/60">{{ __('marketplace.footer.export_description', [], 'id') }}</p>
-            <a href="{{ url('/export') }}" class="mt-4 inline-flex items-center gap-2 rounded-full bg-harvest px-4 py-2.5 text-sm font-bold text-forest transition hover:bg-yellow-400">
+            <a href="{{ route('export.home') }}" class="mt-4 inline-flex items-center gap-2 rounded-full bg-harvest px-4 py-2.5 text-sm font-bold text-forest transition hover:bg-yellow-400">
                 {{ __('marketplace.footer.export', [], 'id') }} <span aria-hidden="true">↗</span>
             </a>
             <h3 class="mt-7 text-xs font-bold uppercase tracking-wider text-white/50">{{ __('marketplace.footer.social', [], 'id') }}</h3>

@@ -8,6 +8,8 @@ use App\Http\Controllers\Admin\AdminOrderController;
 use App\Http\Controllers\Admin\AdminMarketPriceController;
 use App\Http\Controllers\Admin\AdminArticleController;
 use App\Http\Controllers\Admin\AdminShippingServiceController;
+use App\Http\Controllers\Admin\AdminCertificateController;
+use App\Http\Controllers\Export\ExportController;
 use App\Http\Controllers\Farmer\FarmerDashboardController;
 use App\Http\Controllers\Farmer\IncomingOrderController;
 use App\Http\Controllers\Farmer\FarmerProductController;
@@ -18,10 +20,20 @@ use App\Http\Controllers\Marketplace\CheckoutController;
 use App\Http\Controllers\Marketplace\CustomerOrderController;
 use App\Http\Controllers\Marketplace\MarketPriceController;
 use App\Http\Controllers\Marketplace\ArticleController;
+use App\Http\Middleware\SetExportLocale;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [MarketplaceController::class, 'home'])->name('home');
+Route::prefix('export')
+    ->middleware(SetExportLocale::class)
+    ->name('export.')
+    ->group(function (): void {
+        Route::get('/', [ExportController::class, 'home'])->name('home');
+        Route::get('/products', [ExportController::class, 'index'])->name('products.index');
+        Route::get('/products/{slug}', [ExportController::class, 'showProduct'])->name('products.show');
+        Route::get('/certifications', [ExportController::class, 'certifications'])->name('certifications.index');
+    });
 Route::get('/produk', [MarketplaceController::class, 'index'])->name('marketplace.products.index');
 Route::get('/pra-order', [MarketplaceController::class, 'preorder'])->name('marketplace.preorders.index');
 Route::get('/produk/{slug}', [MarketplaceController::class, 'showProduct'])->name('marketplace.products.show');
@@ -57,12 +69,17 @@ Route::prefix('admin')
         Route::delete('/petani/{farmerProfile}/verifikasi', [AdminFarmerController::class, 'revoke'])->name('farmers.revoke');
         Route::get('/produk', [AdminProductController::class, 'index'])->name('products.index');
         Route::get('/produk/{product}', [AdminProductController::class, 'show'])->name('products.show');
+        Route::put('/produk/{product}/data-ekspor', [AdminProductController::class, 'saveExportDetails'])->name('products.export-details.update');
         Route::post('/produk/{product}/setujui', [AdminProductController::class, 'approve'])->name('products.approve');
         Route::post('/produk/{product}/kanal', [AdminProductController::class, 'updateChannels'])->name('products.channels.update');
         Route::post('/produk/{product}/tolak', [AdminProductController::class, 'reject'])->name('products.reject');
         Route::get('/pesanan', [AdminOrderController::class, 'index'])->name('orders.index');
         Route::get('/pesanan/{order}', [AdminOrderController::class, 'show'])->name('orders.show');
         Route::post('/pesanan/{order}/tandai-dibayar', [AdminOrderController::class, 'markPaid'])->name('orders.mark-paid');
+        Route::resource('sertifikat', AdminCertificateController::class)
+            ->parameters(['sertifikat' => 'certificate'])
+            ->except(['show'])
+            ->names('certificates');
         Route::resource('shipping-services', AdminShippingServiceController::class)->except(['show']);
         Route::resource('harga-pasar', AdminMarketPriceController::class)
             ->parameters(['harga-pasar' => 'marketPrice'])

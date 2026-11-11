@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\AdminProductIndexRequest;
 use App\Http\Requests\Admin\ApproveProductRequest;
 use App\Http\Requests\Admin\RejectProductRequest;
+use App\Http\Requests\Admin\SaveProductExportDetailRequest;
 use App\Models\Product;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -33,12 +34,42 @@ class AdminProductController extends Controller
     public function show(Product $product): View
     {
         Gate::authorize('view', $product);
+        $product->load(['farmer.farmerProfile', 'category', 'images', 'exportDetails']);
+        $exportReasons = [];
+
+        if ($product->status !== 'approved') {
+            $exportReasons[] = 'not_approved';
+        }
+
+        if (! $product->show_in_export) {
+            $exportReasons[] = 'channel_disabled';
+        }
+
+        if (blank($product->exportDetails?->name_en) || blank($product->exportDetails?->description_en)) {
+            $exportReasons[] = 'details_incomplete';
+        }
+
+        if ($product->farmer->role !== 'farmer' || $product->farmer->farmerProfile?->verified_at === null) {
+            $exportReasons[] = 'farmer_unverified';
+        }
 
         return view('admin.products.show', [
             'menu' => config('dashboard.admin_menu'),
             'title' => __('admin.products.detail_title', [], 'id'),
-            'product' => $product->load(['farmer.farmerProfile', 'category', 'images']),
+            'product' => $product,
+            'exportReasons' => $exportReasons,
         ]);
+    }
+
+    public function saveExportDetails(SaveProductExportDetailRequest $request, Product $product): RedirectResponse
+    {
+        $product->exportDetails()->updateOrCreate(
+            ['product_id' => $product->id],
+            $request->validated(),
+        );
+
+        return redirect()->route('admin.products.show', $product)
+            ->with('success', __('admin.products.export_details_saved', [], 'id'));
     }
 
     public function approve(ApproveProductRequest $request, Product $product): RedirectResponse

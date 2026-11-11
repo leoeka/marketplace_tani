@@ -12,6 +12,7 @@ return [
         ['label' => 'farmers', 'route' => 'admin.farmers.index', 'active' => 'admin.farmers.*', 'icon' => '🌾'],
         ['label' => 'products', 'route' => 'admin.products.index', 'active' => 'admin.products.*', 'icon' => '🥬'],
         ['label' => 'orders', 'route' => 'admin.orders.index', 'active' => 'admin.orders.*', 'icon' => '📦'],
+        ['label' => 'certificates', 'route' => 'admin.certificates.index', 'active' => 'admin.certificates.*', 'icon' => '📄'],
         ['label' => 'shipping_services', 'route' => 'admin.shipping-services.index', 'active' => 'admin.shipping-services.*', 'icon' => '🚚'],
         ['label' => 'market_prices', 'route' => 'admin.market-prices.index', 'active' => 'admin.market-prices.*', 'icon' => '📈'],
         ['label' => 'articles', 'route' => 'admin.articles.index', 'active' => 'admin.articles.*', 'icon' => '📚'],

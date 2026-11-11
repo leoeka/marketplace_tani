@@ -63,6 +63,74 @@
                 </div>
                 <button type="submit" class="w-full rounded-xl bg-red-700 px-4 py-3 text-sm font-bold text-white hover:bg-red-800">{{ __('admin.products.reject', [], 'id') }}</button>
             </form>
+
+            <section class="space-y-4 rounded-2xl border border-forest/10 bg-white p-5 shadow-sm sm:p-6">
+                <div>
+                    <h2 class="text-lg font-extrabold text-charcoal">{{ __('admin.products.export_details_title', [], 'id') }}</h2>
+                    @if (count($exportReasons) === 0)
+                        <p class="mt-2 rounded-xl bg-green-50 px-3 py-2 text-sm font-semibold text-green-800">{{ __('admin.products.export_visible', [], 'id') }}</p>
+                    @else
+                        <div class="mt-2 rounded-xl bg-amber-50 px-3 py-2 text-sm text-amber-900">
+                            <p class="font-semibold">{{ __('admin.products.export_not_visible', [], 'id') }}</p>
+                            <ul class="mt-1 list-inside list-disc">
+                                @foreach ($exportReasons as $reason)
+                                    <li>{{ __('admin.products.export_reasons.'.$reason, [], 'id') }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+                </div>
+
+                <form method="POST" action="{{ route('admin.products.export-details.update', $product) }}" class="space-y-4">
+                    @csrf
+                    @method('PUT')
+                    <div>
+                        <label for="name_en" class="mb-1.5 block text-sm font-bold text-charcoal">{{ __('admin.products.export_name_en', [], 'id') }}</label>
+                        <input id="name_en" name="name_en" value="{{ old('name_en', $product->exportDetails?->name_en) }}" required maxlength="255" class="w-full rounded-xl border-forest/15 bg-white focus:border-forest focus:ring-forest">
+                        @error('name_en') <p class="mt-1 text-sm text-red-700">{{ $message }}</p> @enderror
+                    </div>
+                    <div>
+                        <label for="description_en" class="mb-1.5 block text-sm font-bold text-charcoal">{{ __('admin.products.export_description_en', [], 'id') }}</label>
+                        <textarea id="description_en" name="description_en" rows="5" required class="w-full rounded-xl border-forest/15 bg-white focus:border-forest focus:ring-forest">{{ old('description_en', $product->exportDetails?->description_en) }}</textarea>
+                        @error('description_en') <p class="mt-1 text-sm text-red-700">{{ $message }}</p> @enderror
+                    </div>
+                    <div>
+                        <label for="hs_code" class="mb-1.5 block text-sm font-bold text-charcoal">{{ __('admin.products.export_hs_code', [], 'id') }}</label>
+                        <input id="hs_code" name="hs_code" value="{{ old('hs_code', $product->exportDetails?->hs_code) }}" inputmode="decimal" maxlength="13" class="w-full rounded-xl border-forest/15 bg-white focus:border-forest focus:ring-forest">
+                        @error('hs_code') <p class="mt-1 text-sm text-red-700">{{ $message }}</p> @enderror
+                    </div>
+                    <div class="grid gap-4 sm:grid-cols-2">
+                        <div>
+                            <label for="moisture_percent" class="mb-1.5 block text-sm font-bold text-charcoal">{{ __('admin.products.export_moisture', [], 'id') }}</label>
+                            <input id="moisture_percent" name="moisture_percent" type="number" min="0" max="100" step="0.01" value="{{ old('moisture_percent', $product->exportDetails?->moisture_percent) }}" class="w-full rounded-xl border-forest/15 bg-white focus:border-forest focus:ring-forest">
+                            @error('moisture_percent') <p class="mt-1 text-sm text-red-700">{{ $message }}</p> @enderror
+                        </div>
+                        <div>
+                            <label for="size_spec" class="mb-1.5 block text-sm font-bold text-charcoal">{{ __('admin.products.export_size_spec', [], 'id') }}</label>
+                            <input id="size_spec" name="size_spec" value="{{ old('size_spec', $product->exportDetails?->size_spec) }}" maxlength="255" class="w-full rounded-xl border-forest/15 bg-white focus:border-forest focus:ring-forest">
+                            @error('size_spec') <p class="mt-1 text-sm text-red-700">{{ $message }}</p> @enderror
+                        </div>
+                    </div>
+                    <div class="grid gap-4 sm:grid-cols-2">
+                        <div>
+                            <label for="monthly_capacity" class="mb-1.5 block text-sm font-bold text-charcoal">{{ __('admin.products.export_monthly_capacity', [], 'id') }}</label>
+                            <input id="monthly_capacity" name="monthly_capacity" type="number" min="0" step="1" value="{{ old('monthly_capacity', $product->exportDetails?->monthly_capacity) }}" class="w-full rounded-xl border-forest/15 bg-white focus:border-forest focus:ring-forest">
+                            @error('monthly_capacity') <p class="mt-1 text-sm text-red-700">{{ $message }}</p> @enderror
+                        </div>
+                        <div>
+                            <label for="monthly_capacity_unit" class="mb-1.5 block text-sm font-bold text-charcoal">{{ __('admin.products.export_capacity_unit', [], 'id') }}</label>
+                            <select id="monthly_capacity_unit" name="monthly_capacity_unit" class="w-full rounded-xl border-forest/15 bg-white focus:border-forest focus:ring-forest">
+                                <option value="">{{ __('admin.products.export_optional', [], 'id') }}</option>
+                                @foreach (['kg', 'ton'] as $unit)
+                                    <option value="{{ $unit }}" @selected(old('monthly_capacity_unit', $product->exportDetails?->monthly_capacity_unit) === $unit)>{{ __('admin.products.export_units.'.$unit, [], 'id') }}</option>
+                                @endforeach
+                            </select>
+                            @error('monthly_capacity_unit') <p class="mt-1 text-sm text-red-700">{{ $message }}</p> @enderror
+                        </div>
+                    </div>
+                    <button type="submit" class="w-full rounded-xl bg-forest px-4 py-3 text-sm font-bold text-white hover:bg-forest/90">{{ __('admin.products.export_save', [], 'id') }}</button>
+                </form>
+            </section>
         </div>
     </div>
 </x-dashboard-layout>
