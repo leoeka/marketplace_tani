@@ -44,6 +44,11 @@ class User extends Authenticatable
         return $this->hasMany(Order::class, 'customer_id');
     }
 
+    public function shipments(): HasMany
+    {
+        return $this->hasMany(OrderShipment::class, 'farmer_id');
+    }
+
     /**
      * Get the attributes that should be cast.
      *

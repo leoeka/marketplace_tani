@@ -27,7 +27,7 @@ class CustomerOrderController extends Controller
         Gate::authorize('view', $order);
 
         return view('marketplace.orders.show', [
-            'order' => $order->load('items'),
+            'order' => $order->load(['items.farmer', 'shipments.farmer']),
         ]);
     }
 }

@@ -14,6 +14,7 @@ class Order extends Model
 
     protected $fillable = [
         'customer_id', 'payment_method', 'payment_term', 'payment_status', 'total', 'shipping_address',
+        'shipping_service_id', 'shipping_service_name', 'shipping_service_type',
     ];
 
     protected function casts(): array
@@ -26,8 +27,18 @@ class Order extends Model
         return $this->belongsTo(User::class, 'customer_id');
     }
 
+    public function shippingService(): BelongsTo
+    {
+        return $this->belongsTo(ShippingService::class);
+    }
+
     public function items(): HasMany
     {
         return $this->hasMany(OrderItem::class);
+    }
+
+    public function shipments(): HasMany
+    {
+        return $this->hasMany(OrderShipment::class);
     }
 }

@@ -32,6 +32,26 @@
 
                 <section class="space-y-4 rounded-2xl border border-forest/10 bg-white p-5 shadow-sm sm:p-6">
                     <fieldset>
+                        <legend class="text-sm font-extrabold text-charcoal">{{ __('marketplace.checkout.shipping', [], 'id') }}</legend>
+                        @if ($shippingServices->isNotEmpty())
+                            <div class="mt-3 grid gap-3">
+                                @foreach ($shippingServices as $shippingService)
+                                    <label class="flex cursor-pointer items-center gap-3 rounded-xl border border-forest/15 p-3 text-sm font-semibold">
+                                        <input type="radio" name="shipping_service_id" value="{{ $shippingService->id }}" required @checked((string) old('shipping_service_id') === (string) $shippingService->id) class="border-forest text-forest focus:ring-forest">
+                                        <span>{{ $shippingService->name }} <span class="font-normal text-charcoal/60">· {{ __('marketplace.checkout.shipping_type_'.$shippingService->type, [], 'id') }}</span></span>
+                                    </label>
+                                @endforeach
+                            </div>
+                            @error('shipping_service_id')<p class="mt-1 text-sm text-red-700">{{ $message }}</p>@enderror
+                        @else
+                            <p class="mt-3 text-sm text-charcoal/65">{{ __('marketplace.checkout.shipping_service_none', [], 'id') }}</p>
+                        @endif
+                        <p class="mt-3 text-xs text-charcoal/60">{{ __('marketplace.checkout.shipping_cost_not_calculated', [], 'id') }}</p>
+                    </fieldset>
+                </section>
+
+                <section class="space-y-4 rounded-2xl border border-forest/10 bg-white p-5 shadow-sm sm:p-6">
+                    <fieldset>
                         <legend class="text-sm font-extrabold text-charcoal">{{ __('marketplace.checkout.payment_method', [], 'id') }}</legend>
                         <div class="mt-3 grid gap-3 sm:grid-cols-3">
                             @foreach (['transfer', 'ewallet', 'qris'] as $method)

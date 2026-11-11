@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\AdminProductController;
 use App\Http\Controllers\Admin\AdminOrderController;
 use App\Http\Controllers\Admin\AdminMarketPriceController;
 use App\Http\Controllers\Admin\AdminArticleController;
+use App\Http\Controllers\Admin\AdminShippingServiceController;
 use App\Http\Controllers\Farmer\FarmerDashboardController;
 use App\Http\Controllers\Farmer\IncomingOrderController;
 use App\Http\Controllers\Farmer\FarmerProductController;
@@ -62,6 +63,7 @@ Route::prefix('admin')
         Route::get('/pesanan', [AdminOrderController::class, 'index'])->name('orders.index');
         Route::get('/pesanan/{order}', [AdminOrderController::class, 'show'])->name('orders.show');
         Route::post('/pesanan/{order}/tandai-dibayar', [AdminOrderController::class, 'markPaid'])->name('orders.mark-paid');
+        Route::resource('shipping-services', AdminShippingServiceController::class)->except(['show']);
         Route::resource('harga-pasar', AdminMarketPriceController::class)
             ->parameters(['harga-pasar' => 'marketPrice'])
             ->except(['show'])
@@ -78,6 +80,7 @@ Route::prefix('dashboard-petani')
         Route::get('/', FarmerDashboardController::class)->name('farmer.dashboard');
         Route::get('/pesanan', [IncomingOrderController::class, 'index'])->name('farmer.orders.index');
         Route::get('/pesanan/{order}', [IncomingOrderController::class, 'show'])->name('farmer.orders.show');
+        Route::post('/pesanan/{order}/resi', [IncomingOrderController::class, 'saveShipment'])->name('farmer.orders.shipments.store');
         Route::resource('produk', FarmerProductController::class)
             ->parameters(['produk' => 'product'])
             ->except(['show'])

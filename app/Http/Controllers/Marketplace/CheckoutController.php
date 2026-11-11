@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Exceptions\CartCheckoutException;
 use App\Http\Requests\Marketplace\CheckoutRequest;
 use App\Models\Order;
+use App\Models\ShippingService;
 use App\Services\Marketplace\CartService;
 use App\Services\Marketplace\CheckoutService;
 use Illuminate\Contracts\View\View;
@@ -25,6 +26,7 @@ class CheckoutController extends Controller
         return view('marketplace.checkout.index', [
             'items' => $cart->items(),
             'total' => $cart->total(),
+            'shippingServices' => ShippingService::query()->where('is_active', true)->orderBy('name')->get(),
         ]);
     }
 

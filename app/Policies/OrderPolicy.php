@@ -32,4 +32,10 @@ class OrderPolicy
     {
         return $user->role === 'admin' && $order->payment_status === 'unpaid';
     }
+
+    public function updateShipment(User $user, Order $order): bool
+    {
+        return $user->role === 'farmer'
+            && $order->items()->where('farmer_id', $user->id)->exists();
+    }
 }

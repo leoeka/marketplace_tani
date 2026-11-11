@@ -12,6 +12,7 @@ return [
         'my_products' => 'Produk Saya',
         'incoming_orders' => 'Pesanan Masuk',
         'orders' => 'Pesanan',
+        'shipping_services' => 'Layanan Pengiriman',
         'shop_profile' => 'Profil Toko',
         'farmers' => 'Petani',
         'products' => 'Produk',

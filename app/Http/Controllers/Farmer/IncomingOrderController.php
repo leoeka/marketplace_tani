@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Farmer;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Farmer\StoreOrderShipmentRequest;
 use App\Models\Order;
+use App\Models\OrderShipment;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Gate;
 
 class IncomingOrderController extends Controller
@@ -32,7 +35,25 @@ class IncomingOrderController extends Controller
         return view('farmer.orders.show', [
             'menu' => config('dashboard.farmer_menu'),
             'title' => __('farmer.orders.detail_title', [], 'id'),
-            'order' => $order->load(['items' => fn ($query) => $query->where('farmer_id', auth()->id())]),
+            'order' => $order->load([
+                'items' => fn ($query) => $query->where('farmer_id', auth()->id()),
+                'shipments' => fn ($query) => $query->where('farmer_id', auth()->id()),
+            ]),
         ]);
+    }
+
+    public function saveShipment(StoreOrderShipmentRequest $request, Order $order): RedirectResponse
+    {
+        $shipment = OrderShipment::query()->firstOrNew([
+            'order_id' => $order->id,
+            'farmer_id' => $request->user()->id,
+        ]);
+        $shippedAt = $shipment->exists ? $shipment->shipped_at : now();
+        $shipment->fill($request->validated());
+        $shipment->shipped_at = $shippedAt;
+        $shipment->save();
+
+        return redirect()->route('farmer.orders.show', $order)
+            ->with('success', __('farmer.orders.shipment_saved', [], 'id'));
     }
 }

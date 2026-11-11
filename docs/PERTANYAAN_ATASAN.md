@@ -7,3 +7,5 @@
 - [3B] Apakah item pesanan untuk produk yang tanggal panennya sudah lewat tetap menyimpan tanggal lama? | asumsi yang dipakai: harvest_date produk disalin sebagai snapshot kapan pun nilainya terisi, sedangkan is_preorder hanya true jika tanggal panen hari ini atau sesudahnya.
 - [3C] Bagaimana menghitung perubahan harga dan menangani dua entri pada tanggal yang sama atau harga pembanding nol? | asumsi yang dipakai: persentase dihitung terhadap harga sebelumnya dan dibulatkan 2 desimal, entri dengan id lebih besar dianggap lebih baru untuk tanggal sama, dan harga harus minimal Rp1 agar persentase terdefinisi.
 - [3C] Bagaimana membedakan slug artikel dengan judul yang sama dan tanggal artikel yang ditampilkan? | asumsi yang dipakai: slug berikutnya memakai akhiran angka (-2, -3, dan seterusnya), tanggal publik adalah published_at.
+- [3D] Apa nama kurir lokal dan ekspedisi cold chain yang sebenarnya? | asumsi yang dipakai: gunakan layanan placeholder "Kurir Lokal" dan "Cold Chain".
+- [3D] Apakah pengiriman hanya boleh dilakukan setelah pembayaran lunas? | asumsi yang dipakai: tahap ini tidak membatasi pengisian resi berdasarkan status pembayaran.

@@ -29,6 +29,24 @@
                 <div class="flex justify-between border-t border-forest/10 px-5 py-4 font-extrabold"><span>{{ __('marketplace.orders.total', [], 'id') }}</span><span class="text-forest">{{ __('marketplace.products.currency_prefix', [], 'id') }} {{ number_format($order->total, 0, ',', '.') }}</span></div>
             </section>
             <aside class="h-fit space-y-5 rounded-2xl border border-forest/10 bg-white p-5 shadow-sm">
+                <div><p class="text-xs font-bold uppercase tracking-wide text-forest/60">{{ __('marketplace.orders.shipping_service', [], 'id') }}</p><p class="mt-1 font-bold">{{ $order->shipping_service_name ?? __('marketplace.checkout.shipping_not_selected', [], 'id') }}</p>@if ($order->shipping_service_type)<p class="mt-1 text-sm text-charcoal/65">{{ __('marketplace.checkout.shipping_type_'.$order->shipping_service_type, [], 'id') }}</p>@endif</div>
+                <div>
+                    <p class="text-xs font-bold uppercase tracking-wide text-forest/60">{{ __('marketplace.orders.shipment_tracking', [], 'id') }}</p>
+                    <div class="mt-2 space-y-3">
+                        @foreach ($order->items->unique('farmer_id') as $farmerItem)
+                            @php($shipment = $order->shipments->firstWhere('farmer_id', $farmerItem->farmer_id))
+                            <div class="rounded-xl bg-cream/70 p-3 text-sm">
+                                <p class="font-semibold">{{ __('marketplace.orders.farmer', [], 'id') }}: {{ $farmerItem->farmer->name }}</p>
+                                @if ($shipment)
+                                    <p class="mt-1">{{ __('marketplace.orders.tracking_number', [], 'id') }}: {{ $shipment->tracking_number }}</p>
+                                    <p class="mt-1">{{ __('marketplace.orders.shipped_at', [], 'id') }}: {{ $shipment->shipped_at->format('d/m/Y') }}</p>
+                                @else
+                                    <p class="mt-1">{{ __('marketplace.orders.not_shipped', [], 'id') }}</p>
+                                @endif
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
                 <div><p class="text-xs font-bold uppercase tracking-wide text-forest/60">{{ __('marketplace.orders.payment_method', [], 'id') }}</p><p class="mt-1 font-bold">{{ __('marketplace.checkout.'.$order->payment_method, [], 'id') }}</p></div>
                 <div><p class="text-xs font-bold uppercase tracking-wide text-forest/60">{{ __('marketplace.orders.payment_term', [], 'id') }}</p><p class="mt-1 font-bold">{{ __('marketplace.checkout.'.$order->payment_term, [], 'id') }}</p></div>
                 <div><p class="text-xs font-bold uppercase tracking-wide text-forest/60">{{ __('marketplace.orders.payment_status', [], 'id') }}</p><p class="mt-1 font-bold">{{ __('marketplace.orders.'.$order->payment_status, [], 'id') }}</p></div>

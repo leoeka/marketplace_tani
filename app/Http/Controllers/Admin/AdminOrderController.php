@@ -28,7 +28,7 @@ class AdminOrderController extends Controller
         return view('admin.orders.show', [
             'menu' => config('dashboard.admin_menu'),
             'title' => __('admin.orders.detail_title', [], 'id'),
-            'order' => $order->load(['customer', 'items.farmer']),
+            'order' => $order->load(['customer', 'items.farmer', 'shipments.farmer']),
         ]);
     }
 
