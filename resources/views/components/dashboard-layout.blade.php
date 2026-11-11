@@ -43,6 +43,9 @@
                     @click="sidebarOpen = false">
                     <span class="text-lg" aria-hidden="true">{{ $item['icon'] }}</span>
                     <span>{{ __('dashboard.menu.'.$item['label'], [], 'id') }}</span>
+                    @if (($item['count'] ?? 0) > 0)
+                        <span class="ml-auto inline-flex min-w-5 items-center justify-center rounded-full bg-harvest px-1.5 py-0.5 text-xs font-extrabold text-charcoal" aria-label="{{ __('dashboard.menu.new_count', ['count' => $item['count']], 'id') }}">{{ number_format($item['count'], 0, ',', '.') }}</span>
+                    @endif
                 </a>
             @endforeach
         </nav>

@@ -6,7 +6,10 @@
                 <p class="text-xs font-extrabold uppercase tracking-[0.2em] text-forest/70">{{ __('export.home.eyebrow') }}</p>
                 <h1 class="mt-5 text-4xl font-extrabold leading-tight tracking-tight text-forest sm:text-5xl lg:text-6xl">{{ __('export.home.title') }}</h1>
                 <p class="mt-6 max-w-xl text-lg leading-8 text-charcoal/65">{{ __('export.home.description') }}</p>
-                <a href="{{ route('export.products.index') }}" class="mt-8 inline-flex items-center justify-center rounded-lg bg-forest px-6 py-3.5 text-sm font-bold text-white transition hover:bg-forest/90">{{ __('export.home.browse_products') }}</a>
+                <div class="mt-8 flex flex-wrap gap-3">
+                    <a href="{{ route('export.products.index') }}" class="inline-flex items-center justify-center rounded-lg bg-forest px-6 py-3.5 text-sm font-bold text-white transition hover:bg-forest/90">{{ __('export.home.browse_products') }}</a>
+                    <a href="{{ route('export.rfq.create') }}" class="inline-flex items-center justify-center rounded-lg border border-forest/20 bg-white px-6 py-3.5 text-sm font-bold text-forest transition hover:bg-[#f4f7f3]">{{ __('export.navigation.rfq') }}</a>
+                </div>
             </div>
             <div class="relative hidden min-h-[22rem] items-center justify-center lg:flex" aria-hidden="true">
                 <div class="absolute h-72 w-72 rounded-full border border-white/20"></div>

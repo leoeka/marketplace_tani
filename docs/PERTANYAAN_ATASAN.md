@@ -14,3 +14,5 @@
 - [4B] Apakah setiap sertifikat berlaku global atau untuk produk tertentu? | asumsi yang dipakai: admin mengaitkan sertifikat ke produk yang berlaku.
 - [4B] Apakah website ekspor hanya menampilkan dokumen sertifikat yang sudah diunggah dan terkait produk yang tampil di kanal ekspor? | asumsi yang dipakai: ya, sertifikat tanpa file atau tanpa produk ekspor yang terlihat tidak ditampilkan.
 - [4B] Apakah sertifikat yang sudah kedaluwarsa disembunyikan atau diberi label "Expired"? | asumsi yang dipakai: sertifikat kedaluwarsa tidak ditampilkan di halaman publik maupun detail produk.
+- [4C] Apakah buyer perlu menerima email konfirmasi setelah mengirim RFQ? | asumsi yang dipakai: tidak mengirim email kepada buyer; halaman terima kasih menjadi satu-satunya konfirmasi.
+- [4C] Berapa batas panjang nama buyer, perusahaan, negara, email, dan telepon? | asumsi yang dipakai: nama/perusahaan/email maksimal 255, negara 100, telepon 50 karakter; pesan maksimal 2.000 karakter sesuai permintaan.

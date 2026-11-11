@@ -9,7 +9,9 @@ use App\Http\Controllers\Admin\AdminMarketPriceController;
 use App\Http\Controllers\Admin\AdminArticleController;
 use App\Http\Controllers\Admin\AdminShippingServiceController;
 use App\Http\Controllers\Admin\AdminCertificateController;
+use App\Http\Controllers\Admin\AdminRfqController;
 use App\Http\Controllers\Export\ExportController;
+use App\Http\Controllers\Export\ExportRfqController;
 use App\Http\Controllers\Farmer\FarmerDashboardController;
 use App\Http\Controllers\Farmer\IncomingOrderController;
 use App\Http\Controllers\Farmer\FarmerProductController;
@@ -33,6 +35,9 @@ Route::prefix('export')
         Route::get('/products', [ExportController::class, 'index'])->name('products.index');
         Route::get('/products/{slug}', [ExportController::class, 'showProduct'])->name('products.show');
         Route::get('/certifications', [ExportController::class, 'certifications'])->name('certifications.index');
+        Route::get('/rfq', [ExportRfqController::class, 'create'])->name('rfq.create');
+        Route::post('/rfq', [ExportRfqController::class, 'store'])->middleware('throttle:5,10')->name('rfq.store');
+        Route::get('/rfq/thank-you', [ExportRfqController::class, 'thanks'])->name('rfq.thanks');
     });
 Route::get('/produk', [MarketplaceController::class, 'index'])->name('marketplace.products.index');
 Route::get('/pra-order', [MarketplaceController::class, 'preorder'])->name('marketplace.preorders.index');
@@ -76,6 +81,10 @@ Route::prefix('admin')
         Route::get('/pesanan', [AdminOrderController::class, 'index'])->name('orders.index');
         Route::get('/pesanan/{order}', [AdminOrderController::class, 'show'])->name('orders.show');
         Route::post('/pesanan/{order}/tandai-dibayar', [AdminOrderController::class, 'markPaid'])->name('orders.mark-paid');
+        Route::get('/rfq', [AdminRfqController::class, 'index'])->name('rfqs.index');
+        Route::get('/rfq/{rfq}', [AdminRfqController::class, 'show'])->name('rfqs.show');
+        Route::post('/rfq/{rfq}/tandai-ditindaklanjuti', [AdminRfqController::class, 'markHandled'])->name('rfqs.mark-handled');
+        Route::post('/rfq/{rfq}/tandai-baru', [AdminRfqController::class, 'markNew'])->name('rfqs.mark-new');
         Route::resource('sertifikat', AdminCertificateController::class)
             ->parameters(['sertifikat' => 'certificate'])
             ->except(['show'])

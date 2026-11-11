@@ -73,6 +73,11 @@ class Product extends Model
         return $this->hasMany(OrderItem::class);
     }
 
+    public function rfqs(): HasMany
+    {
+        return $this->hasMany(Rfq::class);
+    }
+
     public function isPreorder(): bool
     {
         $harvestDate = $this->attributes['harvest_date'] ?? null;

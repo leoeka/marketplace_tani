@@ -16,6 +16,7 @@
                     <p class="text-xs font-extrabold uppercase tracking-[0.18em] text-forest/65"><x-export.category-label :category="$product->category" /></p>
                     <h1 class="mt-3 text-3xl font-extrabold leading-tight tracking-tight text-forest sm:text-4xl">{{ $product->exportDetails->name_en }}</h1>
                     <p class="mt-5 whitespace-pre-line text-base leading-8 text-charcoal/70">{{ $product->exportDetails->description_en }}</p>
+                    <a href="{{ route('export.rfq.create', ['product' => $product->slug]) }}" class="mt-6 inline-flex items-center justify-center rounded-lg bg-forest px-6 py-3 text-sm font-bold text-white transition hover:bg-forest/90">{{ __('export.product_detail.request_quote') }}</a>
                 </div>
 
                 @if ($product->certificates->isNotEmpty())

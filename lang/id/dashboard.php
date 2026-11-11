@@ -19,5 +19,7 @@ return [
         'products' => 'Produk',
         'market_prices' => 'Harga Pasar',
         'articles' => 'Artikel',
+        'rfqs' => 'RFQ',
+        'new_count' => ':count permintaan RFQ baru',
     ],
 ];

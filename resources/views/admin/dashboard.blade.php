@@ -7,11 +7,12 @@
         </div>
     </div>
 
-    <section class="grid gap-4 sm:grid-cols-2 xl:grid-cols-3" aria-label="{{ __('admin.dashboard.title', [], 'id') }}">
+    <section class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4" aria-label="{{ __('admin.dashboard.title', [], 'id') }}">
         @foreach ([
             ['label' => 'verified_farmers', 'count' => $verifiedFarmers, 'tone' => 'bg-green-100 text-green-900'],
             ['label' => 'pending_farmers', 'count' => $pendingFarmers, 'tone' => 'bg-amber-100 text-amber-900'],
             ['label' => 'pending_products', 'count' => $pendingProducts, 'tone' => 'bg-sky-100 text-sky-900'],
+            ['label' => 'new_rfqs', 'count' => $newRfqs, 'tone' => 'bg-violet-100 text-violet-900'],
         ] as $stat)
             <article class="rounded-2xl border border-forest/10 bg-white p-5 shadow-sm">
                 <p class="inline-flex rounded-full px-3 py-1 text-xs font-bold {{ $stat['tone'] }}">{{ __('admin.dashboard.'.$stat['label'], [], 'id') }}</p>
