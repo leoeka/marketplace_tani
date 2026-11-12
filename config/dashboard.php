@@ -15,6 +15,7 @@ return [
         ['label' => 'rfqs', 'route' => 'admin.rfqs.index', 'active' => 'admin.rfqs.*', 'icon' => '✉️'],
         ['label' => 'certificates', 'route' => 'admin.certificates.index', 'active' => 'admin.certificates.*', 'icon' => '📄'],
         ['label' => 'shipping_services', 'route' => 'admin.shipping-services.index', 'active' => 'admin.shipping-services.*', 'icon' => '🚚'],
+        ['label' => 'export_logistics', 'route' => 'admin.loading-ports.index', 'active' => ['admin.loading-ports.*', 'admin.freight-estimates.*'], 'icon' => '🌍'],
         ['label' => 'market_prices', 'route' => 'admin.market-prices.index', 'active' => 'admin.market-prices.*', 'icon' => '📈'],
         ['label' => 'articles', 'route' => 'admin.articles.index', 'active' => 'admin.articles.*', 'icon' => '📚'],
     ],

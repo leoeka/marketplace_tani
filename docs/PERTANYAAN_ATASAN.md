@@ -16,3 +16,11 @@
 - [4B] Apakah sertifikat yang sudah kedaluwarsa disembunyikan atau diberi label "Expired"? | asumsi yang dipakai: sertifikat kedaluwarsa tidak ditampilkan di halaman publik maupun detail produk.
 - [4C] Apakah buyer perlu menerima email konfirmasi setelah mengirim RFQ? | asumsi yang dipakai: tidak mengirim email kepada buyer; halaman terima kasih menjadi satu-satunya konfirmasi.
 - [4C] Berapa batas panjang nama buyer, perusahaan, negara, email, dan telepon? | asumsi yang dipakai: nama/perusahaan/email maksimal 255, negara 100, telepon 50 karakter; pesan maksimal 2.000 karakter sesuai permintaan.
+- [4D] Apa sumber tarif dan lama pengiriman? | asumsi yang dipakai: master admin memasukkan seluruh estimasi; tidak ada sumber API eksternal.
+- [4D] Tarif dihitung per kg atau per kontainer? | asumsi yang dipakai: hanya tarif per kg yang dipakai pada kalkulator; tarif kontainer tidak tersedia.
+- [4D] Bagaimana menghitung bobot volumetrik kargo udara? | asumsi yang dipakai: tidak menghitung bobot volumetrik dan memakai berat yang dimasukkan buyer.
+- [4D] Bandara muat mana yang dipakai untuk jalur udara? | asumsi yang dipakai: jalur udara tidak memilih pelabuhan atau bandara muat.
+- [4D] Pelabuhan muat tambahan apa yang perlu tersedia? | asumsi yang dipakai: hanya tiga pelabuhan dari deskripsi atasan yang di-seed; admin dapat menambah data lainnya.
+- [4D] Siapa yang memperbarui data pelabuhan dan estimasi? | asumsi yang dipakai: hanya master admin melalui panel admin.
+- [4D] Apakah konversi mata uang perlu ditampilkan pada kalkulator logistik? | asumsi yang dipakai: tahap 4D hanya menampilkan USD; konversi mata uang ditangani pada tahap 4E.
+- [4D] Bagaimana jika ada beberapa estimasi aktif untuk kombinasi jalur, tujuan, dan pelabuhan yang sama? | asumsi yang dipakai: data duplikat tetap dapat disimpan dan kalkulator memakai estimasi dengan ID terkecil.

@@ -14,6 +14,7 @@ return [
         'orders' => 'Pesanan',
         'certificates' => 'Sertifikat',
         'shipping_services' => 'Layanan Pengiriman',
+        'export_logistics' => 'Logistik Ekspor',
         'shop_profile' => 'Profil Toko',
         'farmers' => 'Petani',
         'products' => 'Produk',

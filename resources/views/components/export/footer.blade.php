@@ -4,6 +4,7 @@
             <p class="text-lg font-extrabold tracking-tight text-forest">{{ __('export.brand') }}</p>
             <p class="mt-1 text-sm text-charcoal/60">{{ __('export.footer.description') }}</p>
             <a href="{{ route('export.certifications.index') }}" class="mt-3 inline-flex text-sm font-semibold text-forest underline decoration-forest/30 underline-offset-4">{{ __('export.navigation.certifications') }}</a>
+            <a href="{{ route('export.logistics.index') }}" class="ml-4 inline-flex text-sm font-semibold text-forest underline decoration-forest/30 underline-offset-4">{{ __('export.navigation.logistics') }}</a>
             <a href="{{ route('export.rfq.create') }}" class="ml-4 inline-flex text-sm font-semibold text-forest underline decoration-forest/30 underline-offset-4">{{ __('export.navigation.rfq') }}</a>
         </div>
         <a href="{{ route('home') }}" class="inline-flex items-center gap-2 text-sm font-bold text-forest underline decoration-forest/30 underline-offset-4 transition hover:decoration-forest">

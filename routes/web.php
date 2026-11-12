@@ -10,7 +10,10 @@ use App\Http\Controllers\Admin\AdminArticleController;
 use App\Http\Controllers\Admin\AdminShippingServiceController;
 use App\Http\Controllers\Admin\AdminCertificateController;
 use App\Http\Controllers\Admin\AdminRfqController;
+use App\Http\Controllers\Admin\AdminLoadingPortController;
+use App\Http\Controllers\Admin\AdminFreightEstimateController;
 use App\Http\Controllers\Export\ExportController;
+use App\Http\Controllers\Export\ExportLogisticsController;
 use App\Http\Controllers\Export\ExportRfqController;
 use App\Http\Controllers\Farmer\FarmerDashboardController;
 use App\Http\Controllers\Farmer\IncomingOrderController;
@@ -35,6 +38,7 @@ Route::prefix('export')
         Route::get('/products', [ExportController::class, 'index'])->name('products.index');
         Route::get('/products/{slug}', [ExportController::class, 'showProduct'])->name('products.show');
         Route::get('/certifications', [ExportController::class, 'certifications'])->name('certifications.index');
+        Route::get('/logistics', [ExportLogisticsController::class, 'index'])->name('logistics.index');
         Route::get('/rfq', [ExportRfqController::class, 'create'])->name('rfq.create');
         Route::post('/rfq', [ExportRfqController::class, 'store'])->middleware('throttle:5,10')->name('rfq.store');
         Route::get('/rfq/thank-you', [ExportRfqController::class, 'thanks'])->name('rfq.thanks');
@@ -68,6 +72,14 @@ Route::prefix('admin')
     ->group(function (): void {
         Route::redirect('/', '/admin/dashboard')->name('home');
         Route::get('/dashboard', AdminDashboardController::class)->name('dashboard');
+        Route::resource('pelabuhan-muat', AdminLoadingPortController::class)
+            ->parameters(['pelabuhan-muat' => 'loading_port'])
+            ->except(['show'])
+            ->names('loading-ports');
+        Route::resource('estimasi-pengiriman', AdminFreightEstimateController::class)
+            ->parameters(['estimasi-pengiriman' => 'freight_estimate'])
+            ->except(['show'])
+            ->names('freight-estimates');
         Route::get('/petani', [AdminFarmerController::class, 'index'])->name('farmers.index');
         Route::get('/petani/{farmerProfile}', [AdminFarmerController::class, 'show'])->name('farmers.show');
         Route::post('/petani/{farmerProfile}/verifikasi', [AdminFarmerController::class, 'verify'])->name('farmers.verify');

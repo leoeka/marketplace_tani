@@ -5,6 +5,7 @@
             <a href="{{ route('export.home') }}" class="transition hover:text-forest">{{ __('export.navigation.home') }}</a>
             <a href="{{ route('export.products.index') }}" class="transition hover:text-forest">{{ __('export.navigation.products') }}</a>
             <a href="{{ route('export.certifications.index') }}" class="transition hover:text-forest">{{ __('export.navigation.certifications') }}</a>
+            <a href="{{ route('export.logistics.index') }}" class="transition hover:text-forest">{{ __('export.navigation.logistics') }}</a>
             <a href="{{ route('export.rfq.create') }}" class="rounded-lg bg-forest px-4 py-2.5 font-bold text-white transition hover:bg-forest/90">{{ __('export.navigation.rfq') }}</a>
         </div>
     </nav>
