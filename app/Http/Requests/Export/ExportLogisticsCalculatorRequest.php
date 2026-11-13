@@ -68,7 +68,7 @@ class ExportLogisticsCalculatorRequest extends FormRequest
             }
 
             if (! $estimateQuery->exists()) {
-                $validator->errors()->add('destination', __('export.logistics.validation.destination.exists', [], 'en'));
+                $validator->errors()->add('destination', $this->messages()['destination.exists'] ?? '');
             }
         }];
     }
@@ -76,6 +76,6 @@ class ExportLogisticsCalculatorRequest extends FormRequest
     /** @return array<string, string> */
     public function messages(): array
     {
-        return __('export.logistics.validation', [], 'en');
+        return __('export.logistics.validation');
     }
 }

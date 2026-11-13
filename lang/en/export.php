@@ -10,6 +10,7 @@ return [
         'certifications' => 'Certifications',
         'logistics' => 'Logistics',
         'rfq' => 'Request a Quote',
+        'language' => 'Language',
     ],
     'home' => [
         'meta_title' => 'TaniRaya Global | Indonesian products for global markets',
@@ -129,11 +130,14 @@ return [
         'calculate' => 'Calculate estimate',
         'result_title' => 'Indicative estimate',
         'transit_time' => 'Estimated transit time',
-        'indicative_cost' => 'Indicative cost: USD :amount',
+        'indicative_cost' => 'Indicative cost: :currency :amount',
         'rate_unavailable' => 'A rate is not available yet. Request a quote from our team.',
         'no_estimate' => 'We do not have an estimate for this combination yet. Please request a quote.',
         'disclaimer' => 'These figures are estimates only and exclude insurance, customs duties, handling, and charges in the destination country. Our team will provide an official quotation.',
         'request_quote' => 'Request a quote',
+        'currency' => 'Currency',
+        'rate_note' => 'Converted from USD :usd at 1 USD = :rate :currency.',
+        'rate_date' => ' Rate date: :date.',
         'validation' => [
             'mode.required' => 'Choose a freight mode.',
             'mode.in' => 'Choose a valid freight mode.',

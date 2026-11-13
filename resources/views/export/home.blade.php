@@ -1,7 +1,7 @@
 <x-export.layout :title="__('export.home.meta_title')">
     <section class="relative isolate overflow-hidden bg-[#f4f7f3]">
-        <div class="absolute inset-y-0 right-0 -z-10 hidden w-1/2 bg-forest lg:block" aria-hidden="true"></div>
-        <div class="mx-auto grid max-w-7xl items-center gap-12 px-5 py-16 sm:px-8 sm:py-20 lg:grid-cols-[1.1fr_0.9fr] lg:px-10 lg:py-28">
+        <div class="absolute inset-y-0 end-0 -z-10 hidden w-1/2 bg-forest lg:block" aria-hidden="true"></div>
+        <div class="mx-auto grid max-w-7xl items-center gap-12 px-5 py-16 sm:px-8 sm:py-20 lg:grid-cols-2 lg:px-10 lg:py-28">
             <div class="max-w-2xl">
                 <p class="text-xs font-extrabold uppercase tracking-[0.2em] text-forest/70">{{ __('export.home.eyebrow') }}</p>
                 <h1 class="mt-5 text-4xl font-extrabold leading-tight tracking-tight text-forest sm:text-5xl lg:text-6xl">{{ __('export.home.title') }}</h1>

@@ -28,6 +28,7 @@ use App\Http\Controllers\Marketplace\ArticleController;
 use App\Http\Middleware\SetExportLocale;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Export\ExportPreferenceController;
 
 Route::get('/', [MarketplaceController::class, 'home'])->name('home');
 Route::prefix('export')
@@ -42,6 +43,8 @@ Route::prefix('export')
         Route::get('/rfq', [ExportRfqController::class, 'create'])->name('rfq.create');
         Route::post('/rfq', [ExportRfqController::class, 'store'])->middleware('throttle:5,10')->name('rfq.store');
         Route::get('/rfq/thank-you', [ExportRfqController::class, 'thanks'])->name('rfq.thanks');
+        Route::get('/locale/{locale}', [ExportPreferenceController::class, 'locale'])->name('locale');
+        Route::get('/currency/{currency}', [ExportPreferenceController::class, 'currency'])->name('currency');
     });
 Route::get('/produk', [MarketplaceController::class, 'index'])->name('marketplace.products.index');
 Route::get('/pra-order', [MarketplaceController::class, 'preorder'])->name('marketplace.preorders.index');
@@ -140,4 +143,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
