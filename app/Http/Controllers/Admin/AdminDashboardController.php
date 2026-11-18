@@ -23,7 +23,7 @@ class AdminDashboardController extends Controller
 
         return view('admin.dashboard', [
             'menu' => config('dashboard.admin_menu'),
-            'title' => __('admin.dashboard.title', [], 'id'),
+            'title' => __('admin.dashboard.title'),
             'verifiedFarmers' => (clone $farmerProfiles)->whereNotNull('verified_at')->count(),
             'pendingFarmers' => (clone $farmerProfiles)->whereNull('verified_at')->count(),
             'pendingProducts' => Product::query()->where('status', 'pending')->count(),

@@ -15,7 +15,7 @@ class FarmerProfileController extends Controller
     {
         return view('farmer.profile.edit', [
             'menu' => config('dashboard.farmer_menu'),
-            'title' => __('farmer.profile.title', [], 'id'),
+            'title' => __('farmer.profile.title'),
             'profile' => $request->user()->farmerProfile,
         ]);
     }
@@ -24,6 +24,6 @@ class FarmerProfileController extends Controller
     {
         $profileService->save($request->user(), $request->validated());
 
-        return redirect()->route('farmer.profile.edit')->with('success', __('farmer.profile.saved', [], 'id'));
+        return redirect()->route('farmer.profile.edit')->with('success', __('farmer.profile.saved'));
     }
 }

@@ -5,11 +5,11 @@
     @endphp
     <header class="mb-6">
         <h2 id="profile-information-heading" class="text-2xl font-extrabold tracking-tight text-charcoal">
-            {{ __('marketplace.profile.information_title', [], 'id') }}
+            {{ __('marketplace.profile.information_title') }}
         </h2>
 
         <p class="mt-2 text-[15px] leading-6 text-charcoal/60">
-            {{ __('marketplace.profile.information_description', [], 'id') }}
+            {{ __('marketplace.profile.information_description') }}
         </p>
     </header>
 
@@ -23,29 +23,29 @@
 
         <div class="grid gap-5 sm:grid-cols-2">
             <div>
-                <label for="name" class="block text-sm font-bold text-charcoal">{{ __('auth-ui.name', [], 'id') }}</label>
+                <label for="name" class="block text-sm font-bold text-charcoal">{{ __('auth-ui.name') }}</label>
                 <input id="name" name="name" type="text" value="{{ old('name', $user->name) }}" required autofocus autocomplete="name" class="mt-2 block w-full rounded-2xl border border-forest/15 bg-cream/50 px-4 py-3 text-[15px] text-charcoal shadow-sm placeholder:text-charcoal/35 focus:border-forest focus:ring-forest">
                 <x-input-error class="mt-2" :messages="$errors->get('name')" />
             </div>
 
             <div>
-                <label for="email" class="block text-sm font-bold text-charcoal">{{ __('auth-ui.email', [], 'id') }}</label>
+                <label for="email" class="block text-sm font-bold text-charcoal">{{ __('auth-ui.email') }}</label>
                 <input id="email" name="email" type="email" value="{{ old('email', $user->email) }}" required autocomplete="username" class="mt-2 block w-full rounded-2xl border border-forest/15 bg-cream/50 px-4 py-3 text-[15px] text-charcoal shadow-sm placeholder:text-charcoal/35 focus:border-forest focus:ring-forest">
                 <x-input-error class="mt-2" :messages="$errors->get('email')" />
 
                 @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! $user->hasVerifiedEmail())
                     <div>
                         <p class="mt-3 text-[15px] leading-6 text-amber-800">
-                            {{ __('auth-ui.email_unverified', [], 'id') }}
+                            {{ __('auth-ui.email_unverified') }}
 
                             <button form="send-verification" class="font-bold text-forest underline decoration-forest/40 underline-offset-4 hover:text-forest/80 focus:outline-none focus:ring-2 focus:ring-forest focus:ring-offset-2">
-                                {{ __('auth-ui.resend_verification_email', [], 'id') }}
+                                {{ __('auth-ui.resend_verification_email') }}
                             </button>
                         </p>
 
                         @if (session('status') === 'verification-link-sent')
                             <p class="mt-3 rounded-xl border border-green-200 bg-green-50 px-4 py-3 text-[15px] font-semibold text-green-800" role="status">
-                                {{ __('auth-ui.verification_link_sent', [], 'id') }}
+                                {{ __('auth-ui.verification_link_sent') }}
                             </p>
                         @endif
                     </div>
@@ -55,10 +55,10 @@
 
         @if ($profileAccount->role === 'customer')
             <div>
-                <label for="customer_type" class="block text-sm font-bold text-charcoal">{{ __('marketplace.profile.customer_type', [], 'id') }}</label>
+                <label for="customer_type" class="block text-sm font-bold text-charcoal">{{ __('marketplace.profile.customer_type') }}</label>
                 <select id="customer_type" name="customer_type" required class="mt-2 block w-full rounded-2xl border border-forest/15 bg-cream/50 px-4 py-3 text-[15px] text-charcoal shadow-sm focus:border-forest focus:ring-forest">
-                    <option value="individual" @selected(old('customer_type', $profileAccount->customer_type) === 'individual')>{{ __('marketplace.profile.individual', [], 'id') }}</option>
-                    <option value="business" @selected(old('customer_type', $profileAccount->customer_type) === 'business')>{{ __('marketplace.profile.business', [], 'id') }}</option>
+                    <option value="individual" @selected(old('customer_type', $profileAccount->customer_type) === 'individual')>{{ __('marketplace.profile.individual') }}</option>
+                    <option value="business" @selected(old('customer_type', $profileAccount->customer_type) === 'business')>{{ __('marketplace.profile.business') }}</option>
                 </select>
                 <x-input-error class="mt-2" :messages="$errors->get('customer_type')" />
             </div>
@@ -66,7 +66,7 @@
 
         <div class="flex flex-wrap items-center gap-3">
             <button type="submit" class="inline-flex min-h-11 items-center justify-center rounded-xl bg-forest px-5 py-3 text-sm font-extrabold text-white shadow-sm transition hover:bg-forest/90 focus:outline-none focus:ring-2 focus:ring-forest focus:ring-offset-2">
-                {{ __('auth-ui.save_changes', [], 'id') }}
+                {{ __('auth-ui.save_changes') }}
             </button>
 
             @if (session('status') === 'profile-updated')
@@ -77,7 +77,7 @@
                     x-init="setTimeout(() => show = false, 2000)"
                     class="rounded-xl border border-green-200 bg-green-50 px-4 py-3 text-[15px] font-semibold text-green-800"
                     role="status"
-                >{{ __('auth-ui.saved', [], 'id') }}</p>
+                >{{ __('auth-ui.saved') }}</p>
             @endif
         </div>
     </form>

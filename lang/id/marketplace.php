@@ -21,6 +21,7 @@ return [
         'my_orders' => 'Pesanan Saya',
         'logout' => 'Keluar',
         'open_menu' => 'Buka menu navigasi',
+        'language' => 'Bahasa',
     ],
     'hero' => [
         'eyebrow' => 'Dari kebun terbaik Indonesia',
@@ -275,5 +276,20 @@ return [
         'instagram' => 'Instagram TaniRaya',
         'facebook' => 'Facebook TaniRaya',
         'tiktok' => 'TikTok TaniRaya',
+    ],
+
+
+    // Banner saran bahasa
+    'lang_suggest' => 'Bahasa browser Anda adalah Bahasa Indonesia. Ganti ke Bahasa Indonesia?',
+    'lang_suggest_generic' => 'Ingin melihat website ini dalam :language?',
+    'lang_switch' => 'Ganti',
+    'lang_keep' => 'Keep English',
+
+    // Banner berbagi lokasi (tampil setelah login)
+    'location' => [
+        'title' => 'Bagikan lokasi Anda?',
+        'body' => 'Lokasi dipakai untuk membantu kami mengetahui dari wilayah mana TaniRaya diakses. Anda bisa menolak, dan layanan tetap berjalan normal.',
+        'allow' => 'Izinkan',
+        'deny' => 'Tidak',
     ],
 ];

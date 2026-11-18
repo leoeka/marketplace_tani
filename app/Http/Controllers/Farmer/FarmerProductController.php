@@ -20,7 +20,7 @@ class FarmerProductController extends Controller
 
         return view('farmer.products.index', [
             'menu' => config('dashboard.farmer_menu'),
-            'title' => __('farmer.products.title', [], 'id'),
+            'title' => __('farmer.products.title'),
             'products' => Product::query()
                 ->where('farmer_id', auth()->id())
                 ->with(['category', 'images'])
@@ -35,7 +35,7 @@ class FarmerProductController extends Controller
 
         return view('farmer.products.form', [
             'menu' => config('dashboard.farmer_menu'),
-            'title' => __('farmer.products.create_title', [], 'id'),
+            'title' => __('farmer.products.create_title'),
             'product' => new Product(),
             'categories' => Category::query()->orderBy('name')->get(),
             'isEditing' => false,
@@ -53,7 +53,7 @@ class FarmerProductController extends Controller
 
         $products->create($request->user(), $data, $action);
 
-        return redirect()->route('farmer.products.index')->with('success', __('farmer.products.created', [], 'id'));
+        return redirect()->route('farmer.products.index')->with('success', __('farmer.products.created'));
     }
 
     public function edit(Product $product): View
@@ -62,7 +62,7 @@ class FarmerProductController extends Controller
 
         return view('farmer.products.form', [
             'menu' => config('dashboard.farmer_menu'),
-            'title' => __('farmer.products.edit_title', [], 'id'),
+            'title' => __('farmer.products.edit_title'),
             'product' => $product->load('images'),
             'categories' => Category::query()->orderBy('name')->get(),
             'isEditing' => true,
@@ -80,7 +80,7 @@ class FarmerProductController extends Controller
 
         $products->update($product, $data, $action);
 
-        return redirect()->route('farmer.products.index')->with('success', __('farmer.products.updated', [], 'id'));
+        return redirect()->route('farmer.products.index')->with('success', __('farmer.products.updated'));
     }
 
     public function destroy(Product $product, ProductCatalogService $products): RedirectResponse
@@ -88,10 +88,10 @@ class FarmerProductController extends Controller
         Gate::authorize('delete', $product);
 
         if (! $products->delete($product)) {
-            return redirect()->route('farmer.products.index')->with('error', __('farmer.products.delete_has_orders', [], 'id'));
+            return redirect()->route('farmer.products.index')->with('error', __('farmer.products.delete_has_orders'));
         }
 
-        return redirect()->route('farmer.products.index')->with('success', __('farmer.products.deleted', [], 'id'));
+        return redirect()->route('farmer.products.index')->with('success', __('farmer.products.deleted'));
     }
 
 }

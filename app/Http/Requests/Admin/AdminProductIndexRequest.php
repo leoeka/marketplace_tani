@@ -25,7 +25,7 @@ class AdminProductIndexRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'status.in' => __('admin.validation.status_invalid', [], 'id'),
+            'status.in' => __('admin.validation.status_invalid'),
         ];
     }
 }

@@ -2,6 +2,9 @@
 
 return [
     'brand' => 'TaniRaya Global',
+    'lang_suggest' => '检测到您的浏览器使用中文。要切换到中文吗?',
+    'lang_switch' => '切换',
+    'lang_keep' => 'Keep English',
     'meta_description' => '了解印度尼西亚生产商提供的国际产品规格信息。',
     'navigation' => [
         'label' => '主导航',

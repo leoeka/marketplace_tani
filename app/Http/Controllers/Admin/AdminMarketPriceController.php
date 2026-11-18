@@ -21,7 +21,7 @@ class AdminMarketPriceController extends Controller
 
         return view('admin.market-prices.index', [
             'menu' => config('dashboard.admin_menu'),
-            'title' => __('admin.market_prices.title', [], 'id'),
+            'title' => __('admin.market_prices.title'),
             'filters' => $filters,
             'prices' => MarketPrice::query()
                 ->when($filters['commodity'] ?? null, fn ($query, string $commodity) => $query->where('commodity', 'like', '%'.$commodity.'%'))
@@ -39,7 +39,7 @@ class AdminMarketPriceController extends Controller
     {
         return view('admin.market-prices.form', [
             'menu' => config('dashboard.admin_menu'),
-            'title' => __('admin.market_prices.create_title', [], 'id'),
+            'title' => __('admin.market_prices.create_title'),
             'price' => new MarketPrice(['recorded_on' => today()]),
             'action' => route('admin.market-prices.store'),
             'method' => 'POST',
@@ -54,7 +54,7 @@ class AdminMarketPriceController extends Controller
         MarketPrice::query()->create($request->validated());
 
         return redirect()->route('admin.market-prices.index')
-            ->with('success', __('admin.market_prices.created', [], 'id'));
+            ->with('success', __('admin.market_prices.created'));
     }
 
     /**
@@ -64,7 +64,7 @@ class AdminMarketPriceController extends Controller
     {
         return view('admin.market-prices.form', [
             'menu' => config('dashboard.admin_menu'),
-            'title' => __('admin.market_prices.edit_title', [], 'id'),
+            'title' => __('admin.market_prices.edit_title'),
             'price' => $marketPrice,
             'action' => route('admin.market-prices.update', $marketPrice),
             'method' => 'PUT',
@@ -79,7 +79,7 @@ class AdminMarketPriceController extends Controller
         $marketPrice->update($request->validated());
 
         return redirect()->route('admin.market-prices.index')
-            ->with('success', __('admin.market_prices.updated', [], 'id'));
+            ->with('success', __('admin.market_prices.updated'));
     }
 
     /**
@@ -90,6 +90,6 @@ class AdminMarketPriceController extends Controller
         $marketPrice->delete();
 
         return redirect()->route('admin.market-prices.index')
-            ->with('success', __('admin.market_prices.deleted', [], 'id'));
+            ->with('success', __('admin.market_prices.deleted'));
     }
 }

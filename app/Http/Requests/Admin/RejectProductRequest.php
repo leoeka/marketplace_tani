@@ -27,9 +27,9 @@ class RejectProductRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'rejection_note.required' => __('admin.validation.rejection_required', [], 'id'),
-            'rejection_note.string' => __('admin.validation.rejection_string', [], 'id'),
-            'rejection_note.max' => __('admin.validation.rejection_max', [], 'id'),
+            'rejection_note.required' => __('admin.validation.rejection_required'),
+            'rejection_note.string' => __('admin.validation.rejection_string'),
+            'rejection_note.max' => __('admin.validation.rejection_max'),
         ];
     }
 }

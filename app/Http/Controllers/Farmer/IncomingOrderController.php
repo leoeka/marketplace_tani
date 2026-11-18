@@ -19,7 +19,7 @@ class IncomingOrderController extends Controller
 
         return view('farmer.orders.index', [
             'menu' => config('dashboard.farmer_menu'),
-            'title' => __('farmer.orders.title', [], 'id'),
+            'title' => __('farmer.orders.title'),
             'orders' => Order::query()
                 ->whereHas('items', fn ($query) => $query->where('farmer_id', $farmerId))
                 ->with(['items' => fn ($query) => $query->where('farmer_id', $farmerId)])
@@ -34,7 +34,7 @@ class IncomingOrderController extends Controller
 
         return view('farmer.orders.show', [
             'menu' => config('dashboard.farmer_menu'),
-            'title' => __('farmer.orders.detail_title', [], 'id'),
+            'title' => __('farmer.orders.detail_title'),
             'order' => $order->load([
                 'items' => fn ($query) => $query->where('farmer_id', auth()->id()),
                 'shipments' => fn ($query) => $query->where('farmer_id', auth()->id()),
@@ -54,6 +54,6 @@ class IncomingOrderController extends Controller
         $shipment->save();
 
         return redirect()->route('farmer.orders.show', $order)
-            ->with('success', __('farmer.orders.shipment_saved', [], 'id'));
+            ->with('success', __('farmer.orders.shipment_saved'));
     }
 }

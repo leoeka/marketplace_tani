@@ -16,7 +16,7 @@ class AdminCertificateController extends Controller
     {
         return view('admin.certificates.index', [
             'menu' => config('dashboard.admin_menu'),
-            'title' => __('admin.certificates.title', [], 'id'),
+            'title' => __('admin.certificates.title'),
             'certificates' => Certificate::query()
                 ->withCount('products')
                 ->latest()
@@ -27,7 +27,7 @@ class AdminCertificateController extends Controller
 
     public function create(): View
     {
-        return $this->formView(new Certificate(), __('admin.certificates.create_title', [], 'id'));
+        return $this->formView(new Certificate(), __('admin.certificates.create_title'));
     }
 
     public function store(SaveCertificateRequest $request, CertificateCatalogService $certificates): RedirectResponse
@@ -35,14 +35,14 @@ class AdminCertificateController extends Controller
         $certificates->save(null, $request->validated());
 
         return redirect()->route('admin.certificates.index')
-            ->with('success', __('admin.certificates.created', [], 'id'));
+            ->with('success', __('admin.certificates.created'));
     }
 
     public function edit(Certificate $certificate): View
     {
         return $this->formView(
             $certificate->load('products'),
-            __('admin.certificates.edit_title', [], 'id'),
+            __('admin.certificates.edit_title'),
         );
     }
 
@@ -54,7 +54,7 @@ class AdminCertificateController extends Controller
         $certificates->save($certificate, $request->validated());
 
         return redirect()->route('admin.certificates.index')
-            ->with('success', __('admin.certificates.updated', [], 'id'));
+            ->with('success', __('admin.certificates.updated'));
     }
 
     public function destroy(Certificate $certificate, CertificateCatalogService $certificates): RedirectResponse
@@ -62,7 +62,7 @@ class AdminCertificateController extends Controller
         $certificates->delete($certificate);
 
         return redirect()->route('admin.certificates.index')
-            ->with('success', __('admin.certificates.deleted', [], 'id'));
+            ->with('success', __('admin.certificates.deleted'));
     }
 
     private function formView(Certificate $certificate, string $title): View
@@ -74,7 +74,7 @@ class AdminCertificateController extends Controller
             'products' => Product::query()->orderBy('name')->get(['id', 'name']),
             'certificateTypes' => Certificate::TYPES,
             'typeLabels' => collect(Certificate::TYPES)
-                ->mapWithKeys(fn (string $type): array => [$type => __('admin.certificates.types.'.$type, [], 'id')])
+                ->mapWithKeys(fn (string $type): array => [$type => __('admin.certificates.types.'.$type)])
                 ->all(),
         ]);
     }

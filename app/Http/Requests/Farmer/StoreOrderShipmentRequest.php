@@ -26,9 +26,9 @@ class StoreOrderShipmentRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'tracking_number.required' => __('farmer.orders.validation.tracking_number_required', [], 'id'),
-            'tracking_number.string' => __('farmer.orders.validation.tracking_number_string', [], 'id'),
-            'tracking_number.max' => __('farmer.orders.validation.tracking_number_max', [], 'id'),
+            'tracking_number.required' => __('farmer.orders.validation.tracking_number_required'),
+            'tracking_number.string' => __('farmer.orders.validation.tracking_number_string'),
+            'tracking_number.max' => __('farmer.orders.validation.tracking_number_max'),
         ];
     }
 }

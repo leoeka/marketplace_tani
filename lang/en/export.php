@@ -2,6 +2,10 @@
 
 return [
     'brand' => 'TaniRaya Global',
+    'lang_suggest' => 'Your browser language is English. Switch to English?',
+    'lang_switch' => 'Switch',
+    'lang_keep' => 'Keep English',
+    'lang_suggest_generic' => 'Would you like to view this website in :language?',
     'meta_description' => 'Explore international product specifications from Indonesian producers.',
     'navigation' => [
         'label' => 'Main navigation',

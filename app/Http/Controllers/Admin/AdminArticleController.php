@@ -15,7 +15,7 @@ class AdminArticleController extends Controller
     {
         return view('admin.articles.index', [
             'menu' => config('dashboard.admin_menu'),
-            'title' => __('admin.articles.title', [], 'id'),
+            'title' => __('admin.articles.title'),
             'articles' => Article::query()->latest()->paginate(12),
         ]);
     }
@@ -27,7 +27,7 @@ class AdminArticleController extends Controller
     {
         return view('admin.articles.form', [
             'menu' => config('dashboard.admin_menu'),
-            'title' => __('admin.articles.create_title', [], 'id'),
+            'title' => __('admin.articles.create_title'),
             'article' => new Article(['status' => 'draft']),
             'action' => route('admin.articles.store'),
             'method' => 'POST',
@@ -45,7 +45,7 @@ class AdminArticleController extends Controller
         $article = Article::query()->create($data);
 
         return redirect()->route('admin.articles.edit', $article)
-            ->with('success', __('admin.articles.created', [], 'id'));
+            ->with('success', __('admin.articles.created'));
     }
 
     /**
@@ -55,7 +55,7 @@ class AdminArticleController extends Controller
     {
         return view('admin.articles.form', [
             'menu' => config('dashboard.admin_menu'),
-            'title' => __('admin.articles.edit_title', [], 'id'),
+            'title' => __('admin.articles.edit_title'),
             'article' => $article,
             'action' => route('admin.articles.update', $article),
             'method' => 'PUT',
@@ -80,7 +80,7 @@ class AdminArticleController extends Controller
         $article->update($data);
 
         return redirect()->route('admin.articles.index')
-            ->with('success', __('admin.articles.updated', [], 'id'));
+            ->with('success', __('admin.articles.updated'));
     }
 
     /**
@@ -91,6 +91,6 @@ class AdminArticleController extends Controller
         $article->delete();
 
         return redirect()->route('admin.articles.index')
-            ->with('success', __('admin.articles.deleted', [], 'id'));
+            ->with('success', __('admin.articles.deleted'));
     }
 }

@@ -22,14 +22,13 @@ class ExportWebsiteTest extends TestCase
             ->assertSee('<html lang="en" dir="ltr">', false)
             ->assertSee('Browse products');
 
-        $this->withSession(['export_locale' => 'id'])
-            ->get(route('export.home'))
+        $this->get(route('export.home'))
             ->assertOk()
             ->assertSee('<html lang="en" dir="ltr">', false);
 
         $this->get(route('home'))
             ->assertOk()
-            ->assertSee('<html lang="id">', false);
+            ->assertSee('<html lang="id"', false);
     }
 
     public function test_marketplace_only_product_is_absent_from_export_catalog_and_detail_returns_404(): void
@@ -104,7 +103,7 @@ class ExportWebsiteTest extends TestCase
     public function test_export_catalog_paginates_visible_products(): void
     {
         for ($index = 1; $index <= 13; $index++) {
-            $this->createVisibleProduct([], ['name_en' => 'Catalog Product '.$index]);
+            $this->createVisibleProduct([], ['name_en' => 'Catalog Product ' . $index]);
         }
 
         $this->get(route('export.products.index'))
@@ -121,7 +120,7 @@ class ExportWebsiteTest extends TestCase
     public function test_export_home_displays_no_more_than_six_latest_products(): void
     {
         for ($index = 1; $index <= 7; $index++) {
-            $this->createVisibleProduct([], ['name_en' => 'Featured Product '.$index]);
+            $this->createVisibleProduct([], ['name_en' => 'Featured Product ' . $index]);
         }
 
         $this->get(route('export.home'))

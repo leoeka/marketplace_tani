@@ -2,25 +2,25 @@
     <div class="mb-6 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <form method="GET" action="{{ route('admin.market-prices.index') }}" class="flex flex-wrap items-end gap-3">
             <div>
-                <label for="commodity" class="mb-1.5 block text-xs font-bold text-charcoal/70">{{ __('admin.market_prices.search', [], 'id') }}</label>
+                <label for="commodity" class="mb-1.5 block text-xs font-bold text-charcoal/70">{{ __('admin.market_prices.search') }}</label>
                 <input id="commodity" name="commodity" value="{{ $filters['commodity'] ?? '' }}" maxlength="255" class="rounded-xl border-forest/15 bg-white text-sm focus:border-forest focus:ring-forest">
             </div>
-            <button type="submit" class="rounded-xl bg-forest px-4 py-2.5 text-sm font-bold text-white">{{ __('admin.market_prices.filter', [], 'id') }}</button>
+            <button type="submit" class="rounded-xl bg-forest px-4 py-2.5 text-sm font-bold text-white">{{ __('admin.market_prices.filter') }}</button>
         </form>
-        <a href="{{ route('admin.market-prices.create') }}" class="rounded-xl bg-harvest px-4 py-2.5 text-center text-sm font-bold text-forest">{{ __('admin.market_prices.add', [], 'id') }}</a>
+        <a href="{{ route('admin.market-prices.create') }}" class="rounded-xl bg-harvest px-4 py-2.5 text-center text-sm font-bold text-forest">{{ __('admin.market_prices.add') }}</a>
     </div>
 
     @if ($prices->isEmpty())
-        <p class="rounded-2xl border border-dashed border-forest/20 bg-white px-6 py-14 text-center text-sm text-charcoal/65">{{ __('admin.market_prices.empty', [], 'id') }}</p>
+        <p class="rounded-2xl border border-dashed border-forest/20 bg-white px-6 py-14 text-center text-sm text-charcoal/65">{{ __('admin.market_prices.empty') }}</p>
     @else
         <div class="overflow-x-auto rounded-2xl border border-forest/10 bg-white shadow-sm">
             <table class="w-full min-w-[46rem] text-left text-sm">
                 <thead class="bg-cream text-xs uppercase tracking-wide text-charcoal/60"><tr>
-                    <th class="px-5 py-4">{{ __('admin.market_prices.commodity', [], 'id') }}</th>
-                    <th class="px-5 py-4">{{ __('admin.market_prices.price', [], 'id') }}</th>
-                    <th class="px-5 py-4">{{ __('admin.market_prices.source', [], 'id') }}</th>
-                    <th class="px-5 py-4">{{ __('admin.market_prices.recorded_on', [], 'id') }}</th>
-                    <th class="px-5 py-4"><span class="sr-only">{{ __('admin.market_prices.edit', [], 'id') }}</span></th>
+                    <th class="px-5 py-4">{{ __('admin.market_prices.commodity') }}</th>
+                    <th class="px-5 py-4">{{ __('admin.market_prices.price') }}</th>
+                    <th class="px-5 py-4">{{ __('admin.market_prices.source') }}</th>
+                    <th class="px-5 py-4">{{ __('admin.market_prices.recorded_on') }}</th>
+                    <th class="px-5 py-4"><span class="sr-only">{{ __('admin.market_prices.edit') }}</span></th>
                 </tr></thead>
                 <tbody class="divide-y divide-forest/10">
                     @foreach ($prices as $price)
@@ -31,11 +31,11 @@
                             <td class="px-5 py-4">{{ $price->recorded_on->format('d/m/Y') }}</td>
                             <td class="px-5 py-4 text-right">
                                 <div class="flex justify-end gap-3">
-                                    <a href="{{ route('admin.market-prices.edit', $price) }}" class="font-bold text-forest underline">{{ __('admin.market_prices.edit', [], 'id') }}</a>
-                                    <form method="POST" action="{{ route('admin.market-prices.destroy', $price) }}" onsubmit="return confirm(@js(__('admin.market_prices.confirm_delete', [], 'id')))" class="inline">
+                                    <a href="{{ route('admin.market-prices.edit', $price) }}" class="font-bold text-forest underline">{{ __('admin.market_prices.edit') }}</a>
+                                    <form method="POST" action="{{ route('admin.market-prices.destroy', $price) }}" onsubmit="return confirm(@js(__('admin.market_prices.confirm_delete')))" class="inline">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="font-bold text-red-700 underline">{{ __('admin.market_prices.delete', [], 'id') }}</button>
+                                        <button type="submit" class="font-bold text-red-700 underline">{{ __('admin.market_prices.delete') }}</button>
                                     </form>
                                 </div>
                             </td>

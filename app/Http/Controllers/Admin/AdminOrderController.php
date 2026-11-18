@@ -16,7 +16,7 @@ class AdminOrderController extends Controller
 
         return view('admin.orders.index', [
             'menu' => config('dashboard.admin_menu'),
-            'title' => __('admin.orders.title', [], 'id'),
+            'title' => __('admin.orders.title'),
             'orders' => Order::query()->with('customer')->withCount('items')->latest()->paginate(12),
         ]);
     }
@@ -27,7 +27,7 @@ class AdminOrderController extends Controller
 
         return view('admin.orders.show', [
             'menu' => config('dashboard.admin_menu'),
-            'title' => __('admin.orders.detail_title', [], 'id'),
+            'title' => __('admin.orders.detail_title'),
             'order' => $order->load(['customer', 'items.farmer', 'shipments.farmer']),
         ]);
     }
@@ -37,6 +37,6 @@ class AdminOrderController extends Controller
         Gate::authorize('markPaid', $order);
         $order->update(['payment_status' => 'paid']);
 
-        return redirect()->route('admin.orders.show', $order)->with('success', __('admin.orders.paid_success', [], 'id'));
+        return redirect()->route('admin.orders.show', $order)->with('success', __('admin.orders.paid_success'));
     }
 }

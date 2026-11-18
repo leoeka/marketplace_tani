@@ -19,11 +19,11 @@ class CheckoutService
     public function createOrder(User $customer, array $data, array $cart): Order
     {
         if ($customer->role !== 'customer' || ($data['payment_term'] === 'tempo' && $customer->customer_type !== 'business')) {
-            throw new CartCheckoutException(__('marketplace.checkout.tempo_business_only', [], 'id'));
+            throw new CartCheckoutException(__('marketplace.checkout.tempo_business_only'));
         }
 
         if ($cart === []) {
-            throw new CartCheckoutException(__('marketplace.cart.empty', [], 'id'));
+            throw new CartCheckoutException(__('marketplace.cart.empty'));
         }
 
         return DB::transaction(function () use ($customer, $data, $cart): Order {
@@ -36,10 +36,10 @@ class CheckoutService
                     ->first();
 
                 if ($shippingService === null) {
-                    throw new CartCheckoutException(__('marketplace.checkout.validation.shipping_service_invalid', [], 'id'));
+                    throw new CartCheckoutException(__('marketplace.checkout.validation.shipping_service_invalid'));
                 }
             } elseif (ShippingService::query()->where('is_active', true)->exists()) {
-                throw new CartCheckoutException(__('marketplace.checkout.validation.shipping_service_required', [], 'id'));
+                throw new CartCheckoutException(__('marketplace.checkout.validation.shipping_service_required'));
             }
 
             $productIds = array_map('intval', array_keys($cart));
@@ -57,7 +57,7 @@ class CheckoutService
                 $product = $products->get((int) $productId);
 
                 if (! $product instanceof Product || ! $this->cart->isAvailable($product) || (int) $qty < 1 || (int) $qty > $product->stock) {
-                    throw new CartCheckoutException(__('marketplace.cart.item_unavailable', [], 'id'));
+                    throw new CartCheckoutException(__('marketplace.cart.item_unavailable'));
                 }
 
                 $total += $product->price_idr * (int) $qty;
@@ -73,10 +73,10 @@ class CheckoutService
                 'shipping_service_name' => $shippingService?->name,
                 'shipping_service_type' => $shippingService?->type,
                 'shipping_address' => implode("\n", array_filter([
-                    __('marketplace.checkout.address_recipient', ['value' => $data['recipient_name']], 'id'),
-                    __('marketplace.checkout.address_phone', ['value' => $data['phone']], 'id'),
-                    __('marketplace.checkout.address_detail', ['value' => $data['address']], 'id'),
-                    filled($data['notes'] ?? null) ? __('marketplace.checkout.address_notes', ['value' => $data['notes']], 'id') : null,
+                    __('marketplace.checkout.address_recipient', ['value' => $data['recipient_name']]),
+                    __('marketplace.checkout.address_phone', ['value' => $data['phone']]),
+                    __('marketplace.checkout.address_detail', ['value' => $data['address']]),
+                    filled($data['notes'] ?? null) ? __('marketplace.checkout.address_notes', ['value' => $data['notes']]) : null,
                 ])),
             ]);
 

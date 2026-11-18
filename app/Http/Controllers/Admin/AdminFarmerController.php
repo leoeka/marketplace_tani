@@ -18,7 +18,7 @@ class AdminFarmerController extends Controller
 
         return view('admin.farmers.index', [
             'menu' => config('dashboard.admin_menu'),
-            'title' => __('admin.farmers.title', [], 'id'),
+            'title' => __('admin.farmers.title'),
             'farmers' => FarmerProfile::query()
                 ->whereHas('user', fn ($query) => $query->where('role', 'farmer'))
                 ->with('user')
@@ -36,7 +36,7 @@ class AdminFarmerController extends Controller
 
         return view('admin.farmers.show', [
             'menu' => config('dashboard.admin_menu'),
-            'title' => __('admin.farmers.detail_title', [], 'id'),
+            'title' => __('admin.farmers.detail_title'),
             'farmerProfile' => $farmerProfile->load('user'),
         ]);
     }
@@ -47,7 +47,7 @@ class AdminFarmerController extends Controller
 
         $farmerProfile->update(['verified_at' => now()]);
 
-        return back()->with('success', __('admin.farmers.verified_success', [], 'id'));
+        return back()->with('success', __('admin.farmers.verified_success'));
     }
 
     public function revoke(RevokeFarmerVerificationRequest $request, FarmerProfile $farmerProfile): RedirectResponse
@@ -56,6 +56,6 @@ class AdminFarmerController extends Controller
 
         $farmerProfile->update(['verified_at' => null]);
 
-        return back()->with('success', __('admin.farmers.revoked_success', [], 'id'));
+        return back()->with('success', __('admin.farmers.revoked_success'));
     }
 }

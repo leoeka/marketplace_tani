@@ -10,4 +10,4 @@
     $tone = $statusTones[$status] ?? 'bg-stone-100 text-stone-700';
 @endphp
 
-<span {{ $attributes->merge(['class' => 'inline-flex shrink-0 rounded-full px-3 py-1 text-xs font-bold '.$tone]) }}>{{ __('farmer.statuses.'.$status, [], 'id') }}</span>
+<span {{ $attributes->merge(['class' => 'inline-flex shrink-0 rounded-full px-3 py-1 text-xs font-bold '.$tone]) }}>{{ __('farmer.statuses.'.$status) }}</span>

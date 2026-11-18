@@ -29,8 +29,14 @@ use App\Http\Middleware\SetExportLocale;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Export\ExportPreferenceController;
+use App\Http\Controllers\UserLocationController;
+use App\Http\Controllers\Admin\AdminUserLocationController;
+use App\Http\Controllers\SiteLocaleController;
+use App\Http\Controllers\DashboardLocaleController;
+
 
 Route::get('/', [MarketplaceController::class, 'home'])->name('home');
+Route::get('/bahasa/{locale}', [SiteLocaleController::class, 'set'])->name('site.locale');
 Route::prefix('export')
     ->middleware(SetExportLocale::class)
     ->name('export.')
@@ -113,6 +119,7 @@ Route::prefix('admin')
             ->parameters(['artikel' => 'article'])
             ->except(['show'])
             ->names('articles');
+        Route::get('/lokasi-pengguna', [AdminUserLocationController::class, 'index'])->name('locations.index');
     });
 
 Route::prefix('dashboard-petani')
@@ -141,6 +148,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::post('/dashboard-bahasa/{locale}', [DashboardLocaleController::class, 'set'])->name('dashboard.locale');
+});
+
+Route::middleware(['auth', 'throttle:20,1'])->group(function () {
+    Route::post('/lokasi', [UserLocationController::class, 'store'])->name('location.store');
+    Route::post('/lokasi/izin', [UserLocationController::class, 'consent'])->name('location.consent');
+    Route::delete('/lokasi', [UserLocationController::class, 'destroy'])->name('location.destroy');
 });
 
 require __DIR__ . '/auth.php';

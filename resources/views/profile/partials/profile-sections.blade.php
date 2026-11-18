@@ -19,27 +19,27 @@
 
             @if ($user->role === 'customer')
                 <p class="mt-5 inline-flex rounded-full bg-cream px-3 py-1.5 text-sm font-bold text-charcoal">
-                    {{ __('marketplace.profile.'.$user->customer_type, [], 'id') }}
+                    {{ __('marketplace.profile.'.$user->customer_type) }}
                 </p>
             @endif
         </section>
 
-        <nav class="rounded-3xl border border-forest/10 bg-white p-3 shadow-sm" aria-label="{{ __('marketplace.profile.section_navigation', [], 'id') }}">
+        <nav class="rounded-3xl border border-forest/10 bg-white p-3 shadow-sm" aria-label="{{ __('marketplace.profile.section_navigation') }}">
             <div class="grid gap-1">
                 <button type="button" x-on:click="activeSection = 'information'" x-bind:aria-current="activeSection === 'information' ? 'page' : null"
                     x-bind:class="activeSection === 'information' ? 'bg-forest text-white' : 'text-charcoal/75 hover:bg-cream'"
                     class="w-full rounded-xl px-4 py-3 text-left text-[15px] font-bold transition focus:outline-none focus:ring-2 focus:ring-forest focus:ring-offset-2">
-                    {{ __('marketplace.profile.information_title', [], 'id') }}
+                    {{ __('marketplace.profile.information_title') }}
                 </button>
                 <button type="button" x-on:click="activeSection = 'security'" x-bind:aria-current="activeSection === 'security' ? 'page' : null"
                     x-bind:class="activeSection === 'security' ? 'bg-forest text-white' : 'text-charcoal/75 hover:bg-cream'"
                     class="w-full rounded-xl px-4 py-3 text-left text-[15px] font-bold transition focus:outline-none focus:ring-2 focus:ring-forest focus:ring-offset-2">
-                    {{ __('marketplace.profile.security_title', [], 'id') }}
+                    {{ __('marketplace.profile.security_title') }}
                 </button>
                 <button type="button" x-on:click="activeSection = 'delete'" x-bind:aria-current="activeSection === 'delete' ? 'page' : null"
                     x-bind:class="activeSection === 'delete' ? 'bg-red-50 text-red-700' : 'text-charcoal/75 hover:bg-red-50 hover:text-red-700'"
                     class="w-full rounded-xl px-4 py-3 text-left text-[15px] font-bold transition focus:outline-none focus:ring-2 focus:ring-red-600 focus:ring-offset-2">
-                    {{ __('auth-ui.delete_account', [], 'id') }}
+                    {{ __('auth-ui.delete_account') }}
                 </button>
             </div>
         </nav>

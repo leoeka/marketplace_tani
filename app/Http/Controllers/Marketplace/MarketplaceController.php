@@ -65,9 +65,9 @@ class MarketplaceController extends Controller
             'products' => $products,
             'categories' => Category::query()->orderBy('name')->get(),
             'filters' => $filters,
-            'catalogTitle' => __('marketplace.preorder.title', [], 'id'),
-            'catalogDescription' => __('marketplace.preorder.description', [], 'id'),
-            'emptyMessage' => __('marketplace.preorder.empty', [], 'id'),
+            'catalogTitle' => __('marketplace.preorder.title'),
+            'catalogDescription' => __('marketplace.preorder.description'),
+            'emptyMessage' => __('marketplace.preorder.empty'),
             'catalogRoute' => route('marketplace.preorders.index'),
         ]);
     }

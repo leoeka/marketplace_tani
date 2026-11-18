@@ -17,7 +17,7 @@ class FarmerDashboardController extends Controller
 
         return view('farmer.dashboard', [
             'menu' => config('dashboard.farmer_menu'),
-            'title' => __('farmer.dashboard.title', [], 'id'),
+            'title' => __('farmer.dashboard.title'),
             'counts' => collect(['draft', 'pending', 'approved', 'rejected'])
                 ->mapWithKeys(fn (string $status): array => [$status => (int) ($counts[$status] ?? 0)]),
             'isVerified' => $request->user()->farmerProfile()->whereNotNull('verified_at')->exists(),

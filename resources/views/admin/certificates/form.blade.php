@@ -7,7 +7,7 @@
             @method('PUT')
         @endif
         <div>
-            <label for="type" class="mb-1.5 block text-sm font-bold text-charcoal">{{ __('admin.certificates.type', [], 'id') }}</label>
+            <label for="type" class="mb-1.5 block text-sm font-bold text-charcoal">{{ __('admin.certificates.type') }}</label>
             <select id="type" name="type" x-model="selectedType" required class="w-full rounded-xl border-forest/15 focus:border-forest focus:ring-forest">
                 @foreach ($certificateTypes as $type)
                     <option value="{{ $type }}">{{ $typeLabels[$type] }}</option>
@@ -17,43 +17,43 @@
         </div>
 
         <div>
-            <label for="name" class="mb-1.5 block text-sm font-bold text-charcoal">{{ __('admin.certificates.name', [], 'id') }}</label>
+            <label for="name" class="mb-1.5 block text-sm font-bold text-charcoal">{{ __('admin.certificates.name') }}</label>
             <input id="name" name="name" value="{{ old('name', $certificate->name) }}" :placeholder="suggestions[selectedType]" required maxlength="255" class="w-full rounded-xl border-forest/15 focus:border-forest focus:ring-forest">
-            <p class="mt-1 text-xs text-charcoal/55">{{ __('admin.certificates.name_help', [], 'id') }}</p>
+            <p class="mt-1 text-xs text-charcoal/55">{{ __('admin.certificates.name_help') }}</p>
             @error('name') <p class="mt-1 text-sm text-red-700">{{ $message }}</p> @enderror
         </div>
 
         <div>
-            <label for="issuer" class="mb-1.5 block text-sm font-bold text-charcoal">{{ __('admin.certificates.issuer', [], 'id') }}</label>
+            <label for="issuer" class="mb-1.5 block text-sm font-bold text-charcoal">{{ __('admin.certificates.issuer') }}</label>
             <input id="issuer" name="issuer" value="{{ old('issuer', $certificate->issuer) }}" maxlength="255" class="w-full rounded-xl border-forest/15 focus:border-forest focus:ring-forest">
             @error('issuer') <p class="mt-1 text-sm text-red-700">{{ $message }}</p> @enderror
         </div>
 
         <div>
-            <label for="certificate_number" class="mb-1.5 block text-sm font-bold text-charcoal">{{ __('admin.certificates.number', [], 'id') }}</label>
+            <label for="certificate_number" class="mb-1.5 block text-sm font-bold text-charcoal">{{ __('admin.certificates.number') }}</label>
             <input id="certificate_number" name="certificate_number" value="{{ old('certificate_number', $certificate->certificate_number) }}" maxlength="255" class="w-full rounded-xl border-forest/15 focus:border-forest focus:ring-forest">
             @error('certificate_number') <p class="mt-1 text-sm text-red-700">{{ $message }}</p> @enderror
         </div>
 
         <div>
-            <label for="expires_at" class="mb-1.5 block text-sm font-bold text-charcoal">{{ __('admin.certificates.expires_at', [], 'id') }}</label>
+            <label for="expires_at" class="mb-1.5 block text-sm font-bold text-charcoal">{{ __('admin.certificates.expires_at') }}</label>
             <input id="expires_at" name="expires_at" type="date" value="{{ old('expires_at', $certificate->expires_at?->format('Y-m-d')) }}" class="w-full rounded-xl border-forest/15 focus:border-forest focus:ring-forest">
             @error('expires_at') <p class="mt-1 text-sm text-red-700">{{ $message }}</p> @enderror
         </div>
 
         <div>
-            <label for="file" class="mb-1.5 block text-sm font-bold text-charcoal">{{ __('admin.certificates.file', [], 'id') }}</label>
+            <label for="file" class="mb-1.5 block text-sm font-bold text-charcoal">{{ __('admin.certificates.file') }}</label>
             @if ($certificate->file_path)
-                <p class="mb-2 text-sm text-charcoal/65">{{ __('admin.certificates.current_file', [], 'id') }}: <a href="{{ asset('storage/'.$certificate->file_path) }}" target="_blank" rel="noopener" class="font-semibold text-forest underline">{{ __('admin.certificates.view_file', [], 'id') }}</a></p>
+                <p class="mb-2 text-sm text-charcoal/65">{{ __('admin.certificates.current_file') }}: <a href="{{ asset('storage/'.$certificate->file_path) }}" target="_blank" rel="noopener" class="font-semibold text-forest underline">{{ __('admin.certificates.view_file') }}</a></p>
             @endif
             <input id="file" name="file" type="file" accept=".pdf,.jpg,.jpeg,.png" @required(! $certificate->file_path) class="w-full rounded-xl border border-forest/15 bg-white p-2 text-sm file:mr-4 file:rounded-lg file:border-0 file:bg-cream file:px-3 file:py-2 file:font-bold file:text-forest">
-            <p class="mt-1 text-xs text-charcoal/55">{{ __('admin.certificates.file_help', [], 'id') }}</p>
+            <p class="mt-1 text-xs text-charcoal/55">{{ __('admin.certificates.file_help') }}</p>
             @error('file') <p class="mt-1 text-sm text-red-700">{{ $message }}</p> @enderror
         </div>
 
         <fieldset>
-            <legend class="mb-2 block text-sm font-bold text-charcoal">{{ __('admin.certificates.associated_products', [], 'id') }}</legend>
-            <p class="mb-3 text-xs leading-5 text-charcoal/55">{{ __('admin.certificates.products_help', [], 'id') }}</p>
+            <legend class="mb-2 block text-sm font-bold text-charcoal">{{ __('admin.certificates.associated_products') }}</legend>
+            <p class="mb-3 text-xs leading-5 text-charcoal/55">{{ __('admin.certificates.products_help') }}</p>
             @error('product_ids') <p class="mb-2 text-sm text-red-700">{{ $message }}</p> @enderror
             @error('product_ids.*') <p class="mb-2 text-sm text-red-700">{{ $message }}</p> @enderror
             <div class="grid max-h-64 gap-2 overflow-y-auto rounded-xl border border-forest/10 p-3 sm:grid-cols-2">
@@ -67,8 +67,8 @@
         </fieldset>
 
         <div class="flex flex-wrap gap-3">
-            <button type="submit" class="rounded-xl bg-forest px-5 py-3 text-sm font-bold text-white hover:bg-forest/90">{{ __('admin.certificates.save', [], 'id') }}</button>
-            <a href="{{ route('admin.certificates.index') }}" class="rounded-xl border border-forest/20 px-5 py-3 text-sm font-bold text-forest">{{ __('admin.certificates.back', [], 'id') }}</a>
+            <button type="submit" class="rounded-xl bg-forest px-5 py-3 text-sm font-bold text-white hover:bg-forest/90">{{ __('admin.certificates.save') }}</button>
+            <a href="{{ route('admin.certificates.index') }}" class="rounded-xl border border-forest/20 px-5 py-3 text-sm font-bold text-forest">{{ __('admin.certificates.back') }}</a>
         </div>
     </form>
 </x-dashboard-layout>

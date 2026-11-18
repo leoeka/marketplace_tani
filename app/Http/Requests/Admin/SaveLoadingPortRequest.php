@@ -28,6 +28,6 @@ class SaveLoadingPortRequest extends FormRequest
     /** @return array<string, string> */
     public function messages(): array
     {
-        return __('admin.logistics.ports.validation', [], 'id');
+        return __('admin.logistics.ports.validation');
     }
 }

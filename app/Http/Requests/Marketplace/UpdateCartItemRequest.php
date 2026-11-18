@@ -21,9 +21,9 @@ class UpdateCartItemRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'qty.required' => __('marketplace.cart.validation.qty_required', [], 'id'),
-            'qty.integer' => __('marketplace.cart.validation.qty_integer', [], 'id'),
-            'qty.min' => __('marketplace.cart.validation.qty_min', [], 'id'),
+            'qty.required' => __('marketplace.cart.validation.qty_required'),
+            'qty.integer' => __('marketplace.cart.validation.qty_integer'),
+            'qty.min' => __('marketplace.cart.validation.qty_min'),
         ];
     }
 }

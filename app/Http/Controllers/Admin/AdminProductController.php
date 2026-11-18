@@ -20,7 +20,7 @@ class AdminProductController extends Controller
 
         return view('admin.products.index', [
             'menu' => config('dashboard.admin_menu'),
-            'title' => __('admin.products.title', [], 'id'),
+            'title' => __('admin.products.title'),
             'status' => $status,
             'products' => Product::query()
                 ->with(['farmer.farmerProfile', 'category', 'images'])
@@ -55,7 +55,7 @@ class AdminProductController extends Controller
 
         return view('admin.products.show', [
             'menu' => config('dashboard.admin_menu'),
-            'title' => __('admin.products.detail_title', [], 'id'),
+            'title' => __('admin.products.detail_title'),
             'product' => $product,
             'exportReasons' => $exportReasons,
         ]);
@@ -69,7 +69,7 @@ class AdminProductController extends Controller
         );
 
         return redirect()->route('admin.products.show', $product)
-            ->with('success', __('admin.products.export_details_saved', [], 'id'));
+            ->with('success', __('admin.products.export_details_saved'));
     }
 
     public function approve(ApproveProductRequest $request, Product $product): RedirectResponse
@@ -82,7 +82,7 @@ class AdminProductController extends Controller
         ]);
 
         return redirect()->route('admin.products.show', $product)
-            ->with('success', __('admin.products.approved_success', [], 'id'));
+            ->with('success', __('admin.products.approved_success'));
     }
 
     public function updateChannels(ApproveProductRequest $request, Product $product): RedirectResponse
@@ -95,7 +95,7 @@ class AdminProductController extends Controller
         ]);
 
         return redirect()->route('admin.products.show', $product)
-            ->with('success', __('admin.products.channels_saved', [], 'id'));
+            ->with('success', __('admin.products.channels_saved'));
     }
 
     public function reject(RejectProductRequest $request, Product $product): RedirectResponse
@@ -108,6 +108,6 @@ class AdminProductController extends Controller
         ]);
 
         return redirect()->route('admin.products.show', $product)
-            ->with('success', __('admin.products.rejected_success', [], 'id'));
+            ->with('success', __('admin.products.rejected_success'));
     }
 }

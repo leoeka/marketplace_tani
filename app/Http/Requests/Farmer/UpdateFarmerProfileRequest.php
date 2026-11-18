@@ -25,30 +25,30 @@ class UpdateFarmerProfileRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'shop_name.required' => __('farmer.validation.required', ['attribute' => __('farmer.fields.shop_name', [], 'id')], 'id'),
-            'shop_name.max' => __('farmer.validation.max_string', ['attribute' => __('farmer.fields.shop_name', [], 'id'), 'max' => 255], 'id'),
-            'region.required' => __('farmer.validation.required', ['attribute' => __('farmer.fields.region', [], 'id')], 'id'),
-            'region.max' => __('farmer.validation.max_string', ['attribute' => __('farmer.fields.region', [], 'id'), 'max' => 255], 'id'),
-            'group_name.max' => __('farmer.validation.max_string', ['attribute' => __('farmer.fields.group_name', [], 'id'), 'max' => 255], 'id'),
-            'photo.image' => __('farmer.validation.photo_image', [], 'id'),
-            'photo.mimes' => __('farmer.validation.photo_type', [], 'id'),
-            'photo.extensions' => __('farmer.validation.photo_type', [], 'id'),
-            'photo.max' => __('farmer.validation.photo_max', [], 'id'),
-            'shop_name.string' => __('farmer.validation.string', ['attribute' => __('farmer.fields.shop_name', [], 'id')], 'id'),
-            'group_name.string' => __('farmer.validation.string', ['attribute' => __('farmer.fields.group_name', [], 'id')], 'id'),
-            'region.string' => __('farmer.validation.string', ['attribute' => __('farmer.fields.region', [], 'id')], 'id'),
-            'story.string' => __('farmer.validation.string', ['attribute' => __('farmer.fields.story', [], 'id')], 'id'),
+            'shop_name.required' => __('farmer.validation.required', ['attribute' => __('farmer.fields.shop_name')]),
+            'shop_name.max' => __('farmer.validation.max_string', ['attribute' => __('farmer.fields.shop_name'), 'max' => 255]),
+            'region.required' => __('farmer.validation.required', ['attribute' => __('farmer.fields.region')]),
+            'region.max' => __('farmer.validation.max_string', ['attribute' => __('farmer.fields.region'), 'max' => 255]),
+            'group_name.max' => __('farmer.validation.max_string', ['attribute' => __('farmer.fields.group_name'), 'max' => 255]),
+            'photo.image' => __('farmer.validation.photo_image'),
+            'photo.mimes' => __('farmer.validation.photo_type'),
+            'photo.extensions' => __('farmer.validation.photo_type'),
+            'photo.max' => __('farmer.validation.photo_max'),
+            'shop_name.string' => __('farmer.validation.string', ['attribute' => __('farmer.fields.shop_name')]),
+            'group_name.string' => __('farmer.validation.string', ['attribute' => __('farmer.fields.group_name')]),
+            'region.string' => __('farmer.validation.string', ['attribute' => __('farmer.fields.region')]),
+            'story.string' => __('farmer.validation.string', ['attribute' => __('farmer.fields.story')]),
         ];
     }
 
     public function attributes(): array
     {
         return [
-            'shop_name' => __('farmer.fields.shop_name', [], 'id'),
-            'group_name' => __('farmer.fields.group_name', [], 'id'),
-            'region' => __('farmer.fields.region', [], 'id'),
-            'story' => __('farmer.fields.story', [], 'id'),
-            'photo' => __('farmer.fields.photo', [], 'id'),
+            'shop_name' => __('farmer.fields.shop_name'),
+            'group_name' => __('farmer.fields.group_name'),
+            'region' => __('farmer.fields.region'),
+            'story' => __('farmer.fields.story'),
+            'photo' => __('farmer.fields.photo'),
         ];
     }
 }

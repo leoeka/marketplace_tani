@@ -1,6 +1,13 @@
 <?php
 
 return [
+    // Bahasa dashboard petani & admin (ditulis manual, tanpa Google Translate).
+    'locales' => [
+        'id' => 'Bahasa Indonesia',
+        'en' => 'English',
+    ],
+    'default_locale' => 'id',
+
     'farmer_menu' => [
         ['label' => 'overview', 'route' => 'farmer.dashboard', 'icon' => '▦'],
         ['label' => 'my_products', 'route' => 'farmer.products.index', 'active' => 'farmer.products.*', 'icon' => '🥬'],
@@ -10,6 +17,7 @@ return [
     'admin_menu' => [
         ['label' => 'overview', 'route' => 'admin.dashboard', 'icon' => '▦'],
         ['label' => 'farmers', 'route' => 'admin.farmers.index', 'active' => 'admin.farmers.*', 'icon' => '🌾'],
+        ['label' => 'locations', 'route' => 'admin.locations.index', 'active' => 'admin.locations.*', 'icon' => '📍'],
         ['label' => 'products', 'route' => 'admin.products.index', 'active' => 'admin.products.*', 'icon' => '🥬'],
         ['label' => 'orders', 'route' => 'admin.orders.index', 'active' => 'admin.orders.*', 'icon' => '📦'],
         ['label' => 'rfqs', 'route' => 'admin.rfqs.index', 'active' => 'admin.rfqs.*', 'icon' => '✉️'],

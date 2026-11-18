@@ -20,7 +20,7 @@ class AdminRfqController extends Controller
 
         return view('admin.rfqs.index', [
             'menu' => config('dashboard.admin_menu'),
-            'title' => __('admin.rfqs.title', [], 'id'),
+            'title' => __('admin.rfqs.title'),
             'filters' => ['status' => $status, 'search' => $search],
             'rfqs' => Rfq::query()
                 ->when($status, fn (Builder $query, string $filter): Builder => $query->status($filter))
@@ -40,7 +40,7 @@ class AdminRfqController extends Controller
     {
         return view('admin.rfqs.show', [
             'menu' => config('dashboard.admin_menu'),
-            'title' => __('admin.rfqs.detail_title', [], 'id'),
+            'title' => __('admin.rfqs.detail_title'),
             'rfq' => $rfq,
         ]);
     }
@@ -52,7 +52,7 @@ class AdminRfqController extends Controller
             'handled_at' => now(),
         ]);
 
-        return back()->with('success', __('admin.rfqs.handled_success', [], 'id'));
+        return back()->with('success', __('admin.rfqs.handled_success'));
     }
 
     public function markNew(Rfq $rfq): RedirectResponse
@@ -62,6 +62,6 @@ class AdminRfqController extends Controller
             'handled_at' => null,
         ]);
 
-        return back()->with('success', __('admin.rfqs.new_success', [], 'id'));
+        return back()->with('success', __('admin.rfqs.new_success'));
     }
 }

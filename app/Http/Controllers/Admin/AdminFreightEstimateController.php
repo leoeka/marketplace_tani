@@ -18,7 +18,7 @@ class AdminFreightEstimateController extends Controller
 
         return view('admin.logistics.estimates.index', [
             'menu' => config('dashboard.admin_menu'),
-            'title' => __('admin.logistics.estimates.title', [], 'id'),
+            'title' => __('admin.logistics.estimates.title'),
             'freightEstimates' => FreightEstimate::query()
                 ->with('loadingPort')
                 ->when($mode, fn ($query, string $selectedMode) => $query->where('mode', $selectedMode))
@@ -34,7 +34,7 @@ class AdminFreightEstimateController extends Controller
     {
         return view('admin.logistics.estimates.form', [
             'menu' => config('dashboard.admin_menu'),
-            'title' => __('admin.logistics.estimates.create_title', [], 'id'),
+            'title' => __('admin.logistics.estimates.create_title'),
             'freightEstimate' => new FreightEstimate(['mode' => 'sea', 'is_active' => true]),
             'loadingPorts' => LoadingPort::query()->where('is_active', true)->orderBy('sort_order')->orderBy('name')->get(),
             'action' => route('admin.freight-estimates.store'),
@@ -50,14 +50,14 @@ class AdminFreightEstimateController extends Controller
         FreightEstimate::query()->create($data);
 
         return redirect()->route('admin.freight-estimates.index')
-            ->with('success', __('admin.logistics.estimates.created', [], 'id'));
+            ->with('success', __('admin.logistics.estimates.created'));
     }
 
     public function edit(FreightEstimate $freightEstimate): View
     {
         return view('admin.logistics.estimates.form', [
             'menu' => config('dashboard.admin_menu'),
-            'title' => __('admin.logistics.estimates.edit_title', [], 'id'),
+            'title' => __('admin.logistics.estimates.edit_title'),
             'freightEstimate' => $freightEstimate,
             'loadingPorts' => LoadingPort::query()->where('is_active', true)->orderBy('sort_order')->orderBy('name')->get(),
             'action' => route('admin.freight-estimates.update', $freightEstimate),
@@ -72,7 +72,7 @@ class AdminFreightEstimateController extends Controller
         $freightEstimate->update($data);
 
         return redirect()->route('admin.freight-estimates.index')
-            ->with('success', __('admin.logistics.estimates.updated', [], 'id'));
+            ->with('success', __('admin.logistics.estimates.updated'));
     }
 
     public function destroy(FreightEstimate $freightEstimate): RedirectResponse
@@ -80,6 +80,6 @@ class AdminFreightEstimateController extends Controller
         $freightEstimate->delete();
 
         return redirect()->route('admin.freight-estimates.index')
-            ->with('success', __('admin.logistics.estimates.deleted', [], 'id'));
+            ->with('success', __('admin.logistics.estimates.deleted'));
     }
 }

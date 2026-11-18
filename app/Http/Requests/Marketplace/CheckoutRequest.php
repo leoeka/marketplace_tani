@@ -44,11 +44,11 @@ class CheckoutRequest extends FormRequest
     {
         return [function (Validator $validator): void {
             if (ShippingService::query()->where('is_active', true)->exists() && blank($this->input('shipping_service_id'))) {
-                $validator->errors()->add('shipping_service_id', __('marketplace.checkout.validation.shipping_service_required', [], 'id'));
+                $validator->errors()->add('shipping_service_id', __('marketplace.checkout.validation.shipping_service_required'));
             }
 
             if ($this->input('payment_term') === 'tempo' && $this->user()?->customer_type !== 'business') {
-                $validator->errors()->add('payment_term', __('marketplace.checkout.tempo_business_only', [], 'id'));
+                $validator->errors()->add('payment_term', __('marketplace.checkout.tempo_business_only'));
             }
         }];
     }
@@ -56,15 +56,15 @@ class CheckoutRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'recipient_name.required' => __('marketplace.checkout.validation.recipient_required', [], 'id'),
-            'phone.required' => __('marketplace.checkout.validation.phone_required', [], 'id'),
-            'address.required' => __('marketplace.checkout.validation.address_required', [], 'id'),
-            'payment_method.required' => __('marketplace.checkout.validation.payment_method_required', [], 'id'),
-            'payment_method.in' => __('marketplace.checkout.validation.payment_method_invalid', [], 'id'),
-            'payment_term.required' => __('marketplace.checkout.validation.payment_term_required', [], 'id'),
-            'payment_term.in' => __('marketplace.checkout.validation.payment_term_invalid', [], 'id'),
-            'shipping_service_id.integer' => __('marketplace.checkout.validation.shipping_service_invalid', [], 'id'),
-            'shipping_service_id.exists' => __('marketplace.checkout.validation.shipping_service_invalid', [], 'id'),
+            'recipient_name.required' => __('marketplace.checkout.validation.recipient_required'),
+            'phone.required' => __('marketplace.checkout.validation.phone_required'),
+            'address.required' => __('marketplace.checkout.validation.address_required'),
+            'payment_method.required' => __('marketplace.checkout.validation.payment_method_required'),
+            'payment_method.in' => __('marketplace.checkout.validation.payment_method_invalid'),
+            'payment_term.required' => __('marketplace.checkout.validation.payment_term_required'),
+            'payment_term.in' => __('marketplace.checkout.validation.payment_term_invalid'),
+            'shipping_service_id.integer' => __('marketplace.checkout.validation.shipping_service_invalid'),
+            'shipping_service_id.exists' => __('marketplace.checkout.validation.shipping_service_invalid'),
         ];
     }
 }

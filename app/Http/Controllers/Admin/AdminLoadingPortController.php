@@ -15,7 +15,7 @@ class AdminLoadingPortController extends Controller
     {
         return view('admin.logistics.ports.index', [
             'menu' => config('dashboard.admin_menu'),
-            'title' => __('admin.logistics.ports.title', [], 'id'),
+            'title' => __('admin.logistics.ports.title'),
             'loadingPorts' => LoadingPort::query()->orderBy('sort_order')->orderBy('name')->paginate(12),
         ]);
     }
@@ -24,7 +24,7 @@ class AdminLoadingPortController extends Controller
     {
         return view('admin.logistics.ports.form', [
             'menu' => config('dashboard.admin_menu'),
-            'title' => __('admin.logistics.ports.create_title', [], 'id'),
+            'title' => __('admin.logistics.ports.create_title'),
             'loadingPort' => new LoadingPort(['is_active' => true, 'sort_order' => 0]),
             'action' => route('admin.loading-ports.store'),
             'method' => 'POST',
@@ -36,14 +36,14 @@ class AdminLoadingPortController extends Controller
         LoadingPort::query()->create($request->validated());
 
         return redirect()->route('admin.loading-ports.index')
-            ->with('success', __('admin.logistics.ports.created', [], 'id'));
+            ->with('success', __('admin.logistics.ports.created'));
     }
 
     public function edit(LoadingPort $loadingPort): View
     {
         return view('admin.logistics.ports.form', [
             'menu' => config('dashboard.admin_menu'),
-            'title' => __('admin.logistics.ports.edit_title', [], 'id'),
+            'title' => __('admin.logistics.ports.edit_title'),
             'loadingPort' => $loadingPort,
             'action' => route('admin.loading-ports.update', $loadingPort),
             'method' => 'PUT',
@@ -55,24 +55,24 @@ class AdminLoadingPortController extends Controller
         $loadingPort->update($request->validated());
 
         return redirect()->route('admin.loading-ports.index')
-            ->with('success', __('admin.logistics.ports.updated', [], 'id'));
+            ->with('success', __('admin.logistics.ports.updated'));
     }
 
     public function destroy(LoadingPort $loadingPort): RedirectResponse
     {
         if ($loadingPort->freightEstimates()->exists()) {
             return redirect()->route('admin.loading-ports.index')
-                ->with('error', __('admin.logistics.ports.in_use', [], 'id'));
+                ->with('error', __('admin.logistics.ports.in_use'));
         }
 
         try {
             $loadingPort->delete();
         } catch (QueryException) {
             return redirect()->route('admin.loading-ports.index')
-                ->with('error', __('admin.logistics.ports.in_use', [], 'id'));
+                ->with('error', __('admin.logistics.ports.in_use'));
         }
 
         return redirect()->route('admin.loading-ports.index')
-            ->with('success', __('admin.logistics.ports.deleted', [], 'id'));
+            ->with('success', __('admin.logistics.ports.deleted'));
     }
 }

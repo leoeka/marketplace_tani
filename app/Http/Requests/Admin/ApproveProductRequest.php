@@ -34,7 +34,7 @@ class ApproveProductRequest extends FormRequest
             }
 
             if (! $this->boolean('show_in_marketplace') && ! $this->boolean('show_in_export')) {
-                $validator->errors()->add('channels', __('admin.validation.channel_required', [], 'id'));
+                $validator->errors()->add('channels', __('admin.validation.channel_required'));
             }
         }];
     }

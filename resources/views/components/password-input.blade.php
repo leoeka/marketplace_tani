@@ -13,7 +13,7 @@
     <button
         type="button"
         x-on:click="showPassword = !showPassword"
-        x-bind:aria-label="showPassword ? @js(__('auth-ui.hide_password', [], 'id')) : @js(__('auth-ui.show_password', [], 'id'))"
+        x-bind:aria-label="showPassword ? @js(__('auth-ui.hide_password')) : @js(__('auth-ui.show_password'))"
         x-bind:aria-pressed="showPassword"
         class="absolute inset-y-0 right-0 flex items-center px-4 text-charcoal/60 hover:text-forest focus:outline-none focus:ring-2 focus:ring-forest"
     >

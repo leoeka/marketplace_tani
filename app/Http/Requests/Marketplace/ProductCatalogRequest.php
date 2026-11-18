@@ -25,8 +25,8 @@ class ProductCatalogRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'category.exists' => __('marketplace.catalog.category_invalid', [], 'id'),
-            'q.max' => __('marketplace.catalog.search_max', [], 'id'),
+            'category.exists' => __('marketplace.catalog.category_invalid'),
+            'q.max' => __('marketplace.catalog.search_max'),
         ];
     }
 }

@@ -6,21 +6,21 @@
         <div class="relative z-10 max-w-2xl">
             <span class="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-harvest sm:text-sm">
                 <span class="h-2 w-2 rounded-full bg-harvest"></span>
-                {{ __('marketplace.hero.eyebrow', [], 'id') }}
+                {{ __('marketplace.hero.eyebrow') }}
             </span>
             <h1 class="mt-6 max-w-xl text-4xl font-extrabold leading-[1.08] tracking-tight sm:text-5xl lg:text-6xl xl:text-7xl">
-                {{ __('marketplace.hero.title', [], 'id') }}
+                {{ __('marketplace.hero.title') }}
             </h1>
             <p class="mt-5 max-w-lg text-base leading-7 text-white/75 sm:text-lg sm:leading-8">
-                {{ __('marketplace.hero.description', [], 'id') }}
+                {{ __('marketplace.hero.description') }}
             </p>
             <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
                 <a href="#products" class="inline-flex min-h-12 items-center justify-center rounded-full bg-harvest px-6 py-3 text-sm font-extrabold text-forest shadow-lg shadow-black/10 transition hover:-translate-y-0.5 hover:bg-yellow-400 sm:text-base">
-                    {{ __('marketplace.hero.shop', [], 'id') }}
+                    {{ __('marketplace.hero.shop') }}
                     <svg class="ml-2 h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M3.5 10a.75.75 0 0 1 .75-.75h9.94L10.72 5.78a.75.75 0 1 1 1.06-1.06l4.75 4.75a.75.75 0 0 1 0 1.06l-4.75 4.75a.75.75 0 1 1-1.06-1.06l3.47-3.47H4.25A.75.75 0 0 1 3.5 10Z" clip-rule="evenodd" /></svg>
                 </a>
                 <a href="{{ route('register') }}" class="inline-flex min-h-12 items-center justify-center rounded-full border border-white/30 px-6 py-3 text-sm font-bold text-white transition hover:bg-white/10 sm:text-base">
-                    {{ __('marketplace.hero.sell', [], 'id') }}
+                    {{ __('marketplace.hero.sell') }}
                 </a>
             </div>
             <div class="mt-8 flex items-center gap-3 text-sm text-white/70">
@@ -29,11 +29,11 @@
                     <span class="h-8 w-8 rounded-full border-2 border-forest bg-[#d28e4b]"></span>
                     <span class="h-8 w-8 rounded-full border-2 border-forest bg-[#b5c77a]"></span>
                 </span>
-                <span>{{ __('marketplace.hero.direct_from_farmer', [], 'id') }}</span>
+                <span>{{ __('marketplace.hero.direct_from_farmer') }}</span>
             </div>
         </div>
 
-        <div class="relative mx-auto w-full max-w-[34rem] lg:ml-auto" role="img" aria-label="{{ __('marketplace.hero.decorative_produce', [], 'id') }}">
+        <div class="relative mx-auto w-full max-w-[34rem] lg:ml-auto" role="img" aria-label="{{ __('marketplace.hero.decorative_produce') }}">
             <div class="absolute inset-x-7 bottom-4 top-8 rounded-[3rem] bg-[#547c4e] shadow-[0_35px_80px_-40px_rgba(0,0,0,0.65)] sm:inset-x-10 sm:top-5"></div>
             <div class="absolute left-1/2 top-1/2 h-[78%] w-[86%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-harvest/10 blur-2xl"></div>
             <svg viewBox="0 0 560 430" class="relative w-full drop-shadow-[0_25px_22px_rgba(0,0,0,0.25)]" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -54,7 +54,7 @@
             </svg>
             <div class="absolute bottom-0 left-0 flex items-center gap-3 rounded-2xl border border-white/70 bg-white px-4 py-3 text-forest shadow-xl sm:bottom-4 sm:left-2">
                 <span class="flex h-10 w-10 items-center justify-center rounded-full bg-cream text-xl" aria-hidden="true">✦</span>
-                <span class="text-xs font-bold leading-5 sm:text-sm">{{ __('marketplace.hero.fresh_today', [], 'id') }}<br><span class="font-medium text-charcoal/60">{{ __('marketplace.hero.direct_from_farmer', [], 'id') }}</span></span>
+                <span class="text-xs font-bold leading-5 sm:text-sm">{{ __('marketplace.hero.fresh_today') }}<br><span class="font-medium text-charcoal/60">{{ __('marketplace.hero.direct_from_farmer') }}</span></span>
             </div>
         </div>
     </div>

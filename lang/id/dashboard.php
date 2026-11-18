@@ -7,6 +7,7 @@ return [
     'greeting' => 'Halo, :name',
     'view_shop' => 'Lihat Toko',
     'account' => 'Akun Saya',
+    'language' => 'Bahasa',
     'menu' => [
         'overview' => 'Ringkasan',
         'my_products' => 'Produk Saya',
@@ -22,5 +23,6 @@ return [
         'articles' => 'Artikel',
         'rfqs' => 'RFQ',
         'new_count' => ':count permintaan RFQ baru',
+        'locations' => 'Lokasi Pengguna',
     ],
 ];

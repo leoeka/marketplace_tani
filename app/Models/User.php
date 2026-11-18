@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-#[Fillable(['name', 'email', 'password', 'role', 'phone', 'customer_type'])]
+#[Fillable(['name', 'email', 'password', 'role', 'locale', 'phone', 'customer_type', 'location_consent', 'location_consent_at'])]
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
 {
@@ -49,6 +49,16 @@ class User extends Authenticatable
         return $this->hasMany(OrderShipment::class, 'farmer_id');
     }
 
+    public function locations(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(\App\Models\UserLocation::class);
+    }
+
+    public function latestLocation(): \Illuminate\Database\Eloquent\Relations\HasOne
+    {
+        return $this->hasOne(\App\Models\UserLocation::class)->latestOfMany('captured_at');
+    }
+
     /**
      * Get the attributes that should be cast.
      *
@@ -59,6 +69,7 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'location_consent_at' => 'datetime'
         ];
     }
 

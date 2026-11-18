@@ -25,25 +25,25 @@ class CartController extends Controller
         $product = Product::query()->with('farmer.farmerProfile')->findOrFail($productId);
 
         if (! $cart->add($product, (int) $request->validated('qty', 1))) {
-            return back()->with('error', __('marketplace.cart.add_failed', [], 'id'));
+            return back()->with('error', __('marketplace.cart.add_failed'));
         }
 
-        return back()->with('success', __('marketplace.cart.added', [], 'id'));
+        return back()->with('success', __('marketplace.cart.added'));
     }
 
     public function update(UpdateCartItemRequest $request, int $productId, CartService $cart): RedirectResponse
     {
         if (! $cart->update($productId, (int) $request->validated('qty'))) {
-            return back()->with('error', __('marketplace.cart.update_failed', [], 'id'));
+            return back()->with('error', __('marketplace.cart.update_failed'));
         }
 
-        return redirect()->route('cart.index')->with('success', __('marketplace.cart.updated', [], 'id'));
+        return redirect()->route('cart.index')->with('success', __('marketplace.cart.updated'));
     }
 
     public function destroy(int $productId, CartService $cart): RedirectResponse
     {
         $cart->remove($productId);
 
-        return redirect()->route('cart.index')->with('success', __('marketplace.cart.removed', [], 'id'));
+        return redirect()->route('cart.index')->with('success', __('marketplace.cart.removed'));
     }
 }

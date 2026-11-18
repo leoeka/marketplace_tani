@@ -2,6 +2,9 @@
 
 return [
     'brand' => 'TaniRaya Global',
+    'lang_suggest' => 'تم اكتشاف أن لغة متصفحك هي العربية. هل تريد التبديل إلى العربية؟',
+    'lang_switch' => 'تبديل',
+    'lang_keep' => 'Keep English',
     'meta_description' => 'اطّلع على مواصفات المنتجات الدولية من المنتجين الإندونيسيين.',
     'navigation' => [
         'label' => 'التنقل الرئيسي',

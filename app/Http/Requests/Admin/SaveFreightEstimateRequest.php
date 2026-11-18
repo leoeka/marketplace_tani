@@ -42,7 +42,7 @@ class SaveFreightEstimateRequest extends FormRequest
             if ((int) $this->input('transit_days_max') < (int) $this->input('transit_days_min')) {
                 $validator->errors()->add(
                     'transit_days_max',
-                    __('admin.logistics.estimates.validation.max_before_min', [], 'id'),
+                    __('admin.logistics.estimates.validation.max_before_min'),
                 );
             }
         }];
@@ -51,6 +51,6 @@ class SaveFreightEstimateRequest extends FormRequest
     /** @return array<string, string> */
     public function messages(): array
     {
-        return __('admin.logistics.estimates.validation', [], 'id');
+        return __('admin.logistics.estimates.validation');
     }
 }

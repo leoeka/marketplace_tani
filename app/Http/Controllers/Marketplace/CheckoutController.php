@@ -20,7 +20,7 @@ class CheckoutController extends Controller
         Gate::authorize('create', Order::class);
 
         if ($cart->items() === []) {
-            return redirect()->route('cart.index')->with('error', __('marketplace.cart.empty', [], 'id'));
+            return redirect()->route('cart.index')->with('error', __('marketplace.cart.empty'));
         }
 
         return view('marketplace.checkout.index', [
@@ -40,6 +40,6 @@ class CheckoutController extends Controller
 
         session()->forget('cart');
 
-        return redirect()->route('customer.orders.show', $order)->with('success', __('marketplace.checkout.created', [], 'id'));
+        return redirect()->route('customer.orders.show', $order)->with('success', __('marketplace.checkout.created'));
     }
 }

@@ -423,4 +423,17 @@ return [
         'rejection_max' => 'Alasan penolakan maksimal 2.000 karakter.',
         'status_invalid' => 'Status produk yang dipilih tidak tersedia.',
     ],
+    'locations' => [
+        'description' => 'Lokasi terakhir pengguna yang mengizinkan berbagi lokasi. Pengguna yang menolak tidak dicatat.',
+        'empty' => 'Belum ada pengguna.',
+        'name' => 'Pengguna',
+        'role' => 'Peran',
+        'consent' => 'Izin lokasi',
+        'last_location' => 'Lokasi terakhir',
+        'captured_at' => 'Waktu',
+        'granted' => 'Mengizinkan',
+        'denied' => 'Menolak',
+        'not_asked' => 'Belum memilih',
+        'roles' => ['admin' => 'Admin', 'farmer' => 'Petani', 'customer' => 'Pelanggan'],
+    ],
 ];
