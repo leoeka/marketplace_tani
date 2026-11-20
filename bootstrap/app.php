@@ -17,6 +17,8 @@ return Application::configure(basePath: dirname(__DIR__))
             fn(Request $request): string => route($request->user()->dashboardRouteName()),
         );
 
+        $middleware->prepend(\App\Http\Middleware\RedirectWwwHost::class);
+
         $middleware->alias([
             'role' => RoleMiddleware::class,
         ]);

@@ -41,8 +41,8 @@ class ExportPreferenceController extends Controller
         $path = $parts['path'] ?? '/';
 
         $sameHost = ! isset($parts['host']) || $parts['host'] === $request->getHost();
-        $insideExport = str_starts_with($path, '/export');
-        $isPreferenceUrl = str_contains($path, '/export/locale/') || str_contains($path, '/export/currency/');
+        $insideExport = \App\Support\Site::split() || str_starts_with($path, '/export');
+        $isPreferenceUrl = str_contains($path, '/locale/') || str_contains($path, '/currency/');
 
         return redirect()->to($sameHost && $insideExport && ! $isPreferenceUrl ? $previous : $fallback);
     }

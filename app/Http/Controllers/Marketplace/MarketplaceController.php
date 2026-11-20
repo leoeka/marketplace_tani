@@ -75,6 +75,7 @@ class MarketplaceController extends Controller
     public function showProduct(string $slug): View
     {
         $product = $this->marketplaceProducts()
+            ->with('exportDetails')
             ->where('slug', $slug)
             ->firstOrFail();
 
@@ -101,11 +102,7 @@ class MarketplaceController extends Controller
     private function marketplaceProducts(): Builder
     {
         return Product::query()
-            ->where('status', 'approved')
-            ->where('show_in_marketplace', true)
-            ->whereHas('farmer', fn (Builder $query) => $query
-                ->where('role', 'farmer')
-                ->whereHas('farmerProfile', fn (Builder $profileQuery) => $profileQuery->whereNotNull('verified_at')))
+            ->marketplaceVisible()
             ->with(['category', 'images', 'farmer.farmerProfile']);
     }
 }

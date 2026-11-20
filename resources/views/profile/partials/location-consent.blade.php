@@ -12,7 +12,7 @@
         @else
             <span class="font-bold text-amber-800">Anda belum memilih.</span>
         @endif
-        Lokasi hanya dilihat oleh admin dan dipakai untuk mengetahui wilayah akses TaniRaya.
+        Lokasi hanya dilihat oleh admin dan dipakai untuk mengetahui wilayah akses NUSA RESOURCE.
     </p>
 
     @if ($consent === 'granted')

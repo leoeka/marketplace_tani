@@ -1,8 +1,8 @@
 <?php
 
 return [
-    'brand' => 'TaniRaya',
-    'meta_title' => 'TaniRaya — Fresh produce, straight from the farmers',
+    'brand' => 'NUSA RESOURCE',
+    'meta_title' => 'NUSA RESOURCE — Fresh produce, straight from the farmers',
     'meta_description' => 'Shop fresh, high-quality produce and support local Indonesian farmers.',
     'nav' => [
         'home' => 'Home',
@@ -68,6 +68,11 @@ return [
         'back' => 'Back to education',
     ],
     'categories' => [
+        'coffee' => 'Coffee',
+        'vanilla' => 'Vanilla',
+        'cloves' => 'Cloves',
+        'red_rice' => 'Red rice',
+        'corn' => 'Corn',
         'eyebrow' => 'Shop by your needs',
         'title' => 'Choose your favorite category',
         'vegetables' => 'Vegetables',
@@ -124,6 +129,14 @@ return [
         'empty' => 'No pre-order products are available yet. Please check back later.',
     ],
     'product_detail' => [
+        'specs' => [
+            'title' => 'Export specifications',
+            'hs_code' => 'HS Code',
+            'moisture' => 'Moisture content',
+            'size' => 'Size / specification',
+            'capacity' => 'Monthly supply capacity',
+            'per_month' => 'month',
+        ],
         'back_to_products' => 'Back to products',
         'description' => 'About this product',
         'price' => 'Price per unit',
@@ -271,11 +284,11 @@ return [
         'privacy' => 'Privacy policy',
         'export' => 'Export website',
         'export_description' => 'Produce catalog for global partners.',
-        'copyright' => 'TaniRaya. Growing together with Indonesia.',
+        'copyright' => 'NUSA RESOURCE. Growing together with Indonesia.',
         'social' => 'Follow our journey',
-        'instagram' => 'TaniRaya on Instagram',
-        'facebook' => 'TaniRaya on Facebook',
-        'tiktok' => 'TaniRaya on TikTok',
+        'instagram' => 'NUSA RESOURCE on Instagram',
+        'facebook' => 'NUSA RESOURCE on Facebook',
+        'tiktok' => 'NUSA RESOURCE on TikTok',
     ],
 
     // Language suggestion banner
@@ -287,7 +300,7 @@ return [
     // Location sharing banner (shown after login)
     'location' => [
         'title' => 'Share your location?',
-        'body' => 'Your location helps us understand which regions TaniRaya is used from. You can decline, and the service keeps working normally.',
+        'body' => 'Your location helps us understand which regions NUSA RESOURCE is used from. You can decline, and the service keeps working normally.',
         'allow' => 'Allow',
         'deny' => 'No',
     ],

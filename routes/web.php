@@ -26,6 +26,7 @@ use App\Http\Controllers\Marketplace\CustomerOrderController;
 use App\Http\Controllers\Marketplace\MarketPriceController;
 use App\Http\Controllers\Marketplace\ArticleController;
 use App\Http\Middleware\SetExportLocale;
+use App\Support\Site;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Export\ExportPreferenceController;
@@ -35,126 +36,147 @@ use App\Http\Controllers\SiteLocaleController;
 use App\Http\Controllers\DashboardLocaleController;
 
 
-Route::get('/', [MarketplaceController::class, 'home'])->name('home');
-Route::get('/bahasa/{locale}', [SiteLocaleController::class, 'set'])->name('site.locale');
-Route::prefix('export')
-    ->middleware(SetExportLocale::class)
-    ->name('export.')
-    ->group(function (): void {
-        Route::get('/', [ExportController::class, 'home'])->name('home');
-        Route::get('/products', [ExportController::class, 'index'])->name('products.index');
-        Route::get('/products/{slug}', [ExportController::class, 'showProduct'])->name('products.show');
-        Route::get('/certifications', [ExportController::class, 'certifications'])->name('certifications.index');
-        Route::get('/logistics', [ExportLogisticsController::class, 'index'])->name('logistics.index');
-        Route::get('/rfq', [ExportRfqController::class, 'create'])->name('rfq.create');
-        Route::post('/rfq', [ExportRfqController::class, 'store'])->middleware('throttle:5,10')->name('rfq.store');
-        Route::get('/rfq/thank-you', [ExportRfqController::class, 'thanks'])->name('rfq.thanks');
-        Route::get('/locale/{locale}', [ExportPreferenceController::class, 'locale'])->name('locale');
-        Route::get('/currency/{currency}', [ExportPreferenceController::class, 'currency'])->name('currency');
-    });
-Route::get('/produk', [MarketplaceController::class, 'index'])->name('marketplace.products.index');
-Route::get('/pra-order', [MarketplaceController::class, 'preorder'])->name('marketplace.preorders.index');
-Route::get('/produk/{slug}', [MarketplaceController::class, 'showProduct'])->name('marketplace.products.show');
-Route::get('/petani/{slug}', [MarketplaceController::class, 'showFarmer'])->name('marketplace.farmers.show');
-Route::get('/harga-pasar', [MarketPriceController::class, 'index'])->name('marketplace.market-prices.index');
-Route::get('/edukasi', [ArticleController::class, 'index'])->name('marketplace.articles.index');
-Route::get('/edukasi/{slug}', [ArticleController::class, 'show'])->name('marketplace.articles.show');
-Route::get('/keranjang', [CartController::class, 'index'])->name('cart.index');
-Route::post('/keranjang/{productId}', [CartController::class, 'store'])->whereNumber('productId')->name('cart.items.store');
-Route::put('/keranjang/{productId}', [CartController::class, 'update'])->whereNumber('productId')->name('cart.items.update');
-Route::delete('/keranjang/{productId}', [CartController::class, 'destroy'])->whereNumber('productId')->name('cart.items.destroy');
+/*
+ * Website ekspor (PT. VIE NUSANTARA GLOBAL).
+ * Mode dua domain: di akar domain ekspor. Mode lain: di alamat /export.
+ */
+$exportRoutes = function (): void {
+    Route::get('/', [ExportController::class, 'home'])->name('home');
+    // Katalog ekspor lama: diarahkan ke marketplace (produk hanya ada di marketplace).
+    Route::get('/products', [ExportController::class, 'index'])->name('products.index');
+    Route::get('/products/{slug}', [ExportController::class, 'showProduct'])->name('products.show');
+    Route::get('/certifications', [ExportController::class, 'certifications'])->name('certifications.index');
+    Route::get('/logistics', [ExportLogisticsController::class, 'index'])->name('logistics.index');
+    Route::get('/rfq', [ExportRfqController::class, 'create'])->name('rfq.create');
+    Route::post('/rfq', [ExportRfqController::class, 'store'])->middleware('throttle:5,10')->name('rfq.store');
+    Route::get('/rfq/thank-you', [ExportRfqController::class, 'thanks'])->name('rfq.thanks');
+    Route::get('/locale/{locale}', [ExportPreferenceController::class, 'locale'])->name('locale');
+    Route::get('/currency/{currency}', [ExportPreferenceController::class, 'currency'])->name('currency');
+};
 
-Route::middleware(['auth', 'role:customer'])->group(function (): void {
-    Route::get('/checkout', [CheckoutController::class, 'index'])->name('marketplace.checkout.index');
-    Route::post('/checkout', [CheckoutController::class, 'store'])->name('marketplace.checkout.store');
-    Route::get('/akun/pesanan', [CustomerOrderController::class, 'index'])->name('customer.orders.index');
-    Route::get('/akun/pesanan/{order}', [CustomerOrderController::class, 'show'])->name('customer.orders.show');
-});
+$marketplaceRoutes = function (): void {
+    Route::get('/', [MarketplaceController::class, 'home'])->name('home');
+    Route::get('/bahasa/{locale}', [SiteLocaleController::class, 'set'])->name('site.locale');
+    Route::get('/produk', [MarketplaceController::class, 'index'])->name('marketplace.products.index');
+    Route::get('/pra-order', [MarketplaceController::class, 'preorder'])->name('marketplace.preorders.index');
+    Route::get('/produk/{slug}', [MarketplaceController::class, 'showProduct'])->name('marketplace.products.show');
+    Route::get('/petani/{slug}', [MarketplaceController::class, 'showFarmer'])->name('marketplace.farmers.show');
+    Route::get('/harga-pasar', [MarketPriceController::class, 'index'])->name('marketplace.market-prices.index');
+    Route::get('/edukasi', [ArticleController::class, 'index'])->name('marketplace.articles.index');
+    Route::get('/edukasi/{slug}', [ArticleController::class, 'show'])->name('marketplace.articles.show');
+    Route::get('/keranjang', [CartController::class, 'index'])->name('cart.index');
+    Route::post('/keranjang/{productId}', [CartController::class, 'store'])->whereNumber('productId')->name('cart.items.store');
+    Route::put('/keranjang/{productId}', [CartController::class, 'update'])->whereNumber('productId')->name('cart.items.update');
+    Route::delete('/keranjang/{productId}', [CartController::class, 'destroy'])->whereNumber('productId')->name('cart.items.destroy');
 
-Route::get('/dashboard', function (Request $request) {
-    return redirect()->route($request->user()->dashboardRouteName());
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::prefix('admin')
-    ->middleware(['auth', 'role:admin'])
-    ->name('admin.')
-    ->group(function (): void {
-        Route::redirect('/', '/admin/dashboard')->name('home');
-        Route::get('/dashboard', AdminDashboardController::class)->name('dashboard');
-        Route::resource('pelabuhan-muat', AdminLoadingPortController::class)
-            ->parameters(['pelabuhan-muat' => 'loading_port'])
-            ->except(['show'])
-            ->names('loading-ports');
-        Route::resource('estimasi-pengiriman', AdminFreightEstimateController::class)
-            ->parameters(['estimasi-pengiriman' => 'freight_estimate'])
-            ->except(['show'])
-            ->names('freight-estimates');
-        Route::get('/petani', [AdminFarmerController::class, 'index'])->name('farmers.index');
-        Route::get('/petani/{farmerProfile}', [AdminFarmerController::class, 'show'])->name('farmers.show');
-        Route::post('/petani/{farmerProfile}/verifikasi', [AdminFarmerController::class, 'verify'])->name('farmers.verify');
-        Route::delete('/petani/{farmerProfile}/verifikasi', [AdminFarmerController::class, 'revoke'])->name('farmers.revoke');
-        Route::get('/produk', [AdminProductController::class, 'index'])->name('products.index');
-        Route::get('/produk/{product}', [AdminProductController::class, 'show'])->name('products.show');
-        Route::put('/produk/{product}/data-ekspor', [AdminProductController::class, 'saveExportDetails'])->name('products.export-details.update');
-        Route::post('/produk/{product}/setujui', [AdminProductController::class, 'approve'])->name('products.approve');
-        Route::post('/produk/{product}/kanal', [AdminProductController::class, 'updateChannels'])->name('products.channels.update');
-        Route::post('/produk/{product}/tolak', [AdminProductController::class, 'reject'])->name('products.reject');
-        Route::get('/pesanan', [AdminOrderController::class, 'index'])->name('orders.index');
-        Route::get('/pesanan/{order}', [AdminOrderController::class, 'show'])->name('orders.show');
-        Route::post('/pesanan/{order}/tandai-dibayar', [AdminOrderController::class, 'markPaid'])->name('orders.mark-paid');
-        Route::get('/rfq', [AdminRfqController::class, 'index'])->name('rfqs.index');
-        Route::get('/rfq/{rfq}', [AdminRfqController::class, 'show'])->name('rfqs.show');
-        Route::post('/rfq/{rfq}/tandai-ditindaklanjuti', [AdminRfqController::class, 'markHandled'])->name('rfqs.mark-handled');
-        Route::post('/rfq/{rfq}/tandai-baru', [AdminRfqController::class, 'markNew'])->name('rfqs.mark-new');
-        Route::resource('sertifikat', AdminCertificateController::class)
-            ->parameters(['sertifikat' => 'certificate'])
-            ->except(['show'])
-            ->names('certificates');
-        Route::resource('shipping-services', AdminShippingServiceController::class)->except(['show']);
-        Route::resource('harga-pasar', AdminMarketPriceController::class)
-            ->parameters(['harga-pasar' => 'marketPrice'])
-            ->except(['show'])
-            ->names('market-prices');
-        Route::resource('artikel', AdminArticleController::class)
-            ->parameters(['artikel' => 'article'])
-            ->except(['show'])
-            ->names('articles');
-        Route::get('/lokasi-pengguna', [AdminUserLocationController::class, 'index'])->name('locations.index');
+    Route::middleware(['auth', 'role:customer'])->group(function (): void {
+        Route::get('/checkout', [CheckoutController::class, 'index'])->name('marketplace.checkout.index');
+        Route::post('/checkout', [CheckoutController::class, 'store'])->name('marketplace.checkout.store');
+        Route::get('/akun/pesanan', [CustomerOrderController::class, 'index'])->name('customer.orders.index');
+        Route::get('/akun/pesanan/{order}', [CustomerOrderController::class, 'show'])->name('customer.orders.show');
     });
 
-Route::prefix('dashboard-petani')
-    ->middleware(['auth', 'role:farmer'])
-    ->group(function (): void {
-        Route::get('/', FarmerDashboardController::class)->name('farmer.dashboard');
-        Route::get('/pesanan', [IncomingOrderController::class, 'index'])->name('farmer.orders.index');
-        Route::get('/pesanan/{order}', [IncomingOrderController::class, 'show'])->name('farmer.orders.show');
-        Route::post('/pesanan/{order}/resi', [IncomingOrderController::class, 'saveShipment'])->name('farmer.orders.shipments.store');
-        Route::resource('produk', FarmerProductController::class)
-            ->parameters(['produk' => 'product'])
-            ->except(['show'])
-            ->names([
-                'index' => 'farmer.products.index',
-                'create' => 'farmer.products.create',
-                'store' => 'farmer.products.store',
-                'edit' => 'farmer.products.edit',
-                'update' => 'farmer.products.update',
-                'destroy' => 'farmer.products.destroy',
-            ]);
-        Route::get('/profil-toko', [FarmerProfileController::class, 'edit'])->name('farmer.profile.edit');
-        Route::put('/profil-toko', [FarmerProfileController::class, 'update'])->name('farmer.profile.update');
+    Route::get('/dashboard', function (Request $request) {
+        return redirect()->route($request->user()->dashboardRouteName());
+    })->middleware(['auth', 'verified'])->name('dashboard');
+
+    Route::prefix('admin')
+        ->middleware(['auth', 'role:admin'])
+        ->name('admin.')
+        ->group(function (): void {
+            Route::redirect('/', '/admin/dashboard')->name('home');
+            Route::get('/dashboard', AdminDashboardController::class)->name('dashboard');
+            Route::resource('pelabuhan-muat', AdminLoadingPortController::class)
+                ->parameters(['pelabuhan-muat' => 'loading_port'])
+                ->except(['show'])
+                ->names('loading-ports');
+            Route::resource('estimasi-pengiriman', AdminFreightEstimateController::class)
+                ->parameters(['estimasi-pengiriman' => 'freight_estimate'])
+                ->except(['show'])
+                ->names('freight-estimates');
+            Route::get('/petani', [AdminFarmerController::class, 'index'])->name('farmers.index');
+            Route::get('/petani/{farmerProfile}', [AdminFarmerController::class, 'show'])->name('farmers.show');
+            Route::post('/petani/{farmerProfile}/verifikasi', [AdminFarmerController::class, 'verify'])->name('farmers.verify');
+            Route::delete('/petani/{farmerProfile}/verifikasi', [AdminFarmerController::class, 'revoke'])->name('farmers.revoke');
+            Route::get('/produk', [AdminProductController::class, 'index'])->name('products.index');
+            Route::get('/produk/{product}', [AdminProductController::class, 'show'])->name('products.show');
+            Route::put('/produk/{product}/data-ekspor', [AdminProductController::class, 'saveExportDetails'])->name('products.export-details.update');
+            Route::post('/produk/{product}/setujui', [AdminProductController::class, 'approve'])->name('products.approve');
+            Route::post('/produk/{product}/kanal', [AdminProductController::class, 'updateChannels'])->name('products.channels.update');
+            Route::post('/produk/{product}/tolak', [AdminProductController::class, 'reject'])->name('products.reject');
+            Route::get('/pesanan', [AdminOrderController::class, 'index'])->name('orders.index');
+            Route::get('/pesanan/{order}', [AdminOrderController::class, 'show'])->name('orders.show');
+            Route::post('/pesanan/{order}/tandai-dibayar', [AdminOrderController::class, 'markPaid'])->name('orders.mark-paid');
+            Route::get('/rfq', [AdminRfqController::class, 'index'])->name('rfqs.index');
+            Route::get('/rfq/{rfq}', [AdminRfqController::class, 'show'])->name('rfqs.show');
+            Route::post('/rfq/{rfq}/tandai-ditindaklanjuti', [AdminRfqController::class, 'markHandled'])->name('rfqs.mark-handled');
+            Route::post('/rfq/{rfq}/tandai-baru', [AdminRfqController::class, 'markNew'])->name('rfqs.mark-new');
+            Route::resource('sertifikat', AdminCertificateController::class)
+                ->parameters(['sertifikat' => 'certificate'])
+                ->except(['show'])
+                ->names('certificates');
+            Route::resource('shipping-services', AdminShippingServiceController::class)->except(['show']);
+            Route::resource('harga-pasar', AdminMarketPriceController::class)
+                ->parameters(['harga-pasar' => 'marketPrice'])
+                ->except(['show'])
+                ->names('market-prices');
+            Route::resource('artikel', AdminArticleController::class)
+                ->parameters(['artikel' => 'article'])
+                ->except(['show'])
+                ->names('articles');
+            Route::get('/lokasi-pengguna', [AdminUserLocationController::class, 'index'])->name('locations.index');
+        });
+
+    Route::prefix('dashboard-petani')
+        ->middleware(['auth', 'role:farmer'])
+        ->group(function (): void {
+            Route::get('/', FarmerDashboardController::class)->name('farmer.dashboard');
+            Route::get('/pesanan', [IncomingOrderController::class, 'index'])->name('farmer.orders.index');
+            Route::get('/pesanan/{order}', [IncomingOrderController::class, 'show'])->name('farmer.orders.show');
+            Route::post('/pesanan/{order}/resi', [IncomingOrderController::class, 'saveShipment'])->name('farmer.orders.shipments.store');
+            Route::resource('produk', FarmerProductController::class)
+                ->parameters(['produk' => 'product'])
+                ->except(['show'])
+                ->names([
+                    'index' => 'farmer.products.index',
+                    'create' => 'farmer.products.create',
+                    'store' => 'farmer.products.store',
+                    'edit' => 'farmer.products.edit',
+                    'update' => 'farmer.products.update',
+                    'destroy' => 'farmer.products.destroy',
+                ]);
+            Route::get('/profil-toko', [FarmerProfileController::class, 'edit'])->name('farmer.profile.edit');
+            Route::put('/profil-toko', [FarmerProfileController::class, 'update'])->name('farmer.profile.update');
+        });
+
+    Route::middleware('auth')->group(function () {
+        Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+        Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+        Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+        Route::post('/dashboard-bahasa/{locale}', [DashboardLocaleController::class, 'set'])->name('dashboard.locale');
     });
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::post('/dashboard-bahasa/{locale}', [DashboardLocaleController::class, 'set'])->name('dashboard.locale');
-});
+    Route::middleware(['auth', 'throttle:20,1'])->group(function () {
+        Route::post('/lokasi', [UserLocationController::class, 'store'])->name('location.store');
+        Route::post('/lokasi/izin', [UserLocationController::class, 'consent'])->name('location.consent');
+        Route::delete('/lokasi', [UserLocationController::class, 'destroy'])->name('location.destroy');
+    });
 
-Route::middleware(['auth', 'throttle:20,1'])->group(function () {
-    Route::post('/lokasi', [UserLocationController::class, 'store'])->name('location.store');
-    Route::post('/lokasi/izin', [UserLocationController::class, 'consent'])->name('location.consent');
-    Route::delete('/lokasi', [UserLocationController::class, 'destroy'])->name('location.destroy');
-});
+    require __DIR__ . '/auth.php';
+};
 
-require __DIR__ . '/auth.php';
+if (Site::split()) {
+    Route::domain(Site::exportDomain())
+        ->middleware(SetExportLocale::class)
+        ->name('export.')
+        ->group($exportRoutes);
+
+    Route::domain(Site::marketplaceDomain())->group($marketplaceRoutes);
+} else {
+    Route::prefix('export')
+        ->middleware(SetExportLocale::class)
+        ->name('export.')
+        ->group($exportRoutes);
+
+    $marketplaceRoutes();
+}

@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'eyebrow' => 'TaniRaya for everyone',
+    'eyebrow' => 'NUSA RESOURCE for everyone',
     'brand_heading' => 'From good produce, a better future grows.',
     'brand_description' => 'Discover selected harvests from local farmers and become part of a closer, fairer food chain.',
     'login_title' => 'Welcome back',

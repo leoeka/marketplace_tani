@@ -1,8 +1,8 @@
 <?php
 
 return [
-    'brand' => 'TaniRaya',
-    'meta_title' => 'TaniRaya — Hasil bumi segar, langsung dari petani',
+    'brand' => 'NUSA RESOURCE',
+    'meta_title' => 'NUSA RESOURCE — Hasil bumi segar, langsung dari petani',
     'meta_description' => 'Belanja hasil bumi segar berkualitas dan dukung petani lokal Indonesia.',
     'nav' => [
         'home' => 'Beranda',
@@ -68,6 +68,11 @@ return [
         'back' => 'Kembali ke edukasi',
     ],
     'categories' => [
+        'coffee' => 'Kopi',
+        'vanilla' => 'Vanili',
+        'cloves' => 'Cengkeh',
+        'red_rice' => 'Beras merah',
+        'corn' => 'Jagung',
         'eyebrow' => 'Belanja sesuai kebutuhan',
         'title' => 'Pilih kategori favoritmu',
         'vegetables' => 'Sayur',
@@ -124,6 +129,14 @@ return [
         'empty' => 'Belum ada produk pra-order yang tersedia. Silakan kembali lagi nanti.',
     ],
     'product_detail' => [
+        'specs' => [
+            'title' => 'Spesifikasi ekspor',
+            'hs_code' => 'HS Code',
+            'moisture' => 'Kadar air',
+            'size' => 'Ukuran / spesifikasi',
+            'capacity' => 'Kapasitas pasokan per bulan',
+            'per_month' => 'bulan',
+        ],
         'back_to_products' => 'Kembali ke produk',
         'description' => 'Tentang produk',
         'price' => 'Harga per satuan',
@@ -271,11 +284,11 @@ return [
         'privacy' => 'Kebijakan privasi',
         'export' => 'Website ekspor',
         'export_description' => 'Katalog hasil bumi untuk mitra global.',
-        'copyright' => 'TaniRaya. Tumbuh bersama Indonesia.',
+        'copyright' => 'NUSA RESOURCE. Tumbuh bersama Indonesia.',
         'social' => 'Ikuti perjalanan kami',
-        'instagram' => 'Instagram TaniRaya',
-        'facebook' => 'Facebook TaniRaya',
-        'tiktok' => 'TikTok TaniRaya',
+        'instagram' => 'Instagram NUSA RESOURCE',
+        'facebook' => 'Facebook NUSA RESOURCE',
+        'tiktok' => 'TikTok NUSA RESOURCE',
     ],
 
 
@@ -288,7 +301,7 @@ return [
     // Banner berbagi lokasi (tampil setelah login)
     'location' => [
         'title' => 'Bagikan lokasi Anda?',
-        'body' => 'Lokasi dipakai untuk membantu kami mengetahui dari wilayah mana TaniRaya diakses. Anda bisa menolak, dan layanan tetap berjalan normal.',
+        'body' => 'Lokasi dipakai untuk membantu kami mengetahui dari wilayah mana NUSA RESOURCE diakses. Anda bisa menolak, dan layanan tetap berjalan normal.',
         'allow' => 'Izinkan',
         'deny' => 'Tidak',
     ],

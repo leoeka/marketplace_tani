@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use App\Support\MachineTranslator;
+use App\Support\Site;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
@@ -21,7 +22,7 @@ class SetMarketplaceLocale
 {
     public function handle(Request $request, Closure $next): Response
     {
-        if ($request->is('export', 'export/*')) {
+        if (Site::isExport($request)) {
             return $next($request);
         }
 

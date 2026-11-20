@@ -6,7 +6,7 @@
 
     $navLinks = [
         ['route' => 'export.home', 'label' => __('export.navigation.home')],
-        ['route' => 'export.products.index', 'label' => __('export.navigation.products')],
+        ['route' => 'marketplace.products.index', 'label' => __('export.navigation.products')],
         ['route' => 'export.certifications.index', 'label' => __('export.navigation.certifications')],
         ['route' => 'export.logistics.index', 'label' => __('export.navigation.logistics')],
     ];

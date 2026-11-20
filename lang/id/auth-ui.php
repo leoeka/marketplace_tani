@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'eyebrow' => 'TaniRaya untuk semua',
+    'eyebrow' => 'NUSA RESOURCE untuk semua',
     'brand_heading' => 'Dari hasil bumi yang baik, tumbuh masa depan yang lebih baik.',
     'brand_description' => 'Temukan hasil panen pilihan dari petani lokal dan jadilah bagian dari rantai pangan yang lebih dekat dan adil.',
     'login_title' => 'Selamat datang kembali',

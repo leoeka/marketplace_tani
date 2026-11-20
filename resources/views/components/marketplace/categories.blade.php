@@ -9,15 +9,16 @@
 
     @php
         $categories = [
-            ['label' => 'vegetables', 'glyph' => '🥬', 'tone' => 'bg-[#E8F0DF]'],
-            ['label' => 'fruits', 'glyph' => '🍊', 'tone' => 'bg-[#F9E9D8]'],
-            ['label' => 'spices', 'glyph' => '🌶️', 'tone' => 'bg-[#F7E4DE]'],
-            ['label' => 'rice', 'glyph' => '🌾', 'tone' => 'bg-[#F3ECCD]'],
+            ['slug' => 'kopi', 'label' => 'coffee', 'glyph' => '☕', 'tone' => 'bg-[#EFE3D6]'],
+            ['slug' => 'vanili', 'label' => 'vanilla', 'glyph' => '🌼', 'tone' => 'bg-[#F6F0D3]'],
+            ['slug' => 'cengkeh', 'label' => 'cloves', 'glyph' => '🌿', 'tone' => 'bg-[#E8F0DF]'],
+            ['slug' => 'beras-merah', 'label' => 'red_rice', 'glyph' => '🍚', 'tone' => 'bg-[#F7E4DE]'],
+            ['slug' => 'jagung', 'label' => 'corn', 'glyph' => '🌽', 'tone' => 'bg-[#F3ECCD]'],
         ];
     @endphp
-    <div class="grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-4">
+    <div class="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-5">
         @foreach ($categories as $category)
-            <a href="#products" class="group flex min-h-28 items-center gap-3 rounded-2xl border border-forest/5 bg-white p-4 shadow-sm transition hover:-translate-y-1 hover:shadow-md sm:min-h-32 sm:flex-col sm:justify-center sm:gap-2 sm:p-5">
+            <a href="{{ route('marketplace.products.index', ['category' => $category['slug']]) }}" class="group flex min-h-28 items-center gap-3 rounded-2xl border border-forest/5 bg-white p-4 shadow-sm transition hover:-translate-y-1 hover:shadow-md sm:min-h-32 sm:flex-col sm:justify-center sm:gap-2 sm:p-5">
                 <span class="flex h-14 w-14 shrink-0 items-center justify-center rounded-full {{ $category['tone'] }} text-3xl transition group-hover:scale-105" aria-hidden="true">{{ $category['glyph'] }}</span>
                 <span class="font-bold text-charcoal sm:text-base">{{ __('marketplace.categories.' . $category['label']) }}</span>
                 <span class="hidden text-xs text-charcoal/50 sm:inline">{{ __('marketplace.categories.items') }}</span>

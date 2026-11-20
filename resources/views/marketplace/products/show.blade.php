@@ -29,6 +29,30 @@
                     <h2 class="font-extrabold text-charcoal">{{ __('marketplace.product_detail.description') }}</h2>
                     <p class="mt-3 whitespace-pre-line text-sm leading-7 text-charcoal/70">{{ $mt->content($product->description) }}</p>
                 </div>
+                @php
+                    $spec = $product->exportDetails;
+                    $hasCapacity = $spec && $spec->monthly_capacity !== null && filled($spec->monthly_capacity_unit);
+                    $hasSpecs = $spec && (filled($spec->hs_code) || $spec->moisture_percent !== null || filled($spec->size_spec) || $hasCapacity);
+                @endphp
+                @if ($hasSpecs)
+                    <section class="mt-7 border-t border-forest/10 pt-6" aria-labelledby="export-specs">
+                        <h2 id="export-specs" class="font-extrabold text-charcoal">{{ __('marketplace.product_detail.specs.title') }}</h2>
+                        <dl class="mt-3 divide-y divide-forest/10 rounded-2xl border border-forest/10 px-4 text-sm">
+                            @if (filled($spec->hs_code))
+                                <div class="flex justify-between gap-4 py-3"><dt class="text-charcoal/60">{{ __('marketplace.product_detail.specs.hs_code') }}</dt><dd class="text-right font-semibold text-charcoal">{{ $spec->hs_code }}</dd></div>
+                            @endif
+                            @if ($spec->moisture_percent !== null)
+                                <div class="flex justify-between gap-4 py-3"><dt class="text-charcoal/60">{{ __('marketplace.product_detail.specs.moisture') }}</dt><dd class="text-right font-semibold text-charcoal">{{ $spec->moisture_percent }}%</dd></div>
+                            @endif
+                            @if (filled($spec->size_spec))
+                                <div class="flex justify-between gap-4 py-3"><dt class="text-charcoal/60">{{ __('marketplace.product_detail.specs.size') }}</dt><dd class="text-right font-semibold text-charcoal">{{ $spec->size_spec }}</dd></div>
+                            @endif
+                            @if ($hasCapacity)
+                                <div class="flex justify-between gap-4 py-3"><dt class="text-charcoal/60">{{ __('marketplace.product_detail.specs.capacity') }}</dt><dd class="text-right font-semibold text-charcoal">{{ number_format($spec->monthly_capacity, 0, ',', '.') }} {{ $spec->monthly_capacity_unit }} / {{ __('marketplace.product_detail.specs.per_month') }}</dd></div>
+                            @endif
+                        </dl>
+                    </section>
+                @endif
                 <div class="mt-7 border-t border-forest/10 pt-6">
                     <p class="text-xs font-bold uppercase tracking-wide text-forest/60">{{ __('marketplace.product_detail.farmer') }}</p>
                     <a href="{{ route('marketplace.farmers.show', $product->farmer->farmerProfile->slug) }}" class="mt-2 inline-flex items-center gap-3 font-bold text-charcoal hover:text-forest">

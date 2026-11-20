@@ -1,4 +1,10 @@
 <x-export.layout :title="__('export.home.meta_title')">
+    @php
+        app(\App\Support\MachineTranslator::class)->primeContent(
+            $featuredProducts->flatMap(fn ($item) => [$item->name, $item->category->name])->all(),
+            app()->getLocale(),
+        );
+    @endphp
     <section class="relative isolate overflow-hidden bg-[#f4f7f3]">
         <div class="absolute inset-y-0 end-0 -z-10 hidden w-1/2 bg-forest lg:block" aria-hidden="true"></div>
         <div class="mx-auto grid max-w-7xl items-center gap-12 px-5 py-16 sm:px-8 sm:py-20 lg:grid-cols-2 lg:px-10 lg:py-28">
@@ -7,7 +13,7 @@
                 <h1 class="mt-5 text-4xl font-extrabold leading-tight tracking-tight text-forest sm:text-5xl lg:text-6xl">{{ __('export.home.title') }}</h1>
                 <p class="mt-6 max-w-xl text-lg leading-8 text-charcoal/65">{{ __('export.home.description') }}</p>
                 <div class="mt-8 flex flex-wrap gap-3">
-                    <a href="{{ route('export.products.index') }}" class="inline-flex items-center justify-center rounded-lg bg-forest px-6 py-3.5 text-sm font-bold text-white transition hover:bg-forest/90">{{ __('export.home.browse_products') }}</a>
+                    <a href="{{ route('marketplace.products.index') }}" class="inline-flex items-center justify-center rounded-lg bg-forest px-6 py-3.5 text-sm font-bold text-white transition hover:bg-forest/90">{{ __('export.home.browse_products') }}</a>
                     <a href="{{ route('export.rfq.create') }}" class="inline-flex items-center justify-center rounded-lg border border-forest/20 bg-white px-6 py-3.5 text-sm font-bold text-forest transition hover:bg-[#f4f7f3]">{{ __('export.navigation.rfq') }}</a>
                 </div>
             </div>
@@ -27,7 +33,7 @@
                 <p class="text-xs font-extrabold uppercase tracking-[0.18em] text-forest/65">{{ __('export.home.featured_eyebrow') }}</p>
                 <h2 class="mt-2 text-3xl font-extrabold tracking-tight text-charcoal">{{ __('export.home.featured_title') }}</h2>
             </div>
-            <a href="{{ route('export.products.index') }}" class="text-sm font-bold text-forest underline decoration-forest/30 underline-offset-4 hover:decoration-forest">{{ __('export.home.view_catalog') }}</a>
+            <a href="{{ route('marketplace.products.index') }}" class="text-sm font-bold text-forest underline decoration-forest/30 underline-offset-4 hover:decoration-forest">{{ __('export.home.view_catalog') }}</a>
         </div>
 
         @if ($featuredProducts->isEmpty())

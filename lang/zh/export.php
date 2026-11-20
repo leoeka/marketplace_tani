@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'brand' => 'TaniRaya Global',
+    'brand' => 'PT. VIE NUSANTARA GLOBAL',
     'lang_suggest' => '检测到您的浏览器使用中文。要切换到中文吗?',
     'lang_switch' => '切换',
     'lang_keep' => 'Keep English',
@@ -16,7 +16,7 @@ return [
         'language' => '语言',
     ],
     'home' => [
-        'meta_title' => 'TaniRaya Global | 面向全球市场的印尼产品',
+        'meta_title' => 'PT. VIE NUSANTARA GLOBAL | 面向全球市场的印尼产品',
         'eyebrow' => '印尼采购，规格清晰',
         'title' => '面向全球市场的优质印尼农产品',
         'description' => '了解来自印度尼西亚各地生产商的产品信息与供应规格。',
@@ -41,12 +41,18 @@ return [
         'search_max' => '搜索内容不得超过100个字符。',
     ],
     'categories' => [
+        'kopi' => '咖啡',
+        'vanili' => '香草',
+        'cengkeh' => '丁香',
+        'beras-merah' => '红米',
+        'jagung' => '玉米',
         'sayur' => '蔬菜',
         'buah' => '水果',
         'rempah' => '香料',
         'beras' => '大米',
     ],
     'product_card' => [
+        'view_detail' => '查看详情',
         'image_alt' => ':name 产品图片',
         'no_image' => '暂无产品图片',
         'hs_code' => 'HS 编码',
@@ -54,7 +60,7 @@ return [
         'not_provided' => '未提供',
     ],
     'certifications' => [
-        'meta_title' => '认证 | TaniRaya Global',
+        'meta_title' => '认证 | PT. VIE NUSANTARA GLOBAL',
         'eyebrow' => '质量与合规',
         'title' => '认证',
         'description' => '查看与出口目录中产品相关的认证文件。',
@@ -75,7 +81,7 @@ return [
         ],
     ],
     'product_detail' => [
-        'meta_title' => ':name | TaniRaya Global',
+        'meta_title' => ':name | PT. VIE NUSANTARA GLOBAL',
         'back_to_products' => '返回产品列表',
         'image_alt' => ':name 产品图片',
         'no_image' => '暂无产品图片。',
@@ -102,10 +108,10 @@ return [
     ],
     'footer' => [
         'description' => '来自印度尼西亚、面向国际合作伙伴的产品信息。',
-        'marketplace_link' => 'TaniRaya 市场（印度尼西亚）',
+        'marketplace_link' => 'NUSA RESOURCE 市场',
     ],
     'logistics' => [
-        'meta_title' => '全球物流 | TaniRaya Global',
+        'meta_title' => '全球物流 | PT. VIE NUSANTARA GLOBAL',
         'eyebrow' => '全球物流信息',
         'title' => '物流',
         'description' => '查看可用的运输信息，并根据我们团队提供的数据计算参考估价。',
@@ -165,7 +171,7 @@ return [
         ],
     ],
     'rfq' => [
-        'meta_title' => '询价 | TaniRaya Global',
+        'meta_title' => '询价 | PT. VIE NUSANTARA GLOBAL',
         'eyebrow' => '出口询价',
         'title' => '请告诉我们您的采购需求',
         'description' => '请提供您的采购需求，我们的团队将通过电子邮件与您联系。',

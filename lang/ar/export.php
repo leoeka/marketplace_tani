@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'brand' => 'TaniRaya Global',
+    'brand' => 'PT. VIE NUSANTARA GLOBAL',
     'lang_suggest' => 'تم اكتشاف أن لغة متصفحك هي العربية. هل تريد التبديل إلى العربية؟',
     'lang_switch' => 'تبديل',
     'lang_keep' => 'Keep English',
@@ -16,7 +16,7 @@ return [
         'language' => 'اللغة',
     ],
     'home' => [
-        'meta_title' => 'TaniRaya Global | منتجات إندونيسية للأسواق العالمية',
+        'meta_title' => 'PT. VIE NUSANTARA GLOBAL | منتجات إندونيسية للأسواق العالمية',
         'eyebrow' => 'توريد إندونيسي بمواصفات واضحة',
         'title' => 'منتجات زراعية إندونيسية عالية الجودة للأسواق العالمية',
         'description' => 'اطّلع على معلومات المنتجات ومواصفات التوريد من منتجين في مختلف أنحاء إندونيسيا.',
@@ -41,12 +41,18 @@ return [
         'search_max' => 'يجب ألا يتجاوز نص البحث 100 حرف.',
     ],
     'categories' => [
+        'kopi' => 'قهوة',
+        'vanili' => 'فانيليا',
+        'cengkeh' => 'قرنفل',
+        'beras-merah' => 'أرز أحمر',
+        'jagung' => 'ذرة',
         'sayur' => 'الخضروات',
         'buah' => 'الفواكه',
         'rempah' => 'التوابل',
         'beras' => 'الأرز',
     ],
     'product_card' => [
+        'view_detail' => 'عرض التفاصيل',
         'image_alt' => 'صورة المنتج :name',
         'no_image' => 'صورة المنتج غير متاحة',
         'hs_code' => 'الرمز الجمركي (HS)',
@@ -54,7 +60,7 @@ return [
         'not_provided' => 'غير متوفر',
     ],
     'certifications' => [
-        'meta_title' => 'الشهادات | TaniRaya Global',
+        'meta_title' => 'الشهادات | PT. VIE NUSANTARA GLOBAL',
         'eyebrow' => 'الجودة والامتثال',
         'title' => 'الشهادات',
         'description' => 'راجع وثائق الشهادات المرتبطة بالمنتجات في كتالوج التصدير.',
@@ -75,7 +81,7 @@ return [
         ],
     ],
     'product_detail' => [
-        'meta_title' => ':name | TaniRaya Global',
+        'meta_title' => ':name | PT. VIE NUSANTARA GLOBAL',
         'back_to_products' => 'العودة إلى المنتجات',
         'image_alt' => 'صورة المنتج :name',
         'no_image' => 'صور المنتج غير متاحة.',
@@ -102,10 +108,10 @@ return [
     ],
     'footer' => [
         'description' => 'معلومات عن المنتجات من إندونيسيا للشركاء الدوليين.',
-        'marketplace_link' => 'سوق TaniRaya، إندونيسيا',
+        'marketplace_link' => 'سوق NUSA RESOURCE',
     ],
     'logistics' => [
-        'meta_title' => 'الخدمات اللوجستية العالمية | TaniRaya Global',
+        'meta_title' => 'الخدمات اللوجستية العالمية | PT. VIE NUSANTARA GLOBAL',
         'eyebrow' => 'معلومات الخدمات اللوجستية العالمية',
         'title' => 'الخدمات اللوجستية',
         'description' => 'راجع معلومات الشحن المتاحة واحسب تقديرًا استرشاديًا باستخدام البيانات التي يقدّمها فريقنا.',
@@ -165,7 +171,7 @@ return [
         ],
     ],
     'rfq' => [
-        'meta_title' => 'طلب عرض سعر | TaniRaya Global',
+        'meta_title' => 'طلب عرض سعر | PT. VIE NUSANTARA GLOBAL',
         'eyebrow' => 'استفسار تصدير',
         'title' => 'أخبرنا بما تبحث عنه',
         'description' => 'شاركنا متطلبات التوريد لديك. سيتواصل معك فريقنا عبر البريد الإلكتروني.',

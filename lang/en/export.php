@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'brand' => 'TaniRaya Global',
+    'brand' => 'PT. VIE NUSANTARA GLOBAL',
     'lang_suggest' => 'Your browser language is English. Switch to English?',
     'lang_switch' => 'Switch',
     'lang_keep' => 'Keep English',
@@ -17,7 +17,7 @@ return [
         'language' => 'Language',
     ],
     'home' => [
-        'meta_title' => 'TaniRaya Global | Indonesian products for global markets',
+        'meta_title' => 'PT. VIE NUSANTARA GLOBAL | Indonesian products for global markets',
         'eyebrow' => 'Indonesian sourcing, clearly specified',
         'title' => 'Quality Indonesian produce for global markets',
         'description' => 'Explore product information and supply specifications from producers across Indonesia.',
@@ -26,7 +26,7 @@ return [
         'featured_eyebrow' => 'Selected products',
         'featured_title' => 'Featured products',
         'view_catalog' => 'View all products',
-        'featured_empty' => 'No products are currently available in the export catalog.',
+        'featured_empty' => 'No products are available yet.',
     ],
     'catalog' => [
         'eyebrow' => 'Product catalog',
@@ -42,12 +42,18 @@ return [
         'search_max' => 'Search text may not exceed 100 characters.',
     ],
     'categories' => [
+        'kopi' => 'Coffee',
+        'vanili' => 'Vanilla',
+        'cengkeh' => 'Cloves',
+        'beras-merah' => 'Red rice',
+        'jagung' => 'Corn',
         'sayur' => 'Vegetables',
         'buah' => 'Fruit',
         'rempah' => 'Spices',
         'beras' => 'Rice',
     ],
     'product_card' => [
+        'view_detail' => 'View detail',
         'image_alt' => ':name product image',
         'no_image' => 'Product image unavailable',
         'hs_code' => 'HS Code',
@@ -55,7 +61,7 @@ return [
         'not_provided' => 'Not provided',
     ],
     'certifications' => [
-        'meta_title' => 'Certifications | TaniRaya Global',
+        'meta_title' => 'Certifications | PT. VIE NUSANTARA GLOBAL',
         'eyebrow' => 'Quality and compliance',
         'title' => 'Certifications',
         'description' => 'Review certification documents associated with products in the export catalog.',
@@ -76,7 +82,7 @@ return [
         ],
     ],
     'product_detail' => [
-        'meta_title' => ':name | TaniRaya Global',
+        'meta_title' => ':name | PT. VIE NUSANTARA GLOBAL',
         'back_to_products' => 'Back to products',
         'image_alt' => ':name product image',
         'no_image' => 'Product images are unavailable.',
@@ -103,10 +109,10 @@ return [
     ],
     'footer' => [
         'description' => 'Product information from Indonesia for international partners.',
-        'marketplace_link' => 'TaniRaya Marketplace, Indonesia',
+        'marketplace_link' => 'NUSA RESOURCE Marketplace',
     ],
     'logistics' => [
-        'meta_title' => 'Global Logistics | TaniRaya Global',
+        'meta_title' => 'Global Logistics | PT. VIE NUSANTARA GLOBAL',
         'eyebrow' => 'Global logistics information',
         'title' => 'Logistics',
         'description' => 'Review available freight information and calculate an indicative estimate using data provided by our team.',
@@ -166,7 +172,7 @@ return [
         ],
     ],
     'rfq' => [
-        'meta_title' => 'Request a Quote | TaniRaya Global',
+        'meta_title' => 'Request a Quote | PT. VIE NUSANTARA GLOBAL',
         'eyebrow' => 'Export inquiry',
         'title' => 'Tell us what you are looking for',
         'description' => 'Share your sourcing requirements. Our team will follow up with you by email.',

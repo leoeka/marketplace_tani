@@ -90,6 +90,17 @@ class Product extends Model
         return $query->whereDate('harvest_date', '>=', today());
     }
 
+    /** Produk yang tampil di marketplace (juga dipakai beranda website ekspor). */
+    public function scopeMarketplaceVisible(Builder $query): Builder
+    {
+        return $query
+            ->where('status', 'approved')
+            ->where('show_in_marketplace', true)
+            ->whereHas('farmer', fn (Builder $farmerQuery): Builder => $farmerQuery
+                ->where('role', 'farmer')
+                ->whereHas('farmerProfile', fn (Builder $profileQuery): Builder => $profileQuery->whereNotNull('verified_at')));
+    }
+
     public function scopeExportVisible(Builder $query): Builder
     {
         return $query
